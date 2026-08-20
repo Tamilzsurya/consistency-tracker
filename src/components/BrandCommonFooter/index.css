@@ -1,0 +1,33 @@
+.brand-common-footer{
+    background-color: #ffffff;
+    padding: 64px 32px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    border: 1px solid rgba(199, 196, 216, 0.3);
+}
+.brand-common-footer-title{
+    color: #3525CD;
+    font-family: var(--ff-primary);
+    font-size: 20px;
+    font-weight: var(--fw-bold);
+}
+.brand-common-footer-links{
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+.brand-common-footer-link{}
+
+.brand-common-footer-link-text{
+    text-decoration: none;
+    text-align: center;
+
+    color: #464555;
+    font-family: var(--ff-primary);
+    font-size: 14px;
+    font-weight: var(--fw-regular);
+}

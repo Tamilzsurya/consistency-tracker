@@ -1,0 +1,24 @@
+.input-field-container{
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 24px;
+}
+.input-field-label{
+    color: #464555;
+    font-family: var(--ff-primary);
+    font-size: 12px;
+    font-weight: var(--fw-semi-bold);
+    letter-spacing: 0.6px;
+    
+}
+.input-field{
+    border: 1px solid #C7C4D8;
+    padding: 10px 12px;
+
+    font-family: var(--ff-primary);
+    font-size: 16px;
+    font-weight: var(--fw-regular);
+    outline: none;
+    
+}

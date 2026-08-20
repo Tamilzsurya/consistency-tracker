@@ -1,0 +1,28 @@
+.login-navbar{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 32px;
+    background-color: #F8F9FB;
+     box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
+    z-index: 999;
+    
+    position: fixed;
+    top: 0;
+  
+}
+
+
+.brand-logo-link{
+    text-decoration: none;
+}
+
+.login-link{
+    text-decoration: none;
+    color: #464555;
+    font-weight: var(--fw-regular);
+    font-family: var(--ff-primary);
+    font-size: 16px;
+    letter-spacing: 0.8px;
+}

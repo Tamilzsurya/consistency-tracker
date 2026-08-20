@@ -1,0 +1,18 @@
+.brand-logo{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.brand-logo-img{
+    height: 20px;
+    width: 20px;
+}
+.brand-name{
+    text-decoration: none;
+    color: #3525CD;
+
+    font-family: "Inter", sans-serif;
+    font-size: 20px;
+    font-weight: 800; /* Extra Bold */
+    letter-spacing: -0.5px;
+}
