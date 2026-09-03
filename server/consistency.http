@@ -1,0 +1,90 @@
+
+
+POST http://localhost:3001/api/auth/login 
+Content-Type: application/json
+
+{
+  "email": "sathishsathish81485@gmail.com",
+  "password": "1234"
+}
+
+
+
+### Create user or register user
+
+POST http://localhost:3001/api/auth/register
+Content-Type: application/json
+
+{
+  "userName": "sathish Arasu",
+  "email": "sathsathish81485@gmail.com",
+  "password": "password123",
+  "confirmPassword": "password123"
+}
+
+### Get all users
+
+GET http://localhost:3001/api/users
+
+
+### Get one user
+
+GET http://localhost:3001/api/users/1
+
+
+### Update user
+
+PUT http://localhost:3001/api/users/1
+Content-Type: application/json
+
+{
+  "fullName": "Tamil Arasu Updated",
+  "email": "tamil.updated@example.com"
+}
+
+
+### Delete user
+
+DELETE http://localhost:3001/api/users/1
+
+
+### Create habit
+
+POST http://localhost:3001/api/habits
+Content-Type: application/json
+Authorization: Bearer YOUR_TOKEN
+
+{
+  "name": "Learn React",
+  "description": "Study React for 2 hours"
+}
+
+
+### Get habits
+
+GET http://localhost:3001/api/habits
+Authorization: Bearer YOUR_TOKEN
+
+
+### Get one habit
+
+GET http://localhost:3001/api/habits/1
+Authorization: Bearer YOUR_TOKEN
+
+
+### Update habit
+
+PUT http://localhost:3001/api/habits/1
+Content-Type: application/json
+Authorization: Bearer YOUR_TOKEN
+
+{
+  "name": "Learn React Advanced",
+  "description": "Study advanced React concepts"
+}
+
+
+### Delete habit
+
+DELETE http://localhost:3001/api/habits/1
+Authorization: Bearer YOUR_TOKEN

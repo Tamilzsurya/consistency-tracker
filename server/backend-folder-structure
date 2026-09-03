@@ -1,0 +1,67 @@
+server/
+│
+├── src/
+│   │
+│   ├── config/
+│   │   ├── db.js
+│   │   └── mail.js
+│   │
+│   ├── controllers/
+│   │   ├── authController.js
+│   │   ├── habitController.js
+│   │   ├── entryController.js
+│   │   └── userController.js
+│   │
+│   ├── routes/
+│   │   ├── authRoutes.js
+│   │   ├── habitRoutes.js
+│   │   ├── entryRoutes.js
+│   │   └── userRoutes.js
+│   │
+│   ├── services/
+│   │   ├── authService.js
+│   │   ├── emailService.js
+│   │   ├── habitService.js
+│   │   └── userService.js
+│   │
+│   ├── models/
+│   │   ├── userModel.js
+│   │   ├── habitModel.js
+│   │   └── habitEntryModel.js
+│   │
+│   ├── middleware/
+│   │   ├── authMiddleware.js
+│   │   ├── errorMiddleware.js
+│   │   └── validationMiddleware.js
+│   │
+│   ├── validators/
+│   │   ├── authValidator.js
+│   │   ├── habitValidator.js
+│   │   └── userValidator.js
+│   │
+│   ├── utils/
+│   │   ├── generateOtp.js
+│   │   ├── hashPassword.js
+│   │   └── generateToken.js
+│   │
+│   ├── constants/
+│   │   └── messages.js
+│   │
+│   ├── app.js
+│   └── server.js
+│
+├── database/
+│   ├── migrations/
+│   └── seeds/
+│
+├── tests/
+│   ├── auth/
+│   ├── habits/
+│   └── users/
+│
+├── .env
+├── .env.example
+├── .gitignore
+├── consistency.http
+├── package.json
+└── package-lock.json
