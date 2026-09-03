@@ -20,6 +20,9 @@
 
 }
 
+
+/* Info Section */
+
 .info-section{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -181,6 +184,9 @@
     
 }
 
+
+/* Habits Section */
+
 .habits-section{
     display: grid;
     grid-template-columns: 160px 1fr;
@@ -198,7 +204,7 @@
     gap: 30px;
     margin-right: 12px;
 }
-.each-habit-name-card-container{
+/* .each-habit-name-card-container{
     
     height: 24px;
     display: flex;
@@ -215,7 +221,7 @@
     font-size: 16px;
     font-weight: var(--fw-regular);
     line-height: 24px;
-}
+} */
 
 .habit-cards-container{
    overflow-x: auto;
@@ -225,7 +231,7 @@
    gap: 30px;
 }
 
-.each-habit-row-container{
+/* .each-habit-row-container{
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -253,9 +259,9 @@
     border-radius: 4px;
     padding: 0;
     margin: 0;
-}
+} */
 
-.each-habit-row-card-header-date{
+/* .each-habit-row-card-header-date{
     color: #464555;
     font-family: var(--ff-primary);
     font-size: 16px;
@@ -264,8 +270,12 @@
     width: 22px;
     padding: 0;
     margin: 0;
-}
+} */
 
+
+
+
+/* Tips Section */
 
 .tips-section{
     display: grid;

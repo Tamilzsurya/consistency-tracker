@@ -1,0 +1,15 @@
+
+#reg-loader-container{
+    display: flex;
+  justify-content: center;
+  align-items: center;
+
+   cursor: not-allowed;
+    opacity: 0.6; 
+
+}
+
+.loader-btn{
+    padding: 0;
+    margin: 0;
+}

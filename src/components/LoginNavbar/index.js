@@ -5,7 +5,6 @@ import BrandLogo from '../BrandLogo'
 import './index.css';
 
 const LoginNavbar = () => {
-    console.log('LoginNavbar rendered');
 
     return (
         <nav className="login-navbar">

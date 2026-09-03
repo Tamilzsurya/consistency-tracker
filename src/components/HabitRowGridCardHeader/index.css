@@ -1,0 +1,34 @@
+.each-habit-row-container{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+     height: 24px;
+    gap: 8px;
+     
+}
+.each-habit-card-container{
+     min-height: 22px;
+    min-width: 22px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-grow: 1;
+    flex-shrink: 0;
+    
+    text-align: center;
+    overflow: hidden;
+}
+
+
+.each-habit-row-card-header-date{
+    color: #464555;
+    font-family: var(--ff-primary);
+    font-size: 16px;
+    font-weight: var(--fw-semi-bold);
+    line-height: 22px;
+    width: 22px;
+    padding: 0;
+    margin: 0;
+}

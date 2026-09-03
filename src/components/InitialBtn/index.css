@@ -1,0 +1,9 @@
+#reg-loader-container{
+    display: flex;
+  justify-content: center;
+  align-items: center;
+
+   cursor: not-allowed;
+    opacity: 0.6; 
+
+}

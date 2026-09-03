@@ -6,6 +6,7 @@ import HomePage from './pages/HomePage'
 import GridPage from './pages/GridPage'
 import TrendPage from './pages/TrendPage'
 import ProfilePage from './pages/ProfilePage'
+import VerifyOtpPage from './pages/VerifyOtpPage'
 
 
 import './App.css'
@@ -18,6 +19,7 @@ const App = () => (
     <Route exact path="/grid" component={GridPage} />
     <Route exact path="/trends" component={TrendPage} />
     <Route exact path="/profile" component={ProfilePage} />
+    <Route exact path="/verify-otp" component={VerifyOtpPage} />
   </Switch>
 )
 

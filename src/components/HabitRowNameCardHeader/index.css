@@ -1,0 +1,14 @@
+.each-habit-name-card-container{
+    
+    height: 24px;
+    display: flex;
+    align-items: center;
+}
+
+.habit-name{
+    color: #191C1E;
+    font-family: var(--ff-primary);
+    font-size: 16px;
+    font-weight: var(--fw-regular);
+    line-height: 24px;
+} 

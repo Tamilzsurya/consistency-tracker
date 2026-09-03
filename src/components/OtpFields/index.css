@@ -1,0 +1,22 @@
+.otp-fields-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.otp-field{
+    height: 48px;
+    width: 48px;
+    border: none;
+    border-bottom: 2px solid #c7c4d8;
+    
+
+    text-align: center;
+    font-size: 1.2em;
+
+    outline: none;
+}
+.otp-field:focus{
+    border-bottom: 2px solid #3525CD;
+}

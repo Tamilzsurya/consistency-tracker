@@ -1,0 +1,29 @@
+.each-habit-row-container{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+     height: 24px;
+    gap: 8px;
+     
+}
+.each-habit-card-container{
+     min-height: 22px;
+    min-width: 22px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-grow: 1;
+    flex-shrink: 0;
+    
+    text-align: center;
+    overflow: hidden;
+}
+.habit-card-icon{
+    color: #3525CD;
+    font-size: 22px;
+    border-radius: 4px;
+    padding: 0;
+    margin: 0;
+}

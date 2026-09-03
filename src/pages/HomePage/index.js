@@ -9,6 +9,10 @@ import { MdOutlineShare } from "react-icons/md";
 
 import HomeSidebar from '../../components/HomeSidebar';
 import HomeTopNavbar from '../../components/HomeTopNavbar';
+import HabitRowGridCard from '../../components/HabitRowGridCard';
+import HabitRowNameCard from '../../components/HabitRowNameCard';
+import HabitRowGridCardHeader from '../../components/HabitRowGridCardHeader';
+import HabitRowNameCardHeader from '../../components/HabitRowNameCardHeader';
 
 import './index.css';
 
@@ -41,71 +45,6 @@ class HomePage extends Component {
               <p className="tasks-description">Tasks completed this month</p>
             </div>
       </section>
-    )
-  }
-
-  renderHabitRowCards = () =>{
-    const eachHabitRowData = [];
-    for (let i = 1; i <= 31; i++) {
-      eachHabitRowData.push(
-        {
-          id: i,
-          habitName: 'Habit Name',
-          isCompleted: false
-        }
-      );
-    }
-    return (
-      <div className='each-habit-row-container'>
-        {eachHabitRowData.map(each => (
-          <div className='each-habit-card-container'>
-            <FaSquare className="habit-card-icon" />
-          </div>
-        ))}
-      </div>
-      
-    )
-  }
-
-  renderEachHabitNameCard = () =>{
-    return (
-      <div className='each-habit-name-card-container'>
-        <MdOutlineMenuBook className="habit-name-card-icon" />
-        <h3 className='habit-name'>Entertainment</h3>
-      </div>
-    )
-  }
-
-  renderHabitRowCardsHeader = () =>{
-     const eachHabitRowData = [];
-    for (let i = 1; i <= 31; i++) {
-      eachHabitRowData.push(
-        {
-          id: i,
-          habitName: 'Habit Name',
-          isCompleted: false
-        }
-      );
-    }
-     
-    return (
-      <div className='each-habit-row-container'>
-        {eachHabitRowData.map(each => (
-          <div className='each-habit-card-container'>
-            <p className='each-habit-row-card-header-date'>{each.id}</p>
-          </div>
-        ))}
-      </div>
-      
-    )
-    
-  }
-  renderEachHabitNameCardHeader = () =>{
-    return (
-      <div className='each-habit-name-card-container'>
-        
-        <h3 className='habit-name'>November</h3>
-      </div>
     )
   }
 
@@ -145,29 +84,28 @@ class HomePage extends Component {
             this.renderInformationSection()
             }
             
+            {/* today-page: habits section */}
             <section className="habits-section">
               <div className='habit-names-container'>
-                {this.renderEachHabitNameCardHeader()}
-
-               
-                
-                {this.renderEachHabitNameCard()}
-                {this.renderEachHabitNameCard()}
+                <HabitRowNameCardHeader />
+                <HabitRowNameCard name="Entertainment" />
+                <HabitRowNameCard name="Workout" />
+                <HabitRowNameCard name="Reading" />
+                <HabitRowNameCard name="Sleep" />
               </div>
 
               <div className='habit-cards-container'>
-                {this.renderHabitRowCardsHeader()}
-                
-                
-                {this.renderHabitRowCards()}
-                {this.renderHabitRowCards()}
+                <HabitRowGridCardHeader />
+                <HabitRowGridCard />
+                <HabitRowGridCard />
+                <HabitRowGridCard />
+                <HabitRowGridCard />
               </div>
             </section>
 
             {/* { today-page: tips section */
             this.renderTipsSection()
             }
-
         </main>
       </div>
     );

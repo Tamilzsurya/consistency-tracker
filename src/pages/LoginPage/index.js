@@ -69,12 +69,13 @@ class LoginPage extends Component {
                     </div>
 
                     <div className="login-options-container">
+                        
                         <form className="login-form">
-
                             <div className="form-input-container">{this.renderEmailField()}</div>
                             <div className="form-input-container">{this.renderPasswordField()}</div>
                             <button type="submit" className="login-button">Sign In</button>
                         </form>
+
                         <div className="signup-social-container">
                             <p className="signup-text">New here? <Link to="/register" className="signup-link">Start your grid</Link></p>
                             <div className="social-login-container">

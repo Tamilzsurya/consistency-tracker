@@ -4,6 +4,7 @@
      min-height: 100vh;
 }
 
+
 .register-page-main{
     
     display: flex;
@@ -83,7 +84,7 @@
 .register-page-form-button{
     width: 100%;
     padding: 16px 0px;
-    margin-top: 8px;
+    margin: 8px 0px;
     border: none;
     border-radius: 8px;
 
@@ -95,8 +96,6 @@
     font-weight: var(--fw-semi-bold);
     cursor: pointer;
     outline: none;
-
-
 }
 .register-page-form-description{
     color: #464555;
@@ -105,4 +104,21 @@
     font-weight: var(--fw-regular);
     text-align: center;
     margin-top: 24px;
+}
+
+
+.form-err-msg{
+    color: #EF4444;
+    font-family: var(--ff-primary);
+    font-size: 14px;
+    font-weight: var(--fw-regular);
+    letter-spacing: 0.6px;
+}
+
+.form-success-msg{
+    color: #22C55E;
+    font-family: var(--ff-primary);
+    font-size: 14px;
+    font-weight: var(--fw-regular);
+    letter-spacing: 0.6px;
 }
