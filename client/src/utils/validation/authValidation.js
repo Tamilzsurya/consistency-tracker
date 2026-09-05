@@ -1,7 +1,7 @@
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 // Validate individual register field
-export const validateRegisterField = ( id, value, formData ) => {
+export const validateInputField = ( id, value, formData ) => {
 
     // Check if the field is empty
     if (!value.trim()) {
@@ -51,7 +51,7 @@ export const validateRegisterForm = (formData) => {
     const errors = {}
 
     // Validate userName
-    const userNameError = validateRegisterField(
+    const userNameError = validateInputField(
         'userName',
         formData.userName,
         formData
@@ -61,7 +61,7 @@ export const validateRegisterForm = (formData) => {
     }
 
     // Validate email
-    const emailError = validateRegisterField(
+    const emailError = validateInputField(
         'email',
         formData.email,
         formData
@@ -71,7 +71,7 @@ export const validateRegisterForm = (formData) => {
     }
 
     // Validate password
-    const passwordError = validateRegisterField(
+    const passwordError = validateInputField(
         'password',
         formData.password,
         formData
@@ -81,7 +81,7 @@ export const validateRegisterForm = (formData) => {
     }
 
     // Validate confirmPassword
-    const confirmPasswordError = validateRegisterField(
+    const confirmPasswordError = validateInputField(
         'confirmPassword',
         formData.confirmPassword,
         formData
@@ -90,6 +90,34 @@ export const validateRegisterForm = (formData) => {
         errors.confirmPassword = confirmPasswordError
     }
 
+
+    return errors
+}
+
+// Validate Login form
+export const validateLoginForm = (formData) => {
+
+    const errors = {}
+
+    // Validate email
+    const emailError = validateInputField(
+        'email',
+        formData.email,
+        formData
+    )
+    if (emailError) {
+        errors.email = emailError
+    }
+
+    // Validate password
+    const passwordError = validateInputField(
+        'password',
+        formData.password,
+        formData
+    )
+    if (passwordError) {
+        errors.password = passwordError
+    }
 
     return errors
 }

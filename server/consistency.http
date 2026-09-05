@@ -1,11 +1,11 @@
 
-
+### Login user
 POST http://localhost:3001/api/auth/login 
 Content-Type: application/json
 
 {
-  "email": "sathishsathish81485@gmail.com",
-  "password": "1234"
+  "email": "tamilzsurya09@gmail.com",
+  "password": "password123"
 }
 
 
@@ -16,8 +16,8 @@ POST http://localhost:3001/api/auth/register
 Content-Type: application/json
 
 {
-  "userName": "sathish Arasu",
-  "email": "sathsathish81485@gmail.com",
+  "userName": "tamilarasu",
+  "email": "tamilzsurya09@gmail.com",
   "password": "password123",
   "confirmPassword": "password123"
 }

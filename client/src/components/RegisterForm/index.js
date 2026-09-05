@@ -7,7 +7,7 @@ import RegLoaderBtn from '../RegLoaderBtn'
 import { registerUser } from '../../services/authService';
 
 // utils
-import { validateRegisterField, validateRegisterForm } from '../../utils/validation/registerValidation';
+import { validateInputField, validateRegisterForm } from '../../utils/validation/authValidation';
 
 import './index.css'
 
@@ -61,8 +61,7 @@ class RegisterForm extends Component {
             confirmPassword
         }
 
-        const errorMessage = validateRegisterField( id, value, formData)
-
+        const errorMessage = validateInputField( id, value, formData)
 
         this.setState(prevState => ({
             errors: {
@@ -152,7 +151,7 @@ class RegisterForm extends Component {
                         ))
                     }
                     
-                    
+                    {/* // Submit button and loader visibility based on isbtnLoading state */}
                     {
                         isbtnLoading ? (
                             <RegLoaderBtn className="register-page-form-button" />
@@ -161,7 +160,7 @@ class RegisterForm extends Component {
                         )
                     }
                         
-                    
+                    {/* // Display success or error messages after form submission */}
                     {successMessage && (<p className="form-success-msg">{successMessage}</p>)}
                     {submitErrMessage && (<p className="form-err-msg">{submitErrMessage}</p>)}
                     

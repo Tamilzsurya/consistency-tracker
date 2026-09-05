@@ -1,6 +1,6 @@
 import {Route, Switch} from 'react-router-dom'
 
-import LoginForm from './pages/LoginPage'
+import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
 import HomePage from './pages/HomePage'
 import GridPage from './pages/GridPage'
@@ -14,7 +14,7 @@ import './App.css'
 const App = () => (
   <Switch>
     <Route exact path="/" component={HomePage} />
-    <Route exact path="/login" component={LoginForm} />
+    <Route exact path="/login" component={LoginPage} />
     <Route exact path="/register" component={RegisterPage} />
     <Route exact path="/grid" component={GridPage} />
     <Route exact path="/trends" component={TrendPage} />

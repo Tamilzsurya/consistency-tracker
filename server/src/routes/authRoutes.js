@@ -7,10 +7,10 @@ const {
     // logoutUser,
 } = require('../controllers/authController')
 
-const { authRegisterValidator } = require('../validators/authValidator')
+const { authRegisterValidator, authLoginValidator } = require('../validators/authValidator')
 
 router.post('/register', authRegisterValidator, register)
-router.post('/login', loginUser)
+router.post('/login', authLoginValidator, loginUser)
 // router.post('/logout', logoutUser)
 
 

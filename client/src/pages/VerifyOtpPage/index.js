@@ -24,6 +24,8 @@ const VerifyOtpPage = () => {
     const [otp, setOtp] = useState('');
     const [ currentStageBtn, setCurrentStageBtn] = useState(responseConstants.initial);
 
+    console.log( localStorage.getItem('verificationToken') );
+
     const onSubmitOtp = (otp) => {
         console.log(otp);
 

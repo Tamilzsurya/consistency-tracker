@@ -1,11 +1,18 @@
 
+// services
+const sendVerificationEmail = require('../services/emailService')
+
+// models
+const otpModel = require('../models/otpModel')
 const userModel = require('../models/userModel')
+
+// utils
+const AppError = require('../utils/AppError')
 const hashAndComPassword = require('../utils/hashAndComPassword')
 const generateOtp = require('../utils/generateOtp')
-const sendVerificationEmail = require('../services/emailService')
-const AppError = require('../utils/AppError')
 const expireDateTime = require('../utils/expireDateTime')
-const otpModel = require('../models/otpModel')
+const signAndVerifyJwt = require('../utils/signAndVerifyJwt')
+
 
 const register = async (userName, email, password) =>{
    
@@ -22,7 +29,7 @@ const register = async (userName, email, password) =>{
     // create user
     const userId = await userModel.createUser(userName, email, hashedPassword)
 
-
+                             
     return userId
 }
 
@@ -36,34 +43,40 @@ const loginUser = async (email, password) => {
             throw new AppError('Invalid email or password', 401)
         }
 
+        
+        // check if user is registered with google
+        if(existingUser.provider === 'google'){
+            throw new AppError('Please log in with Google', 401)
+        }
+
         // compare password
         const isPasswordMatch = await hashAndComPassword.comparePassword(password, existingUser.password_hash)
         if(!isPasswordMatch){
             throw new AppError('Invalid email or password', 401)
         }
 
+       
+
         //generate otp
-       const otp = await generateOtp()
+        const otp = await generateOtp()
 
         // send  to user email
         await sendVerificationEmail(email, otp);
 
-        // check if the email is verified or not
+        // store otp in db
+        const userId = existingUser.id;
+        const otpHash = await hashAndComPassword.hashedPassword(otp)
+        const { expireTime } = expireDateTime;
+        const otpId = await otpModel.createOtp(userId, otpHash, expireTime)
 
-        if(existingUser.verified_user == false){
-            // store otp in db
-            const userId = existingUser.id;
-            const otpHash = await hashAndComPassword.hashedPassword(otp)
-            const { expireTime } = expireDateTime;
-
-            const otpId = await otpModel.createOtp(userId, otpHash, expireTime)
-
-            return otpHash;
-        }
-        
+        // create verification jwt
+        const tokenExpiresIn = process.env.VERIFY_TOKEN_EXPIRES_IN
+        const payload = {userId, otpId}
+        const verificationToken = await signAndVerifyJwt.signJwt(payload, tokenExpiresIn)
         
 
-        return "success";
+        return verificationToken;
+        
 }
 
 

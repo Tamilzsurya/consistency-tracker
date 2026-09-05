@@ -51,4 +51,46 @@ const authRegisterValidator = (request, response, next) => {
     next()
 }
 
-module.exports ={ authRegisterValidator}
+const authLoginValidator = (request, response, next) => {
+
+    const {email, password} = request.body;
+
+    // check if all fields are filled
+    if(!email?.trim() || !password?.trim()) {
+        return response.status(400).json({
+            message: 'All fields are required'
+        })
+    }
+
+    // check if email is valid or not
+    if(!emailRegex.test(email)) {
+        return response.status(400).json({
+            message: 'Please enter a valid email address'
+        })
+    }
+
+    // check if password is at least 8 characters long
+    if(password.length < 8) {
+        return response.status(400).json({
+            message: 'Password must be at least 8 characters long'
+        })
+    }
+
+    // check if password contains at least one letter
+    if(!/[A-Za-z]/.test(password)) {
+        return response.status(400).json({
+            message: 'Password must contain at least one letter'
+        })
+    }
+
+    // check if password contains at least one number
+    if(!/[0-9]/.test(password)) {
+        return response.status(400).json({
+            message: 'Password must contain at least one number'
+        })
+    }
+
+    next()
+}
+
+module.exports ={ authRegisterValidator, authLoginValidator }

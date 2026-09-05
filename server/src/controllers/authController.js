@@ -7,7 +7,7 @@ const register = async (request, response, next) => {
         
         const userId = await authService.register(userName, email, password)
 
-        response.status(200).json({
+        response.status(201).json({
             message: 'User created successfully. Please log in.',
             userId,
         })
@@ -21,11 +21,11 @@ const loginUser = async (request, response, next) => {
     try {
         const {email, password} = request.body
         
-        const otpId = await authService.loginUser(email, password)
+        const verificationToken = await authService.loginUser(email, password)
 
         response.status(200).json({
-            message: 'User logged in successfully.',
-            otpId,
+            message: 'OTP sent to your email. Please verify.',
+            verificationToken,
         })
     }
     catch(error) {
