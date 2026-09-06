@@ -1,5 +1,6 @@
 import {Route, Switch} from 'react-router-dom'
 
+
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
 import HomePage from './pages/HomePage'
@@ -8,19 +9,29 @@ import TrendPage from './pages/TrendPage'
 import ProfilePage from './pages/ProfilePage'
 import VerifyOtpPage from './pages/VerifyOtpPage'
 
+import HomeProtectedRoute from './ProtectedRoute/HomeProtectedRoute'
+import LoginProtectedRoute from './ProtectedRoute/LoginProtectedRoute'
+
 
 import './App.css'
 
+
 const App = () => (
+  
   <Switch>
-    <Route exact path="/" component={HomePage} />
-    <Route exact path="/login" component={LoginPage} />
-    <Route exact path="/register" component={RegisterPage} />
-    <Route exact path="/grid" component={GridPage} />
-    <Route exact path="/trends" component={TrendPage} />
-    <Route exact path="/profile" component={ProfilePage} />
-    <Route exact path="/verify-otp" component={VerifyOtpPage} />
+    
+    
+    <LoginProtectedRoute  exact path="/login" component={LoginPage} />
+    <LoginProtectedRoute  exact path="/register" component={RegisterPage} />
+    <LoginProtectedRoute  exact path="/verify-otp" component={VerifyOtpPage} />
+
+    <HomeProtectedRoute exact path="/" component={HomePage} />
+    <HomeProtectedRoute exact path="/grid" component={GridPage} />
+    <HomeProtectedRoute exact path="/trends" component={TrendPage} />
+    <HomeProtectedRoute exact path="/profile" component={ProfilePage} />
+    
   </Switch>
 )
+
 
 export default App

@@ -26,7 +26,7 @@ const VerifyOtpPage = () => {
 
     console.log( localStorage.getItem('verificationToken') );
 
-    const onSubmitOtp = (otp) => {
+    const onGetOtp = (otp) => {
         console.log(otp);
 
         if(otp.length === 6) {
@@ -75,7 +75,7 @@ const VerifyOtpPage = () => {
                         {/* Main Form Section */}
                         <form className = "verify-otp-page-form" >
 
-                            <OtpFields length={6} onSubmitOtp={onSubmitOtp} />
+                            <OtpFields length={6} onGetOtp={onGetOtp} />
                             {/* render current stage button based on the response state */
                                 renderCurrentStageBtn(currentStageBtn)
                             }

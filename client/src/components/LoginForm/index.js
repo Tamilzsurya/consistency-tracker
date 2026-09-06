@@ -72,7 +72,7 @@ class LoginForm extends Component {
             })
 
 
-           localStorage.setItem('verificationToken', verificationToken)
+            sessionStorage.setItem('verificationToken', verificationToken)
 
             history.push('/verify-otp')
 

@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 
 import './index.css'
 
-const OtpFields = ({ length, onSubmitOtp }) => {
+const OtpFields = ({ length, onGetOtp }) => {
 
     const [otpValues, setOtpValues] = useState( new Array(length).fill('') );
 
@@ -33,7 +33,7 @@ const OtpFields = ({ length, onSubmitOtp }) => {
         
         const compinedOtp = newOtpValues.join('');
         
-        onSubmitOtp(compinedOtp);
+        onGetOtp(compinedOtp);
         console.log(compinedOtp);
 
         // Move focus to the next input field if the current field is filled
