@@ -1,4 +1,5 @@
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+const otpRegex = /^[0-9]{6}$/
 
 
 const authRegisterValidator = (request, response, next) => {
@@ -93,4 +94,43 @@ const authLoginValidator = (request, response, next) => {
     next()
 }
 
-module.exports ={ authRegisterValidator, authLoginValidator }
+const authVerifyOtpValidator = (request, response, next) => {
+
+    const {otp} = request.body;
+    const authHeader = request.headers['authorization'];
+    let verificationToken;
+
+
+    // check if otp is filled
+    if(!otp?.trim()) {
+        return response.status(400).json({
+            message: 'OTP is required'
+        })
+    }
+
+    // check if otp is valid
+    if(!otpRegex.test(otp)) {
+        return response.status(400).json({
+            message: 'Please enter a valid OTP'
+        })
+    }
+
+    // check if verification token header is valid
+    if(authHeader === undefined) {
+        return response.status(400).json({
+            message: 'Verification token is required'
+        })
+    }
+
+    // check if verification token is valid
+    verificationToken = authHeader.split(' ')[1]
+    if(verificationToken === undefined) {
+        return response.status(400).json({
+            message: 'Verification token is required'
+        })
+    }
+
+    next()
+}
+
+module.exports ={ authRegisterValidator, authLoginValidator, authVerifyOtpValidator }

@@ -54,7 +54,7 @@ class LoginForm extends Component {
             error: {}
         })
 
-        
+        // call login api
         try{
 
             const data = await loginUser( formData );
@@ -72,7 +72,7 @@ class LoginForm extends Component {
             })
 
 
-            sessionStorage.setItem('verificationToken', verificationToken)
+            sessionStorage.setItem('verificationToken', verificationToken, {} )
 
             history.push('/verify-otp')
 

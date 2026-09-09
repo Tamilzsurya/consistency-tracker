@@ -32,8 +32,10 @@ const OtpFields = ({ length, onGetOtp }) => {
         // onsubmitotp
         
         const compinedOtp = newOtpValues.join('');
+        if(compinedOtp.length === 6){
+            onGetOtp(compinedOtp);
+        }
         
-        onGetOtp(compinedOtp);
         console.log(compinedOtp);
 
         // Move focus to the next input field if the current field is filled

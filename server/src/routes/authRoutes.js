@@ -5,13 +5,15 @@ const {
     register,
     loginUser,
     // logoutUser,
+    verifyOtp
 } = require('../controllers/authController')
 
-const { authRegisterValidator, authLoginValidator } = require('../validators/authValidator')
+const { authRegisterValidator, authLoginValidator, authVerifyOtpValidator } = require('../validators/authValidator')
 
 router.post('/register', authRegisterValidator, register)
 router.post('/login', authLoginValidator, loginUser)
 // router.post('/logout', logoutUser)
+router.post('/verify-otp', authVerifyOtpValidator , verifyOtp)
 
 
 module.exports = router

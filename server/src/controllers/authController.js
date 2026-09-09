@@ -8,7 +8,7 @@ const register = async (request, response, next) => {
         const userId = await authService.register(userName, email, password)
 
         response.status(201).json({
-            message: 'User created successfully. Please log in.',
+            message: 'User created successfully. Please Sign in.',
             userId,
         })
     }
@@ -31,6 +31,22 @@ const loginUser = async (request, response, next) => {
     catch(error) {
         next(error)
     }
-}                                
+}     
 
-module.exports = {register, loginUser}
+const verifyOtp = async (request, response, next) => {
+    try {
+        const verificationToken = request.headers['authorization'].split(' ')[1]
+        const {otp} = request.body
+
+        const jwtToken = await authService.verifyOtp(otp, verificationToken)
+
+        response.status(200).json({
+            message: 'Sign in successful.',
+            jwtToken,
+        })
+    }catch(error) {
+        next(error)
+    }
+}
+
+module.exports = {register, loginUser, verifyOtp}

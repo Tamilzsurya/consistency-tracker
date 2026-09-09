@@ -106,6 +106,7 @@
     border: none;
     cursor: pointer;
     margin-top: 24px;
+    margin-bottom: 24px;
     outline: none;
 
     width: 100%;
@@ -197,4 +198,20 @@
 .verify-otp-page-change-email-button:hover 
 .verify-otp-page-change-email-icon {
     color: #3525CD;
+}
+
+.otp-form-err-msg{
+    color: #EF4444;
+    font-family: var(--ff-primary);
+    font-size: 14px;
+    font-weight: var(--fw-regular);
+    letter-spacing: 0.6px;
+}
+
+.otp-form-success-msg{
+    color: #22C55E;
+    font-family: var(--ff-primary);
+    font-size: 14px;
+    font-weight: var(--fw-regular);
+    letter-spacing: 0.6px;
 }

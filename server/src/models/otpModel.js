@@ -16,6 +16,33 @@ const createOtp = async (userId, otpHash, expiresAt) => {
     return result.insertId
 }
 
+// get otp by user id
+const getOtp = async (userId) => {
+    const query = `
+        SELECT *
+        FROM email_verification_otps
+        WHERE user_id = ?
+    `;
+
+    const [rows] = await db.execute(query, [userId]);
+
+    return rows[0];
+}
+
+// delete otp by user id
+const deleteOtp = async (userId) => {
+    const query = `
+        DELETE FROM email_verification_otps
+        WHERE user_id = ?
+    `;
+
+    const [result] = await db.execute(query, [userId]);
+
+    return result;
+}
+
 module.exports = {
-    createOtp
+    createOtp,
+    getOtp,
+    deleteOtp
 }

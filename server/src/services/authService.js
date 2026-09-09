@@ -61,12 +61,18 @@ const loginUser = async (email, password) => {
         const otp = await generateOtp()
 
         // send  to user email
-        await sendVerificationEmail(email, otp);
+        try{
+            await sendVerificationEmail(email, otp);
+        }catch(error){
+            throw new AppError("We are truble to send the otp. Please try again later.")
+        }
+        
+        
 
         // store otp in db
         const userId = existingUser.id;
         const otpHash = await hashAndComPassword.hashedPassword(otp)
-        const { expireTime } = expireDateTime;
+        const  expireTime  = expireDateTime.expireDateTime();
         const otpId = await otpModel.createOtp(userId, otpHash, expireTime)
 
         // create verification jwt
@@ -79,5 +85,49 @@ const loginUser = async (email, password) => {
         
 }
 
+const verifyOtp = async (otp, verificationToken) => {
+    let payload;
 
-module.exports = {register, loginUser}
+    try{
+         payload = await signAndVerifyJwt.verifyJwt(verificationToken)  
+    }catch(error){
+        throw new AppError('Your session has expired. Please Sign in again.', 401)
+    }
+
+    const {userId, otpId} = payload;
+
+    const user = await otpModel.getOtp(userId)
+    
+
+    // check if otp is present in db
+    if(!user){
+        throw new AppError('Invalid OTP', 401)
+    }
+
+    // check if otp is expired
+    if(user.expires_at < new Date()){
+        throw new AppError('OTP has expired. Please Resend OTP', 401)
+    }
+
+
+    // check if otp is valid
+    const isOtpValid = await hashAndComPassword.comparePassword(otp, user.otp_hash)
+    if(!isOtpValid){
+        throw new AppError('Please enter a valid OTP', 401)
+    }
+
+
+    // delete otp from db
+    await otpModel.deleteOtp(userId)
+
+    // create and send the jwToken to the frontend
+    const tokenExpiresIn = process.env.JWT_TOKEN_EXPIRES_IN
+    const jwtPayload = {userId}
+
+    const jwtToken = await signAndVerifyJwt.signJwt(jwtPayload, tokenExpiresIn)
+
+    return jwtToken;
+}
+
+
+module.exports = {register, loginUser, verifyOtp}

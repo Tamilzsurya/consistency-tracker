@@ -1,14 +1,21 @@
 import { useState } from 'react'
+import { Redirect } from 'react-router-dom'
+import Cookies from 'js-cookie'
 
+// icons
 import { MdMarkEmailRead } from "react-icons/md";
 import { MdArrowForward } from "react-icons/md";
 import { MdOutlineModeEdit } from "react-icons/md";
 
+// components
 import logo from '../../assets/logo.svg'
 import BrandLogo from '../../components/BrandLogo'
 import RegLoaderBtn from '../../components/RegLoaderBtn'
 import OtpFields from '../../components/OtpFields'
 import InitialBtn from '../../components/InitialBtn'
+
+import { validateOtpForm } from '../../utils/validation/authValidation'
+import { verifyOtp } from '../../services/authService'
 
 import './index.css'
 
@@ -19,25 +26,87 @@ const responseConstants = {
     failure: 'FAILURE'
 }
  
-const VerifyOtpPage = () => {
+const VerifyOtpPage = props => {
 
     const [otp, setOtp] = useState('');
-    const [ currentStageBtn, setCurrentStageBtn] = useState(responseConstants.initial);
+    const [ apiResponse, setApiResponse] = useState( { 
+        error: "", 
+        currentStageBtn: responseConstants.initial,
+        submitErrorMsg: "",
+        submitSuccessMsg: ""
+     } );
+     
+   
+    const verificationToken = sessionStorage.getItem('verificationToken');
 
-    console.log( localStorage.getItem('verificationToken') );
+    // submit otp and verify
+    const onSubmitOtp = async event =>{
+        event.preventDefault()
 
+        const verificationToken = sessionStorage.getItem('verificationToken');
+        const formData = { otp, verificationToken };
+
+        // validate otp
+        const error = validateOtpForm( formData );
+        if(error) {
+            setApiResponse({...apiResponse, error, currentStageBtn: responseConstants.initial});
+            return;
+        }
+
+        // clear all error messages and set loading state
+        setApiResponse({ 
+        error: "", 
+        currentStageBtn: responseConstants.loading,
+        submitErrorMsg: "",
+        submitSuccessMsg: ""
+     })
+
+     // call verify otp api
+     try{
+    
+        const data = await verifyOtp(formData);
+
+        // set the JWT token to the cookie storage
+        const { jwtToken, message } = data
+        Cookies.set("jwt_token", jwtToken, {expires: 30})
+        
+        console.log(`jwtToken: ${jwtToken}`);
+
+        // Redirect to the home page
+        const { history } = props
+        history.replace("/")
+
+        // remove the verification token from the session storage
+        sessionStorage.removeItem('verificationToken');
+       
+        // set success message
+        setApiResponse({...apiResponse, submitSuccessMsg: message, currentStageBtn: responseConstants.success});
+
+     }catch(error) {
+        
+        setApiResponse({...apiResponse, submitErrorMsg: error.message, currentStageBtn: responseConstants.success});
+     }
+
+
+    }
+
+
+    // get otp from otp fields
     const onGetOtp = (otp) => {
         console.log(otp);
 
         if(otp.length === 6) {
-            setCurrentStageBtn(responseConstants.success);
+           
+            setApiResponse({...apiResponse, currentStageBtn: responseConstants.success});
             setOtp(otp);
         }else {
-            setCurrentStageBtn(responseConstants.initial);
+            
+            setApiResponse({...apiResponse, currentStageBtn: responseConstants.initial});
         }
 
     }
 
+    // render current stage button
     const renderCurrentStageBtn = (currentStageBtn) => {
         switch(currentStageBtn) {
             case responseConstants.initial:
@@ -53,6 +122,17 @@ const VerifyOtpPage = () => {
         }
     }
 
+    const moveToLoginPage = () => {
+        const { history } = props
+        history.replace("/login")
+    }
+
+    // redirect to login page if verification token is not present
+    if(!verificationToken) {
+        return <Redirect to="/login" />
+    }
+    
+    // render verify otp page if verification token is present
     return (
             <div className = "verify-otp-page-bg-container">
 
@@ -73,19 +153,26 @@ const VerifyOtpPage = () => {
                         </section>
 
                         {/* Main Form Section */}
-                        <form className = "verify-otp-page-form" >
+                        <form className = "verify-otp-page-form" onSubmit= { onSubmitOtp } >
 
                             <OtpFields length={6} onGetOtp={onGetOtp} />
+                            { apiResponse.error && <p className="otp-form-err-msg">{apiResponse.error}</p> }
+
                             {/* render current stage button based on the response state */
-                                renderCurrentStageBtn(currentStageBtn)
+                                renderCurrentStageBtn(apiResponse.currentStageBtn)
                             }
+
+
+                            
+                            { apiResponse.submitErrorMsg && <p className="otp-form-err-msg">{apiResponse.submitErrorMsg}</p> }
+                            { apiResponse.submitSuccessMsg && <p className="otp-form-success-msg">{apiResponse.submitSuccessMsg}</p> }
 
                         </form>
 
                         {/* Main Resend otp Section */}
                         <section className="verify-otp-page-resend-otp-section">
                             <p className="verify-otp-page-resend-otp-description">Didn't receive the code? <button className="verify-otp-page-resend-otp-button">Resend</button> (0:30)</p>
-                            <button className="verify-otp-page-change-email-button">
+                            <button className="verify-otp-page-change-email-button" onClick={ moveToLoginPage }>
                                 <MdOutlineModeEdit className="verify-otp-page-change-email-icon" /> Change Email
                             </button>
                         </section> 

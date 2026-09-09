@@ -1,4 +1,15 @@
 
+### Verify otp
+
+POST http://localhost:3001/api/auth/verify-otp
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsIm90cElkIjoxLCJpYXQiOjE3ODg5Njc5NzUsImV4cCI6MTc4ODk2ODU3NX0.x_n6BHr6QvSaOAAvMBf60dBw4oDWoj75COa97P_WLCI
+
+{
+  "otp": "717171"
+}
+
+
 ### Login user
 POST http://localhost:3001/api/auth/login 
 Content-Type: application/json

@@ -12,7 +12,7 @@ const LoginNavbar = () => {
                 <BrandLogo />
             </Link>
             <Link to="/login" className="login-link">
-                LOGIN
+                SIGN IN
             </Link>
         </nav>
     )

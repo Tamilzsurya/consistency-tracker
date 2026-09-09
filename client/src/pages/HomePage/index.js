@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import Cookies from 'js-cookie';
 
 import { FaCheckCircle } from "react-icons/fa";
 import { FaSquare } from "react-icons/fa";
@@ -18,6 +19,8 @@ import './index.css';
 
 class HomePage extends Component {
 
+ 
+  
 
   renderInformationSection = () =>{
     return (
