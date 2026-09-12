@@ -58,14 +58,9 @@ const loginUser = async (email, password) => {
        
 
         //generate otp
-        const otp = await generateOtp()
+        const otp = generateOtp()
 
-        // send  to user email
-        try{
-            await sendVerificationEmail(email, otp);
-        }catch(error){
-            throw new AppError("We are truble to send the otp. Please try again later.")
-        }
+        
         
         
 
@@ -79,6 +74,14 @@ const loginUser = async (email, password) => {
         const tokenExpiresIn = process.env.VERIFY_TOKEN_EXPIRES_IN
         const payload = {userId, otpId}
         const verificationToken = await signAndVerifyJwt.signJwt(payload, tokenExpiresIn)
+
+
+        // send  to user email
+        try{
+            await sendVerificationEmail(email, otp);
+        }catch(error){
+            throw new AppError("We are truble to send the otp. Please try again later.", 500)
+        }
         
 
         return verificationToken;
@@ -129,5 +132,40 @@ const verifyOtp = async (otp, verificationToken) => {
     return jwtToken;
 }
 
+const resendOtp = async (verificationToken) => {
 
-module.exports = {register, loginUser, verifyOtp}
+    // check the token is expire or not
+    let payload;
+    try{
+        payload = await signAndVerifyJwt.verifyJwt(verificationToken);
+    }catch(error){
+        throw new AppError('Your session has expired. Please Sign in again.', 401)
+    }
+
+
+    const { email } = await userModel.getUserById(payload.userId);
+    const { userId } = payload;
+
+    //generate otp
+    const otp = generateOtp()
+
+    
+
+    // store otp in db
+    const otpHash = await hashAndComPassword.hashedPassword(otp)
+    const  expireTime  = expireDateTime.expireDateTime();
+
+    await otpModel.updateOtp(userId, otpHash, expireTime)
+
+
+    // resend the otp to user email
+    try{
+        await sendVerificationEmail(email, otp);
+    }catch(error){
+        throw new AppError("We are truble to send the otp. Please try again later.", 500)
+    }
+
+}
+
+
+module.exports = {register, loginUser, verifyOtp, resendOtp}

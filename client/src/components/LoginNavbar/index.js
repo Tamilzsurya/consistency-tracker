@@ -1,21 +1,24 @@
-import {Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 
 import BrandLogo from '../BrandLogo'
 
 import './index.css';
 
-const LoginNavbar = () => {
+const LoginNavbar = props => {
+
+    const { history } = props;
+    const redirectToLoginPage = () => history.replace("/login");
+   
 
     return (
         <nav className="login-navbar">
             <Link to="/" className="brand-logo-link">
                 <BrandLogo />
             </Link>
-            <Link to="/login" className="login-link">
-                SIGN IN
-            </Link>
+            
+            <button className="login-link" onClick = { redirectToLoginPage } >SIGN IN</button>
         </nav>
     )
 }
 
-export default LoginNavbar;
+export default withRouter(LoginNavbar);

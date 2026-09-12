@@ -2,7 +2,7 @@
 import './index.css'
 
 const InitialBtn = props => {
-    const { className, content, icon = "" } = props
+    const { className, content } = props
 
     return (
         < div id="reg-loader-container" className={`${className}`}>

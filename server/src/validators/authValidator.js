@@ -1,5 +1,28 @@
+const { request, response } = require("../app")
+
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const otpRegex = /^[0-9]{6}$/
+
+
+
+const validateVerificationToken = ( authHeader ) => {
+
+    
+
+    // check if verification token header is valid
+    if(authHeader === undefined) {
+        return 'Verification token is required. Please Sign in again and continue.'
+    }
+
+    // check if verification token is valid
+    const verificationToken = authHeader.split(' ')[1]
+    if(verificationToken === undefined){
+        return 'Verification token is required. Please Sign in again and continue.'
+    }
+
+
+    return ''
+}
 
 
 const authRegisterValidator = (request, response, next) => {
@@ -98,7 +121,7 @@ const authVerifyOtpValidator = (request, response, next) => {
 
     const {otp} = request.body;
     const authHeader = request.headers['authorization'];
-    let verificationToken;
+    
 
 
     // check if otp is filled
@@ -115,22 +138,36 @@ const authVerifyOtpValidator = (request, response, next) => {
         })
     }
 
-    // check if verification token header is valid
-    if(authHeader === undefined) {
-        return response.status(400).json({
-            message: 'Verification token is required'
-        })
+    // check if there is any error in verification token.
+    const error = validateVerificationToken(authHeader);
+    if(error){
+         response.status(400).json(
+            {
+                message: error
+            }
+        )
     }
-
-    // check if verification token is valid
-    verificationToken = authHeader.split(' ')[1]
-    if(verificationToken === undefined) {
-        return response.status(400).json({
-            message: 'Verification token is required'
-        })
-    }
+    
 
     next()
 }
 
-module.exports ={ authRegisterValidator, authLoginValidator, authVerifyOtpValidator }
+const authResendOtpValidator = (request, response, next) =>{
+    const authHeader = request.headers['authorization']
+
+    const error = validateVerificationToken(authHeader) ;
+    
+
+    if(error){
+        return response.status(400).json(
+            {
+                message: error
+            }
+        )
+    }
+
+
+    next()
+}
+
+module.exports ={ authRegisterValidator, authLoginValidator, authVerifyOtpValidator, authResendOtpValidator }

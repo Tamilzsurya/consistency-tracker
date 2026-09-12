@@ -165,6 +165,16 @@
     line-height: 20px;
 }
 
+.verify-otp-page-resend-otp-button:disabled{
+    color: #C7C4D8;
+    cursor: not-allowed;
+}
+
+/* .verify-otp-page-resend-otp-button-disabled{
+    color: #C7C4D8;
+
+} */
+
 .verify-otp-page-change-email-button{
     background-color: transparent;
     border: none;

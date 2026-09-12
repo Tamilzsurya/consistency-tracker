@@ -106,12 +106,17 @@
     font-weight: 400; 
 }
 
-.signup-link {
+.signup-link-btn {
     color: #3525CD;
     font-family: "Inter", sans-serif;
     font-size: 14px;
     font-weight: 400;
     text-decoration: none;
+
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
 }
 .social-login-container {
     display: flex;

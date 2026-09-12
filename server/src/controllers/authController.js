@@ -49,4 +49,23 @@ const verifyOtp = async (request, response, next) => {
     }
 }
 
-module.exports = {register, loginUser, verifyOtp}
+const resendOtp = async (request, response, next) => {
+    
+    try{
+
+        const verificationToken  = request.headers['authorization'].split(' ')[1]
+        const result = await authService.resendOtp(verificationToken)
+
+        response.status(200).json(
+            {
+                message: "Otp successfully send to your email."
+            }
+        )
+
+    }catch(error){
+        next(error)
+    }
+
+}
+
+module.exports = {register, loginUser, verifyOtp, resendOtp}

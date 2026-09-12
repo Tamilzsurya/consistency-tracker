@@ -124,20 +124,29 @@ export const validateLoginForm = (formData) => {
 
 export const validateOtpForm = ( formData ) => {
 
-    let error = ''
+    
     const otpRegex = /^[0-9]{6}$/
     const { otp, verificationToken } = formData
 
     if (otp.length !== 6 || !otpRegex.test(otp)) {
-        error = 'Please enter a valid OTP'
-        return error
+        return 'Please enter a valid OTP'
+         
     }
 
     if (!verificationToken) {
-        error = 'Your session has expired. Please Sign in again.'
-        return error
+        return  'Your session has expired. Please Sign in again.'
     }
 
+    return ''
+}
 
-    return error
+export const validateResendOtp = formData => {
+    const {verificationToken} = formData
+    
+
+    if(!verificationToken){
+        return "Your session has expired. Please Sign in again."
+    }
+
+    return ''
 }

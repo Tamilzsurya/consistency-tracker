@@ -1,5 +1,22 @@
 const {db} = require("../config/db");
 
+// update the resended otp 
+const updateOtp = async (userId, otpHash, expireTime) => {
+    const query = `
+        UPDATE email_verification_otps
+        SET 
+            otp_hash = ?,
+            expires_at = ?,
+            attempt = attempt + 1
+        WHERE user_id = ?
+    `;
+
+    const [result] = await db.execute(query, [otpHash, expireTime, userId])
+
+    return result;
+}
+
+// create or update the otp
 const createOtp = async (userId, otpHash, expiresAt) => {
     const query = `
         INSERT INTO email_verification_otps
@@ -44,5 +61,6 @@ const deleteOtp = async (userId) => {
 module.exports = {
     createOtp,
     getOtp,
-    deleteOtp
+    deleteOtp,
+    updateOtp
 }

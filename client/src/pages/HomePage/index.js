@@ -76,6 +76,7 @@ class HomePage extends Component {
 
   render() {
 
+   
     return (
       <div className="home-page">
         <HomeSidebar />

@@ -74,7 +74,7 @@ class LoginForm extends Component {
 
             sessionStorage.setItem('verificationToken', verificationToken, {} )
 
-            history.push('/verify-otp')
+            history.replace('/verify-otp')
 
 
         }catch(error){
@@ -166,6 +166,12 @@ class LoginForm extends Component {
         )
     }
 
+    // Redirect to register page when register button is clicked
+    redirectToRegisterPage = () => {
+        const { history } = this.props
+        history.replace('/register')
+    }
+
     render() {
         const { isbtnLoading, successMessage, submitErrMessage } = this.state
 
@@ -190,7 +196,7 @@ class LoginForm extends Component {
 
                         {/* Social Login Options */}
                         <div className="signup-social-container">
-                            <p className="signup-text">New here? <Link to="/register" className="signup-link">Start your grid</Link></p>
+                            <p className="signup-text">New here? <button type="button" className="signup-link-btn" onClick={ this.redirectToRegisterPage } >Start your grid</button></p>
                             <div className="social-login-container">
 
                                 <div className="social-login-options">
