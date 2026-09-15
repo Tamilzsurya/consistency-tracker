@@ -1,4 +1,7 @@
 
+const signAndVerifyJwt = require('../utils/signAndVerifyJwt')
+
+
 const authService = require('../services/authService')
 
 const register = async (request, response, next) => {
@@ -68,4 +71,29 @@ const resendOtp = async (request, response, next) => {
 
 }
 
-module.exports = {register, loginUser, verifyOtp, resendOtp}
+
+const googleCallback = async (request, response, next) => {
+    
+    try{
+
+        const user = request.user;
+
+        // generate jwt token
+        const payload = { userId: user.id };
+        const tokenExpiresIn = process.env.JWT_TOKEN_EXPIRES_IN;
+
+        const jwtToken = await signAndVerifyJwt.signJwt(payload, tokenExpiresIn);
+
+        // send the cookie to client
+        response.cookie('jwt_token', jwtToken, { maxAge: 1000 * 60 * 60 * 24 * 7 })
+
+        return response.redirect(`${process.env.CLIENT_URL}/`);
+
+    }
+    catch(error){
+        next(error)
+    }
+    
+};
+
+module.exports = {register, loginUser, verifyOtp, resendOtp, googleCallback}

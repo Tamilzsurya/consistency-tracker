@@ -9,8 +9,8 @@ import TrendPage from './pages/TrendPage'
 import ProfilePage from './pages/ProfilePage'
 import VerifyOtpPage from './pages/VerifyOtpPage'
 
-import HomeProtectedRoute from './ProtectedRoute/HomeProtectedRoute'
-import LoginProtectedRoute from './ProtectedRoute/LoginProtectedRoute'
+import HomeProtectedRoute from './protectedRoutes/HomeProtectedRoute'
+import LoginProtectedRoute from './protectedRoutes/LoginProtectedRoute'
 
 
 import './App.css'

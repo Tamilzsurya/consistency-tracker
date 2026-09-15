@@ -14,6 +14,9 @@ import './index.css';
 import google from '../../assets/google.svg';
 import apple from '../../assets/apple.svg';
 
+// constants auth messages
+import AUTH_ERROR_MESSAGES  from '../../constents/authMessages.js';
+
 class LoginForm extends Component {
     state = {
         email: '',
@@ -25,6 +28,53 @@ class LoginForm extends Component {
 
         submitErrMessage: '',
         successMessage: ''
+    }
+
+
+    componentDidMount() {
+        
+        const { location, history } = this.props;
+        const { search } = location;
+        console.log(this.props);
+
+
+
+        
+
+         const searchParams =  new URLSearchParams(search);
+
+        const errorCode = searchParams.get("error");
+
+        if (!errorCode) {
+            return;
+        }
+
+        const message = AUTH_ERROR_MESSAGES[errorCode] || "Something went wrong while signing in with Google.";
+
+        this.setState({ submitErrMessage: message });
+
+        window.history.replaceState({}, document.title, '/login');
+
+        
+    }
+
+    
+
+
+
+
+
+
+
+
+    // handle google login
+    handelGoogleLogin = async () => {
+
+         window.location.href = 'http://localhost:3001/api/auth/google'
+    }
+    // handle apple login
+    handelAppleLogin = async () => {
+       this.setState({submitErrMessage: "This feature is not available yet. Please try other login methods."})
     }
 
 
@@ -113,6 +163,11 @@ class LoginForm extends Component {
         }));
     }
 
+
+
+
+
+
     // Render Input Fields
     renderEmailField = () => {
         const { error } = this.state;
@@ -146,7 +201,7 @@ class LoginForm extends Component {
 
     renderGoogleLoginButton = () => {
         return (
-            <button className="social-login-button">
+            <button onClick={this.handelGoogleLogin} type="button" className="social-login-button">
                 <div className="social-login-btn-content">
                     <img src={google} alt="Google" className="social-login-icon" />
                     <p>Google</p>
@@ -157,7 +212,7 @@ class LoginForm extends Component {
 
     renderAppleLoginButton = () => {
         return (
-            <button className="social-login-button">
+            <button onClick = {this.handelAppleLogin} type="button" className="social-login-button">
                 <div className="social-login-btn-content">
                     <img src={apple} alt="Apple" className="social-login-icon" />
                     <p>Apple</p>

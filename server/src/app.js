@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const passport = require('./config/passport');
 
 const userRoutes = require('./routes/userRoutes')
 // const habitRoutes = require('./routes/habitRoutes')
@@ -17,6 +18,7 @@ app.use(cors(
         credentials: true,
     }
 ))
+app.use(passport.initialize())
 
 // Routes
 app.use('/api/auth', authRoutes)

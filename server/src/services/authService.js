@@ -12,8 +12,9 @@ const hashAndComPassword = require('../utils/hashAndComPassword')
 const generateOtp = require('../utils/generateOtp')
 const expireDateTime = require('../utils/expireDateTime')
 const signAndVerifyJwt = require('../utils/signAndVerifyJwt')
+const { AUTH_ERROR_CODES } = require('../constants/messages')
 
-
+// register user
 const register = async (userName, email, password) =>{
    
     // check if user already exists
@@ -33,7 +34,6 @@ const register = async (userName, email, password) =>{
     return userId
 }
 
-
 //login user
 const loginUser = async (email, password) => {
 
@@ -46,7 +46,7 @@ const loginUser = async (email, password) => {
         
         // check if user is registered with google
         if(existingUser.provider === 'google'){
-            throw new AppError('Please log in with Google', 401)
+            throw new AppError("This email is registered with Google. Please login with Google.", 401)
         }
 
         // compare password
@@ -60,8 +60,6 @@ const loginUser = async (email, password) => {
         //generate otp
         const otp = generateOtp()
 
-        
-        
         
 
         // store otp in db
@@ -84,10 +82,10 @@ const loginUser = async (email, password) => {
         }
         
 
-        return verificationToken;
-        
+        return verificationToken;    
 }
 
+// verify otp
 const verifyOtp = async (otp, verificationToken) => {
     let payload;
 
@@ -132,6 +130,7 @@ const verifyOtp = async (otp, verificationToken) => {
     return jwtToken;
 }
 
+// resend otp
 const resendOtp = async (verificationToken) => {
 
     // check the token is expire or not
@@ -167,5 +166,125 @@ const resendOtp = async (verificationToken) => {
 
 }
 
+const googleLogin = async (googleUser) => {
 
-module.exports = {register, loginUser, verifyOtp, resendOtp}
+    const {
+        googleId,
+        email,
+        fullName,
+        profilePicture,
+        emailVerified,
+    } = googleUser
+
+    // 1. Validate Google profile
+        // check if googleId and email are present if not throw error
+        if (!googleId || !email) {
+            throw new AppError(
+                "Unable to get required information from Google.",
+                400,
+                AUTH_ERROR_CODES.GOOGLE_LOGIN_FAILED
+            );
+        }
+
+        // check if email is verified if not throw error
+        if (!emailVerified) {
+            throw new AppError(
+                "Your Google email address is not verified.",
+                400,
+                AUTH_ERROR_CODES.GOOGLE_EMAIL_NOT_VERIFIED
+            );
+        }
+
+
+
+
+    // 2. Check google_id first
+    // if googleId is present in db then return user
+    const existingGoogleUser = await userModel.getUserByGoogleId(googleId);
+
+    if (existingGoogleUser) {
+        return existingGoogleUser;
+    }
+
+
+
+    // 3. Google ID does not exist.
+    //    Check email.
+    const existingEmailUser = await userModel.getUserByEmail(email);
+
+
+    // 4. Email does not exist
+    //    Create Google account
+    if (!existingEmailUser) {
+
+        const newUser =
+            await userModel.createGoogleUser( googleUser );
+
+        return newUser;
+    }
+
+
+
+    // 5. Email exists
+    //    Existing LOCAL account
+    if (existingEmailUser.provider === "local") {
+
+        const linkedUser = await userModel.linkGoogleAccount({
+                userId: existingEmailUser.id,
+                googleId,
+                profilePicture,
+            });
+
+        return linkedUser;
+    }
+
+    // 6. Existing account is another provider
+    if (existingEmailUser.provider === "google") {
+
+        /*
+         * Normally this case means the account
+         * should already have google_id.
+         *
+         * If google_id didn't match above,
+         * something is inconsistent.
+         */
+
+        throw new AppError(
+            "This Google account is not linked correctly.",
+            409,
+            AUTH_ERROR_CODES.GOOGLE_ACCOUNT_CONFLICT
+        );
+    }
+
+
+    if (existingEmailUser.provider === "apple") {
+
+        /*
+         * Future behavior:
+         *
+         * Apple account exists with same email.
+         *
+         * Do not automatically change provider.
+         *
+         * Later you can implement an explicit
+         * account-linking flow.
+         */
+
+        throw new AppError(
+            "This email is already registered with Apple. Please login with Apple.",
+            409,
+            AUTH_ERROR_CODES.GOOGLE_ACCOUNT_CONFLICT_WITH_APPLE
+        );
+    }
+
+
+    throw new AppError(
+        "Unable to complete Google login.",
+        500
+    );
+
+    
+}
+
+
+module.exports = {register, loginUser, verifyOtp, resendOtp, googleLogin}

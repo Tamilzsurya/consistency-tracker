@@ -1,4 +1,8 @@
 
+### Google login
+GET http://localhost:3001/api/auth/google
+
+
 ### Resend otp
 POST http://localhost:3001/api/auth/resend-otp
 Content-Type: application/json

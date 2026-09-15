@@ -156,7 +156,7 @@ const VerifyOtpPage = props => {
 
         // set the JWT token to the cookie storage
         const { jwtToken, message } = data
-        Cookies.set("jwt_token", jwtToken, {expires: 30})
+        Cookies.set("jwt_token", jwtToken, {expires: 7})
         
         
         // set success message
