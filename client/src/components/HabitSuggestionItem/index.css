@@ -1,0 +1,23 @@
+.habit-empty-view-suggestion-section-li-container{
+    list-style: none;
+
+    background-color: #EDEEF0;
+    border-radius: 9999px;
+    padding: 8px 16px;
+    cursor: pointer;
+
+    border: 1px solid #C7C4D8;
+}
+.habit-empty-view-suggestion-section-li-container:hover{
+    background-color:#C7C4D8;
+}
+
+
+.habit-empty-view-suggestion-section-li-paragraph{
+    color: #191C1E;
+    font-family: var(--ff-primary);
+    font-size: 14px;
+    font-weight: var(--fw-regular);
+    line-height: 20px;
+    letter-spacing: 0px;
+}

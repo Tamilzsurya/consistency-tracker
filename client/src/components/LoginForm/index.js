@@ -37,11 +37,9 @@ class LoginForm extends Component {
         const { search } = location;
         console.log(this.props);
 
-
-
         
 
-         const searchParams =  new URLSearchParams(search);
+        const searchParams =  new URLSearchParams(search);
 
         const errorCode = searchParams.get("error");
 

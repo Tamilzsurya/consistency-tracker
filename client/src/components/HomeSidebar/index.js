@@ -1,12 +1,14 @@
 
 import {Link, withRouter} from 'react-router-dom';
 
+// icons
 import { MdCalendarToday } from "react-icons/md";
 import { BiGridAlt } from "react-icons/bi";
 import { MdPersonOutline } from "react-icons/md";
 import { BiLineChart } from "react-icons/bi";
 import { FaPlus } from "react-icons/fa";
 
+// components
 import BrandLogo from '../BrandLogo';
 
 import './index.css';
@@ -21,7 +23,7 @@ const HomeSidebar = props => {
 
     const { match } = props;
     const { path } = match;
-    console.log(path);
+    
 
     return (
                 <div className="side-bar">
