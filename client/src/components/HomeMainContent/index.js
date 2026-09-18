@@ -5,6 +5,7 @@ import { useState } from "react";
 import HabitSuccessView from '../HabitSuccessView';
 import HabitEmptyView from '../HabitEmptyView';
 import HabitLoadingView from '../HabitLoadingView';
+import HabitFailureView from '../HabitFailureView';
 
 import './index.css'
 
@@ -25,7 +26,13 @@ const HomeMainContent = () => {
     return (
          <main className="home-page-main-container">
 
-            <HabitLoadingView />
+            {/* <HabitEmptyView /> */}
+
+            {/* <HabitLoadingView /> */}
+
+            {/* <HabitSuccessView /> */}
+
+            <HabitFailureView content={"Your streak is broken! Start a new one!"} />
             
         </main>
     )
