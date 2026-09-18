@@ -4,6 +4,7 @@ import { useState } from "react";
 // components
 import HabitSuccessView from '../HabitSuccessView';
 import HabitEmptyView from '../HabitEmptyView';
+import HabitLoadingView from '../HabitLoadingView';
 
 import './index.css'
 
@@ -22,9 +23,9 @@ const HomeMainContent = () => {
     });
 
     return (
-         <main className="home-page-main-content">
+         <main className="home-page-main-container">
 
-            { apiResponse.habitData.length > 0 ? <HabitSuccessView /> : <HabitEmptyView /> }
+            <HabitLoadingView />
             
         </main>
     )

@@ -10,7 +10,7 @@ import userProfileAvatar from '../../assets/images/user-profile-avatar.jpg';
 import './index.css';
 
 const HomeTopNavbar = () => (
-    <div className="top-navbar">
+    <nav className="top-navbar">
         <div className="top-navbar-brand-logo">
             <BrandLogo />
         </div>
@@ -25,7 +25,7 @@ const HomeTopNavbar = () => (
             <MdOutlineSettings className="top-navbar-icon" />
             <img className="user-profile-avatar" src={userProfileAvatar} alt="User Profile" />
         </div>
-    </div>
+    </nav>
 );
 
 export default HomeTopNavbar;

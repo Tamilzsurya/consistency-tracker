@@ -1,0 +1,25 @@
+
+
+.habit-loading-view-container{
+    width: 100%;
+    height: calc(100vh - 60px );
+
+
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.habit-loading-view-container-loader{
+    margin-bottom: 24px;
+}
+
+.habit-loading-view-container-para{
+    color: #464555;
+    font-family: var(--ff-primary);
+    font-size: 16px;
+    font-weight: var(--fw-regular);
+    line-height: 24px;
+}

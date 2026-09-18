@@ -79,7 +79,7 @@ const HabitSucessView = () => {
 
     return (
         
-        <section className="main-content">
+        <section className="habit-success-view">
             {/* today-page: information section */
             renderInformationSection()
             }

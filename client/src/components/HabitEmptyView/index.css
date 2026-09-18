@@ -5,7 +5,7 @@
     
 
     background-color: #F8F9FB;
-    padding: 32px 32px;
+    padding: 64px 32px;
 }
 
 .habit-empty-view{
@@ -39,21 +39,35 @@
 .habit-empty-view-add-habit-section-title{
     color: #191C1E;
     font-family: var(--ff-primary);
-    font-size: 32px;
+    font-size: 24px;
     font-weight: var(--fw-semi-bold);
-    line-height: 40px;
+    line-height: 30px;
     letter-spacing: -0.32px;
     margin-bottom: 12px;
 }
+@media screen and (min-width: 992px){
+    .habit-empty-view-add-habit-section-title{
+        font-size: 32px;
+        line-height: 40px;
+    }
+}
+
 .habit-empty-view-add-habit-section-description{
     color: #464555;
     font-family: var(--ff-primary);
-    font-size: 16px;
+    font-size: 14px;
     font-weight: var(--fw-regular);
-    line-height: 24px;
+    line-height: 22px;
     letter-spacing: 0px;
     margin-bottom: 40px;
 }
+@media screen and (min-width: 992px){
+    .habit-empty-view-add-habit-section-description{
+        font-size: 16px;
+        line-height: 24px;
+    }
+}
+
 .habit-empty-view-add-habit-section-button{
     background-color: #3525CD;
     border-radius: 9999px;
@@ -66,16 +80,25 @@
 
     color: #ffffff;
     font-family: var(--ff-primary);
-    font-size: 16px;
+    font-size: 14px;
     font-weight: var(--fw-semi-bold);
-    line-height: 24px;
+    line-height: 22px;
     letter-spacing: 0px;
 
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 12px;
+
+    cursor: pointer;
 }
+@media screen and (min-width: 992px){
+    .habit-empty-view-add-habit-section-button{
+        font-size: 16px;
+        line-height: 24px;
+    }
+}
+
 
 .empty-view-add-habit-section-button-icon{
     height: 14px;

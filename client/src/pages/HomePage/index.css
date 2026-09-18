@@ -8,11 +8,10 @@
 @media screen and (min-width: 768px) {
     .home-page{
         display: grid;
-        grid-template-columns: 240px 1fr;
         grid-template-rows: 60px 1fr;
+        grid-template-columns: 240px 1fr;
+        
     }
 }
 
-.home-page-main-content{
-    overflow-y: auto;
-}
+
