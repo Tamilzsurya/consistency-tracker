@@ -3,7 +3,7 @@ const cors = require('cors');
 const passport = require('./config/passport');
 
 const userRoutes = require('./routes/userRoutes')
-// const habitRoutes = require('./routes/habitRoutes')
+const habitRoutes = require('./routes/habitRoutes')
 // const entryRoutes = require('./routes/entryRoutes')
 const authRoutes = require('./routes/authRoutes')
 
@@ -23,7 +23,7 @@ app.use(passport.initialize())
 // Routes
 app.use('/api/auth', authRoutes)
 app.use('/api/users', userRoutes)
-// app.use('/api/habits', habitRoutes)
+app.use('/api/habits', habitRoutes)
 // app.use('/api/entries', entryRoutes)
 
 

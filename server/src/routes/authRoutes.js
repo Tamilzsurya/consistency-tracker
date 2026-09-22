@@ -19,13 +19,14 @@ const { authRegisterValidator, authLoginValidator, authVerifyOtpValidator, authR
 
 // google oauth callback middleware
 const { googleOauthCallbackMiddleware } = require('../middleware/googleOauthCallbackMiddleware')
+const  authMiddleware  = require('../middleware/authMiddleware')
 
 
 router.post('/register', authRegisterValidator, register)
 router.post('/login', authLoginValidator, loginUser)
 // router.post('/logout', logoutUser)
-router.post('/verify-otp', authVerifyOtpValidator , verifyOtp)
-router.post('/resend-otp', authResendOtpValidator, resendOtp)
+router.post('/verify-otp', authVerifyOtpValidator, authMiddleware, verifyOtp)
+router.post('/resend-otp', authResendOtpValidator, authMiddleware, resendOtp)
 
 // google oauth route
 router.get('/google', 

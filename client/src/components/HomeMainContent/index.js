@@ -6,6 +6,7 @@ import HabitSuccessView from '../HabitSuccessView';
 import HabitEmptyView from '../HabitEmptyView';
 import HabitLoadingView from '../HabitLoadingView';
 import HabitFailureView from '../HabitFailureView';
+import AddHabitPopButton from '../AddHabitPopButton';
 
 import './index.css'
 
@@ -30,9 +31,10 @@ const HomeMainContent = () => {
 
             {/* <HabitLoadingView /> */}
 
-            {/* <HabitSuccessView /> */}
+            <HabitSuccessView />
 
-            <HabitFailureView content={"Your streak is broken! Start a new one!"} />
+            {/* <HabitFailureView /> */}
+
             
         </main>
     )

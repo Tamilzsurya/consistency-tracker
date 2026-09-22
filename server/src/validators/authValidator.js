@@ -1,5 +1,3 @@
-const { request, response } = require("../app")
-
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const otpRegex = /^[0-9]{6}$/
 

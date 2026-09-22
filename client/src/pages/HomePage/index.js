@@ -5,6 +5,7 @@ import HomeTopNavbar from '../../components/HomeTopNavbar';
 import HomeMainContent from '../../components/HomeMainContent';
 
 
+
 // css
 import './index.css';
 
@@ -19,6 +20,7 @@ const HomePage = () =>  {
         {/* main Content */}
         <HomeMainContent />
 
+  
       </div>
     );
   

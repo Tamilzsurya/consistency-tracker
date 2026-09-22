@@ -6,17 +6,17 @@ GET http://localhost:3001/api/auth/google
 ### Resend otp
 POST http://localhost:3001/api/auth/resend-otp
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsIm90cElkIjoxMywiaWF0IjoxNzg5MTIzODE5LCJleHAiOjE3ODkxMjQ0MTl9.CaLtCnPpdYHhcpCrycHwo70qwT9YCEKgrX4VpwY-U88
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjYsIm90cElkIjoyOSwiaWF0IjoxNzg5OTg1Mzk1LCJleHAiOjE3ODk5ODU5OTV9.kvthvVTCmb18kCsjvOPdb5cUk4SkOGtLddTcj6Bex40
 
 
 
 ### Verify otp
 POST http://localhost:3001/api/auth/verify-otp
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsIm90cElkIjoxMywiaWF0IjoxNzg5MTE4NjQyLCJleHAiOjE3ODkxMTkyNDJ9.Sc99guS7qhVaWTke-NzPLv5z0dr-yEbzawoBWyJdaVg
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjYsIm90cElkIjoyOSwiaWF0IjoxNzg5OTg1Mzk1LCJleHAiOjE3ODk5ODU5OTV9.kvthvVTCmb18kCsjvOPdb5cUk4SkOGtLddTcj6Bex40
 
 {
-  "otp": "717171"
+  "otp": "612186"
 }
 
 
@@ -26,7 +26,7 @@ Content-Type: application/json
 
 {
   "email": "tamilzsurya09@gmail.com",
-  "password": "password123"
+  "password": "Tmt@2004"
 }
 
 
@@ -42,6 +42,17 @@ Content-Type: application/json
   "password": "password123",
   "confirmPassword": "password123"
 }
+
+
+
+
+
+
+
+
+
+
+
 
 ### Get all users
 
@@ -69,15 +80,29 @@ Content-Type: application/json
 DELETE http://localhost:3001/api/users/1
 
 
-### Create habit
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Create habit
 POST http://localhost:3001/api/habits
 Content-Type: application/json
-Authorization: Bearer YOUR_TOKEN
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsImlhdCI6MTc4OTk4NTY1MCwiZXhwIjoxNzkwNTkwNDUwfQ.vlB0WqCfIW12562F0RtehNGlcbOdGcokuypLCm7doCU
 
 {
   "name": "Learn React",
-  "description": "Study React for 2 hours"
+  "category": "Health"
 }
 
 

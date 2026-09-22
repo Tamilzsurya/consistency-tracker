@@ -7,7 +7,7 @@ const otpModel = require('../models/otpModel')
 const userModel = require('../models/userModel')
 
 // utils
-const AppError = require('../utils/AppError')
+const AppError = require('../utils/appError')
 const hashAndComPassword = require('../utils/hashAndComPassword')
 const generateOtp = require('../utils/generateOtp')
 const expireDateTime = require('../utils/expireDateTime')
@@ -86,16 +86,8 @@ const loginUser = async (email, password) => {
 }
 
 // verify otp
-const verifyOtp = async (otp, verificationToken) => {
-    let payload;
+const verifyOtp = async (otp, userId) => {
 
-    try{
-         payload = await signAndVerifyJwt.verifyJwt(verificationToken)  
-    }catch(error){
-        throw new AppError('Your session has expired. Please Sign in again.', 401)
-    }
-
-    const {userId, otpId} = payload;
 
     const user = await otpModel.getOtp(userId)
     
@@ -131,19 +123,12 @@ const verifyOtp = async (otp, verificationToken) => {
 }
 
 // resend otp
-const resendOtp = async (verificationToken) => {
+const resendOtp = async (userId) => {
 
-    // check the token is expire or not
-    let payload;
-    try{
-        payload = await signAndVerifyJwt.verifyJwt(verificationToken);
-    }catch(error){
-        throw new AppError('Your session has expired. Please Sign in again.', 401)
-    }
+   
 
 
-    const { email } = await userModel.getUserById(payload.userId);
-    const { userId } = payload;
+    const { email } = await userModel.getUserById(userId);
 
     //generate otp
     const otp = generateOtp()

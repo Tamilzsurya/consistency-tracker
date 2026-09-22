@@ -114,7 +114,11 @@ class RegisterForm extends Component {
 
             this.setState({
                 isbtnLoading: false,
-                successMessage: data.message
+                successMessage: data.message,
+                userName: '',
+                email: '',
+                password: '',
+                confirmPassword: ''
             })
 
         } catch (error) {

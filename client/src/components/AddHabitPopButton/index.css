@@ -1,0 +1,40 @@
+.add-habit-pop-button-container{
+   position: fixed;
+    bottom: 75px;
+    right: 32px;
+   
+}
+@media screen and (min-width: 768px){
+    .add-habit-pop-button-container{
+        bottom: 32px;
+        right: 32px;
+    }
+}
+.add-habit-pop-button{
+
+    border: none;
+
+    height: 56px;
+    width: 56px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #3525CD;
+    
+    border-radius: 50%;
+    cursor: pointer;
+    outline: none;
+
+    box-shadow: 
+        0px 10px 30px rgba(53, 37, 205, 0.2),
+        0px 4px 6px -4px rgba(53, 37, 205, 0.2);
+    
+
+}
+
+.add-habit-pop-button-icon{
+    color: #ffffff;
+    font-size: 16px;
+}

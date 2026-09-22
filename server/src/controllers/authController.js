@@ -38,10 +38,12 @@ const loginUser = async (request, response, next) => {
 
 const verifyOtp = async (request, response, next) => {
     try {
-        const verificationToken = request.headers['authorization'].split(' ')[1]
-        const {otp} = request.body
+       
+        const {otp} = request.body;
+        const {payload} = request;
+        const {userId, otpId} = payload
 
-        const jwtToken = await authService.verifyOtp(otp, verificationToken)
+        const jwtToken = await authService.verifyOtp(otp, userId)
 
         response.status(200).json({
             message: 'Sign in successful.',
@@ -56,8 +58,10 @@ const resendOtp = async (request, response, next) => {
     
     try{
 
-        const verificationToken  = request.headers['authorization'].split(' ')[1]
-        const result = await authService.resendOtp(verificationToken)
+        const {payload} = request;
+        const {userId, otpId} = payload;
+
+        const result = await authService.resendOtp(userId)
 
         response.status(200).json(
             {
