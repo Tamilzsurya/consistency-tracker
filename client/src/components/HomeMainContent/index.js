@@ -27,11 +27,11 @@ const HomeMainContent = () => {
     return (
          <main className="home-page-main-container">
 
-            {/* <HabitEmptyView /> */}
+            <HabitEmptyView />
 
             {/* <HabitLoadingView /> */}
 
-            <HabitSuccessView />
+            {/* <HabitSuccessView /> */}
 
             {/* <HabitFailureView /> */}
 

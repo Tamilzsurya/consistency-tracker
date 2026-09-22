@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import {Route, Switch} from 'react-router-dom'
 
 
@@ -12,11 +13,15 @@ import ProfilePage from '../../pages/ProfilePage';
 // components
 import AddHabitPopButton from '../../components/AddHabitPopButton';
 
+// modals
+import AddHabitPopFormModal from '../../modals/AddHabitPopFormModal';
+
 import './index.css'
 
 
 
 const ProtectedLayout = () => {
+    const [isAddHabitPopFormModalOpen, setIsAddHabitPopFormModalOpen] = useState(false)
 
     return (
         <div>
@@ -31,7 +36,8 @@ const ProtectedLayout = () => {
 
             <AddHabitPopButton />
             
-
+            <AddHabitPopFormModal />
+           
         </div>
     )
 }

@@ -1,0 +1,52 @@
+.active-add-habit-pop-modal-form-habit-category-item{
+    background-color: #E2DFFF;
+    
+}
+
+.add-habit-pop-modal-form-habit-category-item{
+    border-radius: 8px;
+    padding: 12px 24px;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    gap: 12px;
+
+    cursor: pointer;
+}
+.add-habit-pop-modal-form-habit-category-item:hover{
+    background-color: #E5E7EB;
+}
+
+
+.add-habit-pop-modal-form-habit-category-item-icon{
+    color: #3525CD;
+    font-size: 22px;
+}
+.add-habit-pop-modal-form-habit-category-item-text{
+    color: #191C1E;
+    font-family: var(--ff-primary);
+    font-size: 14px;
+    font-weight: var(--fw-regular);
+    line-height: 20px;
+    letter-spacing: 0px;
+}
+
+.active-add-habit-pop-modal-form-habit-category-item-text{
+    color: #3323CC;
+    font-weight: var(--fw-semi-bold);
+}
+
+.add-habit-pop-modal-form-habit-category-item-btn{
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    width: 100%;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    gap: 12px;
+}

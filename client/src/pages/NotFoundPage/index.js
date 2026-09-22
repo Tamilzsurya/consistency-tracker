@@ -12,7 +12,7 @@ import BrandCommonFooter from '../../components/BrandCommonFooter'
 import './index.css'
 
 
-const NotFoundPage = (props) => {
+const NotFoundPage = props => {
 
     const redirectToHomePage = () => {
         const { history } = props

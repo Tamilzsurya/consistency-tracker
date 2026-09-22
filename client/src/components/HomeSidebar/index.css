@@ -2,7 +2,7 @@
     grid-row: 3 / 4;
     background-color: #F8F9FB;
     box-shadow: 0px -4px 20px 0px rgba(0, 0, 0, 0.03);
-    z-index: 999;
+    z-index: var(--z-navbar-layer);
     
     display: flex;
     align-items: center;

@@ -1,0 +1,250 @@
+
+
+
+.add-habit-pop-modal-container{
+    background-color: rgba(46, 49, 50, 0.4);
+    backdrop-filter: blur(4px);
+
+    min-height: 100vh;
+    width: 100%;
+    overflow-y: auto;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: var(--z-modal-popup-layer);
+    position: fixed;
+    top: 0px;
+
+    padding: 32px;
+}
+
+.add-habit-pop-modal-form{
+    background-color: #ffffff;
+
+    max-width: 448px;
+    width: 100%;
+    border-radius: 16px;
+    box-shadow: 0px 12px 40px rgba(79, 70, 229, 0.08);
+
+    padding: 40px;
+
+    box-shadow: 0px 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+
+
+
+
+
+/* form header */
+
+.add-habit-pop-modal-form-header-container{
+    
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+
+    width: 100%;
+
+    margin-bottom: 24px;
+}
+
+.add-habit-pop-modal-form-header-title{
+    color: #191C1E;
+    font-family: var(--ff-primary);
+    font-size: 20px;
+    font-weight: var(--fw-semi-bold);
+    line-height: 28px;
+}
+.add-habit-pop-modal-form-header-close-btn{
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+.add-habit-pop-modal-form-header-close-icon{
+    color: #464555;
+    font-size: 28px;
+}
+
+
+
+
+
+/* form input container */
+.add-habit-pop-modal-form-inputs-container{
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+
+.add-habit-pop-modal-form-habit-name-container{
+    display: flex;
+    flex-direction: column;
+    
+}
+.add-habit-pop-modal-form-label{
+    color: #464555;
+    font-family: var(--ff-primary);
+    font-size: 12px;
+    font-weight: var(--fw-semi-bold);
+    letter-spacing: 0.6px;
+    line-height: 16px;
+
+    margin-bottom: 4px;
+    
+}
+.add-habit-pop-modal-form-input{
+    border: 1px solid #6B7280;
+    padding: 14px 24px;
+    border-radius: 8px;
+
+    width: 100%;
+
+    color: #191C1E;
+    font-family: var(--ff-primary);
+    font-size: 14px;
+    font-weight: var(--fw-regular);
+    line-height: 20px;
+    outline: none;
+
+    background-color: #F3F4F6;
+}
+.add-habit-pop-modal-form-input:focus{
+    border: 1px solid #3525CD;
+}
+
+
+
+
+/* form drop down container */
+.add-habit-pop-modal-form-habit-category-container{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+
+.add-habit-pop-modal-form-habit-category-dropdown-selected-btn{
+    border-radius: 8px;
+    background-color: #F3F4F6;
+    padding: 12px 24px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    border: none;
+
+    cursor: pointer;
+    outline: none;
+}
+.add-habit-pop-modal-form-habit-category-dropdown-selected-btn:hover{
+    background-color: #E5E7EB;
+}
+
+
+
+.add-habit-pop-modal-form-habit-category-dropdown-selected-content-container{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.add-habit-pop-modal-form-habit-category-icon{
+    color: #3525CD;
+    font-size: 18px;
+}
+.add-habit-pop-modal-form-habit-category-text{
+    color: #191C1E;
+    font-family: var(--ff-primary);
+    font-size: 14px;
+    font-weight: var(--fw-medium);
+    line-height: 20px;
+    letter-spacing: 0px;
+}
+.add-habit-pop-modal-form-habit-category-dropdown-icon{
+    color: #777587;
+    font-size: 24px;
+}
+
+
+
+/* dropdown menue */
+.add-habit-pop-modal-form-habit-category-dropdown-menu-ul-container{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    box-shadow: 0px 8px 10px -6px rgba(0, 0, 0, 0.10),   /* Shadow #1 */
+    0px 20px 25px -5px rgba(0, 0, 0, 0.10);  /* Shadow #2 */
+
+    border-radius: 12px;
+
+    background-color: #ffffff;
+    width: 100%;
+
+    padding: 4px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1;
+
+}
+
+
+/* button container */
+.add-habit-pop-modal-form-btn-container{
+    display: flex;
+    justify-content: flex-end;
+    gap: 16px;
+    margin-top: 24px;
+}
+.add-habit-pop-modal-form-cancel-btn{
+    border-radius: 8px;
+    background-color: #ffffff;
+    padding: 12px 24px;
+
+  
+    color: #191C1E;
+    font-family: var(--ff-primary);
+    font-size: 14px;
+    font-weight: var(--fw-regular);
+    line-height: 20px;
+    letter-spacing: 0px;
+
+    border: 1px solid #6B7280;
+    cursor: pointer;
+    outline: none;
+}
+.add-habit-pop-modal-form-cancel-btn:hover{
+    background-color: #E5E7EB;
+    border: 1px solid #E5E7EB;
+}
+
+.add-habit-pop-modal-form-add-habit-btn{
+    border-radius: 8px;
+    background-color: #3525CD;
+    padding: 12px 24px;
+
+    box-shadow: 0px 4px 6px -1px rgba(53, 37, 205, 0.25);
+
+    color: #ffffff;
+    font-family: var(--ff-primary);
+    font-size: 14px;
+    font-weight: var(--fw-semi-bold);
+    line-height: 20px;
+    letter-spacing: 0px;
+
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
