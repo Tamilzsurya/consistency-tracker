@@ -11,4 +11,17 @@ const createHabit = async (userId, name, category) => {
     return result.insertId
 }
 
-module.exports = { createHabit }
+const getAllHabits = async (userId) => {
+
+    const query = `
+        SELECT * FROM habits
+        WHERE user_id = ?
+    `;
+
+    const [rows] = await db.execute(query, [userId])
+
+    return rows
+
+}
+
+module.exports = { createHabit, getAllHabits }

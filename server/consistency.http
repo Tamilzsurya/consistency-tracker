@@ -106,10 +106,10 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsImlhd
 }
 
 
-### Get habits
+### Get All habits
 
 GET http://localhost:3001/api/habits
-Authorization: Bearer YOUR_TOKEN
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsImlhdCI6MTc4OTk4NTY1MCwiZXhwIjoxNzkwNTkwNDUwfQ.vlB0WqCfIW12562F0RtehNGlcbOdGcokuypLCm7doCU
 
 
 ### Get one habit

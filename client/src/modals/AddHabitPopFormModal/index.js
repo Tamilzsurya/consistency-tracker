@@ -149,7 +149,7 @@ const AddHabitPopFormModal = props => {
                                 </div>
 
                                 <div className="add-habit-pop-modal-form-btn-container">
-                                    <button className="add-habit-pop-modal-form-cancel-btn">Cancel</button>
+                                    <button type="button" onClick={handleCloseModal} className="add-habit-pop-modal-form-cancel-btn">Cancel</button>
                                     <button type="submit" className="add-habit-pop-modal-form-add-habit-btn">Create Habit</button>
                                 </div>
 

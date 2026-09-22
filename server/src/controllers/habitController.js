@@ -22,4 +22,28 @@ const createHabit = async (request, response, next) => {
     }
 }
 
-module.exports = {createHabit}
+const getAllHabits = async (request, response, next) => {
+
+    try {
+
+        const {payload} = request
+
+        const {userId} = payload
+
+        const habits = await habitService.getAllHabits(userId)
+
+        response.status(200).json(
+            {
+                message: 'All habits fetched successfully',
+                habit: habits,
+            }
+        )
+    }
+    catch(error) {
+        next(error)
+    }
+    
+
+}
+
+module.exports = {createHabit, getAllHabits}

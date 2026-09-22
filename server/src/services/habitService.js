@@ -18,4 +18,10 @@ const createHabit = async (userId, name, category) => {
     return habitId
 }
 
-module.exports = {createHabit}
+const getAllHabits = async (userId) => {
+
+    const habits = await habitModel.getAllHabits(userId)
+    return habits
+}
+
+module.exports = {createHabit, getAllHabits}
