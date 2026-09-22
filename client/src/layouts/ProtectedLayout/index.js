@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import {Route, Switch} from 'react-router-dom'
 
-
-
+// contexts
+import AddHabitModalContext from '../../contexts/AddHabitModalContext'
 
 // pages
 import HomePage from '../../pages/HomePage';
@@ -23,22 +23,42 @@ import './index.css'
 const ProtectedLayout = () => {
     const [isAddHabitPopFormModalOpen, setIsAddHabitPopFormModalOpen] = useState(false)
 
+    const handelSetIsAddHabitPopFormModalOpen = (value) => {
+        setIsAddHabitPopFormModalOpen(value)
+    }
+    
     return (
-        <div>
 
-            <Switch>
+        <AddHabitModalContext.Provider value= 
+         { 
+            {
+                isAddHabitModalOpen: isAddHabitPopFormModalOpen,
+                setIsAddHabitModalOpen: handelSetIsAddHabitPopFormModalOpen
+            }
+         } >
+
+
+             <div>
+
+                <Switch>
                 <Route exact path="/" component={HomePage} />
-                <Route exact path="/grid" component={GridPage} />
-                <Route exact path="/trends" component={TrendPage} />
-                <Route exact path="/profile" component={ProfilePage} />
-            </Switch>
+                    <Route exact path="/grid" component={GridPage} />
+                    <Route exact path="/trends" component={TrendPage} />
+                    <Route exact path="/profile" component={ProfilePage} />
+                </Switch>
 
 
-            <AddHabitPopButton />
+                <AddHabitPopButton />
+                
+                {
+                    isAddHabitPopFormModalOpen && <AddHabitPopFormModal />
+                }
+                
             
-            <AddHabitPopFormModal />
-           
-        </div>
+            </div> 
+
+        </AddHabitModalContext.Provider>
+
     )
 }
 

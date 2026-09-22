@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import AddHabitModalContext from '../../contexts/AddHabitModalContext'
 
 // icons
 import { IoIosClose } from "react-icons/io";
@@ -35,8 +36,6 @@ const AddHabitPopFormModal = props => {
     const [showDropDownMenu, setShowDropDownMenu] = useState(false);
 
 
-    const { setIsAddHabitPopFormModalOpen } = props
-
 
 
     console.log(selectedHabitCategory);
@@ -58,19 +57,6 @@ const AddHabitPopFormModal = props => {
 
 
     // render elements
-    const renderAddHabitPopModalFormHeader = () => {
-        return (
-            <div className="add-habit-pop-modal-form-header-container">
-                <h1 className="add-habit-pop-modal-form-header-title">Add Habit</h1>
-
-                <button type="button" onClick={() => setIsAddHabitPopFormModalOpen(prevState => !prevState)} className="add-habit-pop-modal-form-header-close-btn">
-                    <IoIosClose className="add-habit-pop-modal-form-header-close-icon" />
-                </button>
-                
-            </div>
-        )
-    }
-
     const renderHabitNameContainer = () => {
         return (
             <div className="add-habit-pop-modal-form-habit-name-container">
@@ -126,32 +112,57 @@ const AddHabitPopFormModal = props => {
 
 
     return (
-        <div className="add-habit-pop-modal-container">
-            
-            <form className="add-habit-pop-modal-form">
-                { // form header
-                    renderAddHabitPopModalFormHeader()
-                }
-                <div className="add-habit-pop-modal-form-inputs-container">
-                    { // habit name container
-                        renderHabitNameContainer()
-                    }
-                    { // habit category container
-                        renderHabitCategoryContainer()
-                    }
+        <AddHabitModalContext.Consumer>
+            {
+                value => {
+
+                    const { isAddHabitModalOpen, setIsAddHabitModalOpen } = value;
                     
-                </div>
-
-                <div className="add-habit-pop-modal-form-btn-container">
-                    <button className="add-habit-pop-modal-form-cancel-btn">Cancel</button>
-                    <button type="submit" className="add-habit-pop-modal-form-add-habit-btn">Create Habit</button>
-                </div>
+                    const handleCloseModal = () => {
+                        setIsAddHabitModalOpen(false);
+                    }
 
 
-            </form>
+                    return(
+                        <div className="add-habit-pop-modal-container">
+                            
+                            <form className="add-habit-pop-modal-form">
+
+                                {/* form header */}
+                                <div className="add-habit-pop-modal-form-header-container">
+                                    <h1 className="add-habit-pop-modal-form-header-title">Add Habit</h1>
+
+                                    <button type="button" onClick={handleCloseModal} className="add-habit-pop-modal-form-header-close-btn">
+                                        <IoIosClose className="add-habit-pop-modal-form-header-close-icon" />
+                                    </button>
+                                    
+                                </div>
+                                                             
+                                <div className="add-habit-pop-modal-form-inputs-container">
+                                    { // habit name container
+                                        renderHabitNameContainer()
+                                    }
+                                    { // habit category container
+                                        renderHabitCategoryContainer()
+                                    }
+                                    
+                                </div>
+
+                                <div className="add-habit-pop-modal-form-btn-container">
+                                    <button className="add-habit-pop-modal-form-cancel-btn">Cancel</button>
+                                    <button type="submit" className="add-habit-pop-modal-form-add-habit-btn">Create Habit</button>
+                                </div>
 
 
-        </div>
+                            </form>
+
+
+                        </div>
+                    )
+
+                }
+            }
+        </AddHabitModalContext.Consumer>
     )
 }
 

@@ -1,6 +1,9 @@
 
 import {Link, withRouter} from 'react-router-dom';
 
+
+import AddHabitModalContext from '../../contexts/AddHabitModalContext'
+
 // icons
 import { MdCalendarToday } from "react-icons/md";
 import { BiGridAlt } from "react-icons/bi";
@@ -26,28 +29,39 @@ const HomeSidebar = props => {
     
 
     return (
-                <div className="side-bar">
+                <AddHabitModalContext.Consumer>
+                    { 
+                        value => {
+                            const { isAddHabitModalOpen, setIsAddHabitModalOpen } = value;
+                            const handelSetIsAddHabitModalOpen = () => setIsAddHabitModalOpen(true);
 
-                    <div className="sidebar-brand-logo">
-                        <BrandLogo />
-                    </div>
+                            return (
+                                    <div className="side-bar">
 
-                    <ul className="sidebar-mobile-menu">
-                        {menuItems.map(item => (
-                            <li key={item.id} className="sidebar-mobile-menu-item">
-                                <Link to={item.to} className={`sidebar-mobile-menu-link ${path === item.to ? 'active-link' : ''}`}>
-                                    <item.icon className="sidebar-mobile-menu-icon" />
-                                    <label  className="sidebar-mobile-menu-text">{item.label}</label>
-                                </Link>
-                            </li>
-                        ))}
-                    </ul>
+                                            <div className="sidebar-brand-logo">
+                                                <BrandLogo />
+                                            </div>
 
-                    <button className="habit-btn">
-                        <FaPlus className="habit-btn-icon" />
-                        <span className="habit-btn-text">New Habit</span>
-                    </button>
-                </div>
+                                            <ul className="sidebar-mobile-menu">
+                                                {menuItems.map(item => (
+                                                    <li key={item.id} className="sidebar-mobile-menu-item">
+                                                        <Link to={item.to} className={`sidebar-mobile-menu-link ${path === item.to ? 'active-link' : ''}`}>
+                                                            <item.icon className="sidebar-mobile-menu-icon" />
+                                                            <label  className="sidebar-mobile-menu-text">{item.label}</label>
+                                                        </Link>
+                                                    </li>
+                                                ))}
+                                            </ul>
+
+                                            <button type="button" onClick = {handelSetIsAddHabitModalOpen} className="habit-btn">
+                                                <FaPlus className="habit-btn-icon" />
+                                                <span className="habit-btn-text">New Habit</span>
+                                            </button>
+                                    </div>
+                            )
+                        }
+                    }
+                </AddHabitModalContext.Consumer>
             )
 };
 
