@@ -35,7 +35,7 @@ const getAllHabits = async (request, response, next) => {
         response.status(200).json(
             {
                 message: 'All habits fetched successfully',
-                habit: habits,
+                habits,
             }
         )
     }

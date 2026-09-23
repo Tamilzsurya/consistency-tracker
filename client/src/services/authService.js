@@ -167,7 +167,8 @@ export const verifyOtp = async (formData) => {
         )
     }
 
-    // if the response indicates a server error (status code 500-599), throw an error with the message from the server or a default message
+    
+   // if the response indicates a server error (status code 500-599), throw an error with the message from the server or a default message
     if(response.status >= 500){
         throw new Error(
             data.message || "Something went wrong on our end. Please try again later."
@@ -176,6 +177,7 @@ export const verifyOtp = async (formData) => {
 
 
     throw new Error("Otp verification failed.")
+ 
     
 }
 
