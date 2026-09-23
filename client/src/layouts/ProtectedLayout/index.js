@@ -22,7 +22,13 @@ import './index.css'
 
 const ProtectedLayout = () => {
     const [isAddHabitPopFormModalOpen, setIsAddHabitPopFormModalOpen] = useState(false)
+    const [allHabitsDataVersion, setAllHabitsDataVersion] = useState(0)
 
+    const refreshHabitsData = () => {
+        setAllHabitsDataVersion(prevState => prevState + 1);
+    }
+
+    // handel set isAddHabitPopFormModalOpen context
     const handelSetIsAddHabitPopFormModalOpen = (value) => {
         setIsAddHabitPopFormModalOpen(value)
     }
@@ -33,7 +39,10 @@ const ProtectedLayout = () => {
          { 
             {
                 isAddHabitModalOpen: isAddHabitPopFormModalOpen,
-                setIsAddHabitModalOpen: handelSetIsAddHabitPopFormModalOpen
+                setIsAddHabitModalOpen: handelSetIsAddHabitPopFormModalOpen,
+
+                allHabitsDataVersion,
+                refreshHabitsData
             }
          } >
 
@@ -41,7 +50,7 @@ const ProtectedLayout = () => {
              <div>
 
                 <Switch>
-                <Route exact path="/" component={HomePage} />
+                    <Route exact path="/" component={HomePage} />
                     <Route exact path="/grid" component={GridPage} />
                     <Route exact path="/trends" component={TrendPage} />
                     <Route exact path="/profile" component={ProfilePage} />

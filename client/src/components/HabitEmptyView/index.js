@@ -9,7 +9,7 @@ import { FaPlus } from "react-icons/fa";
 import consistencyGridEmptyStateImg from '../../assets/images/consistency-grid-empty-state-img.jpg'
 
 // constents
-import habitSuggestionList from '../../constents/habitSuggestion.js'
+import habitSuggestionList from '../../constants/habitSuggestion.js'
 
 // components
 import HabitSuggestionItem from '../HabitSuggestionItem'

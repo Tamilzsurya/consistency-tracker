@@ -100,6 +100,7 @@
 
     cursor: pointer;
 }
+
 @media screen and (min-width: 992px){
     .habit-empty-view-add-habit-section-button{
         font-size: 16px;

@@ -1,0 +1,105 @@
+.add-habit-popup-from-success-view-container{
+    background-color: #ffffff;
+
+    max-width: 448px;
+    width: 100%;
+    border-radius: 16px;
+    box-shadow: 0px 12px 40px rgba(79, 70, 229, 0.08);
+
+    padding: 24px;
+
+    box-shadow: 0px 25px 50px -12px rgba(0, 0, 0, 0.25);
+
+
+}
+
+.add-habit-popup-modal-form-success-view-header-container{
+
+    display: flex;
+    flex-direction: column; 
+    
+}
+
+
+.add-habit-popup-modal-form-success-view-header-close-btn{
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    align-self: flex-end;
+}
+.add-habit-popup-modal-form-success-view-header-close-icon{
+    color: #464555;
+    font-size: 28px;
+}
+
+.add-habit-popup-modal-form-success-view-content-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.add-habit-popup-modal-form-success-view-icon-container{
+    background-color: #6CF8BB;
+    height: 64px;
+    width: 64px;
+    border-radius: 9999px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 18px;
+}
+.add-habit-popup-modal-form-success-view-icon{
+    font-size: 25px;
+    color: #00714D;
+}
+
+
+.add-habit-popup-modal-form-success-view-content-container-title{
+    color: #191C1E;
+    font-family: var(--ff-primary);
+    font-size: 24px;
+    font-weight: var(--fw-bold);
+    line-height: 32px;
+
+    letter-spacing: -0.6px;
+
+    margin-bottom: 12px;
+}
+.add-habit-popup-modal-form-success-view-content-container-para{
+    color: #464555;
+    font-family: var(--ff-primary);
+    font-size: 14px;
+    font-weight: var(--fw-regular);
+    line-height: 20px;
+
+    margin-bottom: 24px;
+}
+.add-habit-popup-modal-form-success-view-content-container-add-habit-btn{
+    width: 100%;
+    padding: 12px 24px;
+    border-radius: 8px;
+    background-color: #3525CD;
+    box-shadow: 0px 4px 16px rgba(79, 70, 229, 0.35);
+
+    border: none;
+    cursor: pointer;
+    outline: none;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
+    
+    color: #ffffff;
+    font-family: var(--ff-primary);
+    font-size: 14px;
+    font-weight: var(--fw-semi-bold);
+    line-height: 20px;
+    letter-spacing: 0px;
+}
+.add-habit-popup-modal-form-success-view-content-container-add-habit-icon{
+    color: #ffffff;
+    font-size: 14px;
+}

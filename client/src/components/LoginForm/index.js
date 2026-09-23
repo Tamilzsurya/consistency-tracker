@@ -15,7 +15,7 @@ import google from '../../assets/google.svg';
 import apple from '../../assets/apple.svg';
 
 // constants auth messages
-import AUTH_ERROR_MESSAGES  from '../../constents/authMessages.js';
+import AUTH_ERROR_MESSAGES  from '../../constants/authMessages';
 
 class LoginForm extends Component {
     state = {

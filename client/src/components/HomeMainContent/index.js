@@ -1,5 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Cookies from 'js-cookie'
+
+
+// contexts
+import AddHabitModalContext from '../../contexts/AddHabitModalContext'
 
 // components
 import HabitSuccessView from '../HabitSuccessView';
@@ -27,16 +31,19 @@ const HomeMainContent = () => {
         currentApiStateView: responseConstants.initial
     });
 
+    const {allHabitsDataVersion} = useContext(AddHabitModalContext);
+
 
     useEffect(() => {
+        console.log("Main content rendered")
         getAllHabitsApiCall();
-    }, [])
+    }, [allHabitsDataVersion])
+
+    
 
 
     const getAllHabitsApiCall = async () => {
         const jwt_token =  Cookies.get("jwt_token");
-
-        console.log(jwt_token)
 
         const formData = {
             jwt_token
@@ -66,7 +73,7 @@ const HomeMainContent = () => {
                 return;
             }
 
-            console.log(data)
+            
 
             setApiResponse(prevState => ({
                 ...prevState,
@@ -76,8 +83,6 @@ const HomeMainContent = () => {
 
 
         }catch(error){
-
-            console.log(error)
 
             setApiResponse(prevState => ({
                 ...prevState,
@@ -110,20 +115,18 @@ const HomeMainContent = () => {
 
 
     return (
-         <main className="home-page-main-container">
+       
+            <main className="home-page-main-container">
 
-            
+                {/* <HabitLoadingView /> */}
 
-            {/* <HabitLoadingView /> */}
+                {/* <HabitSuccessView /> */}
 
-            {/* <HabitSuccessView /> */}
+                {/* <HabitFailureView /> */}
 
-            {/* <HabitFailureView /> */}
-
-
-            { renderCurrentView() }
-            
-        </main>
+                { renderCurrentView() }
+                            
+            </main>        
     )
 }
 

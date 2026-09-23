@@ -3,7 +3,10 @@ import React from "react";
 const AddHabitModalContext = React.createContext(
     {
         isAddHabitModalOpen: false,
-        setIsAddHabitModalOpen: () => {}
+        setIsAddHabitModalOpen: () => {},
+
+        allHabitsDataVersion: 0,
+        refreshHabitsData: () => {}
     }
 );
 
