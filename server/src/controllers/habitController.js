@@ -1,4 +1,5 @@
 
+const { request, response } = require('express')
 const habitService = require('../services/habitService')
 
 const createHabit = async (request, response, next) => {
@@ -46,4 +47,21 @@ const getAllHabits = async (request, response, next) => {
 
 }
 
-module.exports = {createHabit, getAllHabits}
+const deleteHabit = async (request, response, next) => {
+    try{
+
+        const {habitId} = request.params;
+
+        const result = await habitService.deleteHabit(habitId)
+
+        return response.status(200).json({
+            message: "success",
+            result
+        })
+
+    }catch(error){
+        next(error)
+    }
+}
+
+module.exports = {createHabit, getAllHabits, deleteHabit}

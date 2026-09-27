@@ -5,6 +5,7 @@ import { MdOutlineKeyboardArrowUp } from "react-icons/md";
 
 import { IoIosClose } from "react-icons/io";
 
+import { BsThreeDotsVertical } from "react-icons/bs";
 import { BsThreeDots } from "react-icons/bs";
 
 import { FaCheckCircle } from "react-icons/fa";
@@ -13,6 +14,10 @@ import { AiOutlinePlusCircle } from "react-icons/ai";
 import { MdOutlineShare } from "react-icons/md";
 
 import { FaExclamation } from "react-icons/fa";
+
+import { MdOutlineEdit } from "react-icons/md";
+import { RiDeleteBin6Line } from "react-icons/ri";
+
 
 
 //react loader spinner

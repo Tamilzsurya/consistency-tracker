@@ -33,7 +33,7 @@ const HomeMainContent = () => {
         currentApiStateView: responseConstants.initial
     });
 
-    console.log(apiResponse.habitData)
+   
 
     // context
     const {allHabitsDataVersion} = useContext(AddHabitModalContext);

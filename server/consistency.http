@@ -133,7 +133,7 @@ Authorization: Bearer YOUR_TOKEN
 ### Delete habit
 
 DELETE http://localhost:3001/api/habits/1
-Authorization: Bearer YOUR_TOKEN
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsImlhdCI6MTc4OTk4NTY1MCwiZXhwIjoxNzkwNTkwNDUwfQ.vlB0WqCfIW12562F0RtehNGlcbOdGcokuypLCm7doCU
 
 
 

@@ -9,7 +9,7 @@ const { habitValidator } = require('../validators/habitValidator')
 const authMiddleware = require('../middleware/authMiddleware')
 
 // controllers
-const {createHabit, getAllHabits} = require('../controllers/habitController')
+const {createHabit, getAllHabits, deleteHabit} = require('../controllers/habitController')
 
 
 
@@ -19,6 +19,7 @@ const {createHabit, getAllHabits} = require('../controllers/habitController')
 // routes
 router.post('/', habitValidator, authMiddleware, createHabit)
 router.get('/', authMiddleware, getAllHabits)
+router.delete('/:habitId', authMiddleware, deleteHabit)
 
 
 module.exports = router

@@ -24,4 +24,15 @@ const getAllHabits = async (userId) => {
 
 }
 
-module.exports = { createHabit, getAllHabits }
+const deleteHabit = async (habitId) => {
+    const query = `
+        DELETE FROM  habits
+        WHERE id = ?
+    `;
+
+    const [result] = await db.execute(query, [habitId]);
+    
+    return result;
+}
+
+module.exports = { createHabit, getAllHabits, deleteHabit }

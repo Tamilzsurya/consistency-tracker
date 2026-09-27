@@ -27,6 +27,7 @@ import {responseConstants} from '../../constants/uiConstants'
 
 // services
 import {createOrUpdateHabitEntry} from '../../services/habitEntryService'
+import {deleteHabit} from '../../services/habitService'
 
 
 
@@ -48,17 +49,22 @@ const HabitSucessView = props => {
         submitErrorMsg: "",
         submitSuccessMsg: ""
     });
+    const [deleteHabitApiResponse, setDeleteHabitApiResponse] = useState({
+        deleteHabitApiResponseView: responseConstants.initial,
+        submitErrorMsg: "",
+        submitSuccessMsg: ""
+    });
     
     
     
     const {totalDays, formatedMonth, newDate, totalDaysList} = monthDetails;
-    
+    const jwtToken =  Cookies.get("jwt_token");
+
 
 
     // todayHabitEntryApiResponse api call
     const onCallUpdateTodayHabitEntryApi = async entryData => {
-        const jwtToken =  Cookies.get("jwt_token");
-
+        
         setTodayHabitEntryApiResponse(prevState => ({
             ...prevState,
             todayHabitEntryApiResponseView: responseConstants.loading
@@ -86,6 +92,35 @@ const HabitSucessView = props => {
           }))
         }
 
+    }
+
+    // delete Habit Api call
+    const onCallDeleteHabitApi = async habitId => {
+
+
+        console.log(habitId);
+        setDeleteHabitApiResponse(prevState => ({
+            ...prevState,
+            deleteHabitApiResponseView: responseConstants.loading
+        }))
+
+        try{
+            const data = await deleteHabit(habitId, jwtToken)
+            setDeleteHabitApiResponse(prevState => ({
+                ...prevState,
+                deleteHabitApiResponseView: responseConstants.success,
+                submitErrorMsg: "",
+                submitSuccessMsg: data.message
+            }))
+        }catch(error){
+            console.log(error.message);
+            setDeleteHabitApiResponse(prevState => ({
+                ...prevState,
+                deleteHabitApiResponseView: responseConstants.failure,
+                submitErrorMsg: error.message,
+                submitSuccessMsg: ""
+            }))
+        }
     }
 
 
@@ -155,7 +190,23 @@ const HabitSucessView = props => {
         </section>
       )
 
+      // todayHabitEntryApiResponse view
     const renderTodayHabitEntryApiResponseView = (currentView) => {
+      switch(currentView){
+        case responseConstants.initial:
+          return null;
+        case responseConstants.loading:
+          return <PopupLoadingModal />;
+        case responseConstants.success:
+          return <PopupSuccessModal setTodayHabitEntryApiResponse={setTodayHabitEntryApiResponse} />;
+        case responseConstants.failure:
+          return <PopupFailureModal setTodayHabitEntryApiResponse={setTodayHabitEntryApiResponse} />;
+        default:
+          return null;
+      }
+    }
+
+    const renderDeleteHabitApiResponseView = (currentView) => {
       switch(currentView){
         case responseConstants.initial:
           return null;
@@ -172,6 +223,7 @@ const HabitSucessView = props => {
 
 
 
+
     return (
         
         <section className="habit-success-view">
@@ -185,7 +237,7 @@ const HabitSucessView = props => {
                   <HabitRowNameCardHeader key={formatedMonth} formatedMonth={formatedMonth} handleNextMonth={handleNextMonth} handlePreviousMonth={handlePreviousMonth} />
                   {
                     habitsData.map(eachHabit => (
-                      <HabitRowNameCard key={eachHabit.id} habitDetails={eachHabit} />
+                      <HabitRowNameCard key={eachHabit.id} habitDetails={eachHabit} onCallDeleteHabitApi={onCallDeleteHabitApi} />
                     ))
                   }
                   
@@ -212,8 +264,12 @@ const HabitSucessView = props => {
             {/* <PopupLoadingModal /> */}
             {/* <PopupSuccessModal /> */}
             {/* <PopupFailureModal /> */}
-            {
+
+            {// todayHabitEntryApiResponse view
               renderTodayHabitEntryApiResponseView(todayHabitEntryApiResponse.todayHabitEntryApiResponseView)
+            }
+            {
+              renderDeleteHabitApiResponseView(deleteHabitApiResponse.deleteHabitApiResponseView)
             }
         </section>
     )

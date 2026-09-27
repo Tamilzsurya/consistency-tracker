@@ -58,7 +58,7 @@ const HabitRowGridCard = props => {
         }
     })
 
-    console.log(totalDaysHabitDataList)
+    
 
     
 

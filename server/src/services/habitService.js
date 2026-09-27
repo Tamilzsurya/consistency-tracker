@@ -42,4 +42,10 @@ const getAllHabits = async (userId) => {
     return formatedHabitsList
 }
 
-module.exports = {createHabit, getAllHabits}
+const deleteHabit = async (habitId) => {
+    const result = await habitModel.deleteHabit(habitId)
+
+    return result;
+}
+
+module.exports = {createHabit, getAllHabits, deleteHabit}
