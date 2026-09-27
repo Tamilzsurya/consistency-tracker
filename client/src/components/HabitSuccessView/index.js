@@ -1,3 +1,6 @@
+import { useState, useEffect, useContext } from "react";
+import Cookies from 'js-cookie'
+
 
 // icons
 import { FaCheckCircle } from "react-icons/fa";
@@ -11,6 +14,20 @@ import HabitRowNameCard from '../HabitRowNameCard';
 import HabitRowGridCardHeader from '../HabitRowGridCardHeader';
 import HabitRowNameCardHeader from '../HabitRowNameCardHeader';
 
+// modals
+import PopupLoadingModal from '../../modals/PopupLoadingMoadal';
+import PopupSuccessModal from '../../modals/PopupSuccessModal';
+import PopupFailureModal from '../../modals/PopupFailureModal';
+
+// utils/dateAndTime/dateOperations.js
+import {getNextMonthAndTotalDays, getPreviousMonthAndTotalDays, getCurrentMonthAndTotalDays } from '../../utils/dateAndTime/dateOperations'
+
+// constants
+import {responseConstants} from '../../constants/uiConstants'
+
+// services
+import {createOrUpdateHabitEntry} from '../../services/habitEntryService'
+
 
 
 import './index.css'
@@ -18,11 +35,74 @@ import './index.css'
 
 
 
-const HabitSucessView = () => {
+const HabitSucessView = props => {
+    const {habitsData} = props
+    
+    
+    const currentMonthDetails = getCurrentMonthAndTotalDays(new Date())
+    
+    
+    const [monthDetails, setMonthDetails] = useState(currentMonthDetails);
+    const [todayHabitEntryApiResponse, setTodayHabitEntryApiResponse] = useState({
+        todayHabitEntryApiResponseView: responseConstants.initial,
+        submitErrorMsg: "",
+        submitSuccessMsg: ""
+    });
+    
+    
+    
+    const {totalDays, formatedMonth, newDate, totalDaysList} = monthDetails;
+    
+
+
+    // todayHabitEntryApiResponse api call
+    const onCallUpdateTodayHabitEntryApi = async entryData => {
+        const jwtToken =  Cookies.get("jwt_token");
+
+        setTodayHabitEntryApiResponse(prevState => ({
+            ...prevState,
+            todayHabitEntryApiResponseView: responseConstants.loading
+        }))
+
+        try{
+          const data = await createOrUpdateHabitEntry(entryData, jwtToken);
+
+          setTodayHabitEntryApiResponse(prevState => ({
+            ...prevState,
+            todayHabitEntryApiResponseView: responseConstants.success,
+            submitErrorMsg: "",
+            submitSuccessMsg: data.message
+          }))
+
+          
+          
+        }catch(error){
+          console.log(error.message);
+          setTodayHabitEntryApiResponse(prevState => ({
+            ...prevState,
+            todayHabitEntryApiResponseView: responseConstants.failure,
+            submitErrorMsg: error.message,
+            submitSuccessMsg: ""
+          }))
+        }
+
+    }
 
 
 
+    // functions to change current month to next month
+    const handleNextMonth = () => {
+        const nextMonthDetails = getNextMonthAndTotalDays(newDate);
+        setMonthDetails(nextMonthDetails);
+    }
+    // functions to change current month to previous month
+    const handlePreviousMonth = () => {
+        const previousMonthDetails = getPreviousMonthAndTotalDays(newDate);
+        setMonthDetails(previousMonthDetails);
+    }
 
+
+    // render
     const renderInformationSection = () =>{
         return (
           <section className="info-section">
@@ -75,6 +155,21 @@ const HabitSucessView = () => {
         </section>
       )
 
+    const renderTodayHabitEntryApiResponseView = (currentView) => {
+      switch(currentView){
+        case responseConstants.initial:
+          return null;
+        case responseConstants.loading:
+          return <PopupLoadingModal />;
+        case responseConstants.success:
+          return <PopupSuccessModal setTodayHabitEntryApiResponse={setTodayHabitEntryApiResponse} />;
+        case responseConstants.failure:
+          return <PopupFailureModal setTodayHabitEntryApiResponse={setTodayHabitEntryApiResponse} />;
+        default:
+          return null;
+      }
+    }
+
 
 
     return (
@@ -86,25 +181,39 @@ const HabitSucessView = () => {
             
             {/* today-page: habits section */}
             <section className="habits-section">
-              <div className='habit-names-container'>
-                <HabitRowNameCardHeader />
-                <HabitRowNameCard name="Entertainment" />
-                <HabitRowNameCard name="Workout" />
-                <HabitRowNameCard name="Reading" />
-                <HabitRowNameCard name="Sleep" />
-              </div>
+                <div className='habit-names-container'>
+                  <HabitRowNameCardHeader key={formatedMonth} formatedMonth={formatedMonth} handleNextMonth={handleNextMonth} handlePreviousMonth={handlePreviousMonth} />
+                  {
+                    habitsData.map(eachHabit => (
+                      <HabitRowNameCard key={eachHabit.id} habitDetails={eachHabit} />
+                    ))
+                  }
+                  
+                  
+                </div>
 
-              <div className='habit-cards-container'>
-                <HabitRowGridCardHeader />
-                <HabitRowGridCard />
-                <HabitRowGridCard />
-                <HabitRowGridCard />
-                <HabitRowGridCard />
-              </div>
+                <div className='habit-cards-container'>
+                  <HabitRowGridCardHeader totalDays={totalDays} key={formatedMonth} />
+                  {
+                    habitsData.map(eachHabit => (
+                      <HabitRowGridCard key={eachHabit.id} habitDetails={eachHabit} totalDays={totalDays} totalDaysList={totalDaysList} onCallUpdateTodayHabitEntryApi={onCallUpdateTodayHabitEntryApi} />
+                    ))
+                  }
+                </div>
             </section>
+
+            
 
             {/* { today-page: tips section */
             renderTipsSection()
+            }
+
+
+            {/* <PopupLoadingModal /> */}
+            {/* <PopupSuccessModal /> */}
+            {/* <PopupFailureModal /> */}
+            {
+              renderTodayHabitEntryApiResponseView(todayHabitEntryApiResponse.todayHabitEntryApiResponseView)
             }
         </section>
     )

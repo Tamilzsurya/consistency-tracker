@@ -134,3 +134,40 @@ Authorization: Bearer YOUR_TOKEN
 
 DELETE http://localhost:3001/api/habits/1
 Authorization: Bearer YOUR_TOKEN
+
+
+
+
+
+
+
+
+
+### Habit entries APIs
+
+### Create or Update habit entry
+
+POST http://localhost:3001/api/entries
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsImlhdCI6MTc4OTk4NTY1MCwiZXhwIjoxNzkwNTkwNDUwfQ.vlB0WqCfIW12562F0RtehNGlcbOdGcokuypLCm7doCU
+
+{
+  "id": "1-2026-09-26",
+  "habitId": 1,
+  "isCompleted": false,
+  "entryDate": "2026-09-26"
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

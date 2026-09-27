@@ -10,6 +10,7 @@ import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { MdOutlineKeyboardArrowUp } from "react-icons/md";
 
 
+
 // components
 import AddHabitCategoryListItem from '../AddHabitCategoryListItem'
 import RegLoaderBtn from '../RegLoaderBtn'
@@ -47,6 +48,8 @@ const AddHabitPopupForm = props => {
         submitSuccessMsg: ""
     });
 
+    console.log(selectedHabitCategory)
+
     // context
     const {isAddHabitModalOpen, setIsAddHabitModalOpen, refreshHabitsData} = useContext(AddHabitModalContext);
 
@@ -69,6 +72,7 @@ const AddHabitPopupForm = props => {
             category: selectedHabitCategory.label,   
             jwt_token
         }
+        console.log(selectedHabitCategory.label)
 
         // validate form and set error
         const error = habitFormValidation(formData);

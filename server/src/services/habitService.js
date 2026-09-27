@@ -1,6 +1,7 @@
 
 const userModel = require('../models/userModel')
 const habitModel = require('../models/habitModel')
+const habitEntriesModel =  require('../models/habitEntryModel')
 const AppError = require('../utils/appError')
 
 const createHabit = async (userId, name, category) => {
@@ -21,7 +22,24 @@ const createHabit = async (userId, name, category) => {
 const getAllHabits = async (userId) => {
 
     const habits = await habitModel.getAllHabits(userId)
-    return habits
+    const habitEntries = await habitEntriesModel.getHabitEntries(1)
+
+    const formatedHabitsList = Promise.all(habits.map( async habit => {
+        const habitEntries = await habitEntriesModel.getHabitEntries(habit.id)
+        const formatedHabitEntries = habitEntries.map(eachHabitEntry => (
+            {
+                habitEntryId: eachHabitEntry.id,
+                habitId: eachHabitEntry.habit_id,
+                isCompleted: eachHabitEntry.is_completed,
+                habitEntryDate:  eachHabitEntry.entry_date 
+            }
+        ))
+
+        return {...habit, habitEntries: formatedHabitEntries}
+
+    } )
+    )
+    return formatedHabitsList
 }
 
 module.exports = {createHabit, getAllHabits}

@@ -3,9 +3,12 @@
 import './index.css'
 
 
-const HabitRowGridCardHeader = () =>{
+const HabitRowGridCardHeader = props =>{
+    const {totalDays} = props
+
+
      const eachHabitRowData = [];
-    for (let i = 1; i <= 31; i++) {
+    for (let i = 1; i <= totalDays; i++) {
       eachHabitRowData.push(
         {
           id: i,
@@ -18,7 +21,7 @@ const HabitRowGridCardHeader = () =>{
     return (
       <div className='each-habit-row-container'>
         {eachHabitRowData.map(each => (
-          <div className='each-habit-card-container'>
+          <div key={each.id} className='each-habit-card-container'>
             <p className='each-habit-row-card-header-date'>{each.id}</p>
           </div>
         ))}

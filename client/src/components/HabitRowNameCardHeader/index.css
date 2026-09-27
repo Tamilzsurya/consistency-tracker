@@ -3,6 +3,12 @@
     height: 24px;
     display: flex;
     align-items: center;
+    gap: 6px;
+   
+    
+}
+.each-habit-name-card-container-header{
+    justify-content: space-between;
 }
 
 .habit-name{
@@ -12,3 +18,25 @@
     font-weight: var(--fw-regular);
     line-height: 24px;
 } 
+
+.each-habit-name-card-icon-btn{
+    display: flex;
+    align-items: center;
+
+   
+
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
+
+.each-habit-name-card-arrow-icon{
+    color: #3525CD;
+    font-size: 22px;
+    border-radius: 4px;
+    background-color: #E5E7EB; 
+}
+.each-habit-name-card-arrow-icon:hover{
+    background-color: #E5E7EB;
+}

@@ -4,7 +4,7 @@ const passport = require('./config/passport');
 
 const userRoutes = require('./routes/userRoutes')
 const habitRoutes = require('./routes/habitRoutes')
-// const entryRoutes = require('./routes/entryRoutes')
+const entryRoutes = require('./routes/entryRoutes')
 const authRoutes = require('./routes/authRoutes')
 
 const errorMiddleware = require('./middleware/errorMiddleware')
@@ -24,7 +24,8 @@ app.use(passport.initialize())
 app.use('/api/auth', authRoutes)
 app.use('/api/users', userRoutes)
 app.use('/api/habits', habitRoutes)
-// app.use('/api/entries', entryRoutes)
+app.use('/api/entries', entryRoutes)
+
 
 
 

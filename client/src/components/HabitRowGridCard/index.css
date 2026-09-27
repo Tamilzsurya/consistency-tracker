@@ -19,11 +19,37 @@
     
     text-align: center;
     overflow: hidden;
+    
 }
 .habit-card-icon{
-    color: #3525CD;
+    
     font-size: 22px;
     border-radius: 4px;
     padding: 0;
     margin: 0;
+    
+}
+.completed-habit-card-icon{
+    color: #3525CD;
+    
+}
+.today-completed-habit-card-icon{
+    border: 2px dashed #bcbcbe;
+    cursor: pointer;
+}
+.incompleted-habit-card-icon{
+    color: #bcbcbe;
+    /* #bcbcbe, #c9c9ca, #b3b3b6, bbbcbe, #E7E8EA */
+}
+.today-incompleted-habit-card-icon{
+    cursor: pointer;
+}
+
+
+/* checkbox input */
+.habit-card-checkbox-label-container{
+    cursor: pointer;
+}
+.habit-card-checkbox-input{
+    display: none;
 }

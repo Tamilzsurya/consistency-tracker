@@ -11,8 +11,10 @@ import HabitEmptyView from '../HabitEmptyView';
 import HabitLoadingView from '../HabitLoadingView';
 import HabitFailureView from '../HabitFailureView';
 
-
+// services
 import {getAllHabits} from '../../services/habitService';
+
+
 
 import './index.css'
 
@@ -31,8 +33,12 @@ const HomeMainContent = () => {
         currentApiStateView: responseConstants.initial
     });
 
+    console.log(apiResponse.habitData)
+
+    // context
     const {allHabitsDataVersion} = useContext(AddHabitModalContext);
 
+    // console.log(`Habit Data: ${apiResponse.habitData[0].habitName}`)
 
     useEffect(() => {
         console.log("Main content rendered")
@@ -73,11 +79,19 @@ const HomeMainContent = () => {
                 return;
             }
 
+
+            // format the response data
+            const formatedHabits = habits.map(habit => ({
+                id: habit.id,
+                name: habit.name,
+                category: habit.category,
+                habitEntries: habit.habitEntries
+            }))
             
 
             setApiResponse(prevState => ({
                 ...prevState,
-                habitData: habits,
+                habitData: formatedHabits,
                 currentApiStateView: responseConstants.success
             }))
 
@@ -102,7 +116,7 @@ const HomeMainContent = () => {
             case responseConstants.loading:
                 return <HabitLoadingView />;
             case responseConstants.success:
-                return <HabitSuccessView habitData={apiResponse.habitData} />;
+                return <HabitSuccessView habitsData={apiResponse.habitData} />;
             case responseConstants.failure:
                 return <HabitFailureView error={apiResponse.error} />;
             case responseConstants.empty:
@@ -120,7 +134,7 @@ const HomeMainContent = () => {
 
                 {/* <HabitLoadingView /> */}
 
-                {/* <HabitSuccessView /> */}
+                {/*<HabitSuccessView habitsData={apiResponse.habitData} /> */}
 
                 {/* <HabitFailureView /> */}
 
