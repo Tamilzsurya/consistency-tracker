@@ -14,13 +14,13 @@ import { FaCheckCircle } from "react-icons/fa";
 import './index.css';
 
 const PopupSuccessModal = props => {
-    const {setTodayHabitEntryApiResponse} = props
+    const {id = "Entry", setApiResponse} = props
 
     // context
     const {refreshHabitsData} = useContext( AddHabitModalContext)
 
     const handleClose = () => {
-        setTodayHabitEntryApiResponse({
+        setApiResponse({
             todayHabitEntryApiResponseView: responseConstants.initial,
             submitErrorMsg: "",
             submitSuccessMsg: ""
@@ -41,7 +41,7 @@ const PopupSuccessModal = props => {
                     <FaCheckCircle className="check-icon" />
                 </div>
 
-                <h1 className="popup-success-content-title">Action Completed Successfully!</h1>
+                <h1 className="popup-success-content-title">Your Habit {id === 'Entry' ? 'Entried' : 'Deleted'} Successfully!</h1>
                 <p className="popup-success-content-description">Your request has been completed successfully. It has been updated to your consistency grid.</p>
             </div>
         </div>

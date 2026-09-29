@@ -5,6 +5,11 @@ import './index.css';
 
 
 const HabitFailureView = props => {
+    const {getAllHabitsApiCall} = props
+    const onTryAgain = () => {
+        getAllHabitsApiCall();
+    }
+
     return (
         <div className="habit-failure-view-bg-container">
 
@@ -12,7 +17,7 @@ const HabitFailureView = props => {
                 <img className="habit-failure-view-content-image" src={consistencyGridFailureStateImg} alt='consistency grid failure state img' />
                 <h1 className='habit-failure-view-content-title'>Couldn't load your habits</h1>
                 <p className = 'habit-failure-view-content-description'>We couldn't retrieve your latest progress. Please try again.</p>
-                <button type='button' className="habit-failure-view-content-button" onClick={() =>{}}>Try Again</button>
+                <button type='button' className="habit-failure-view-content-button" onClick={onTryAgain}>Try Again</button>
             </div>
             
         </div>

@@ -14,7 +14,8 @@ import './index.css'
 
 const AddHabitPupupFromSuccessView = props => {
     const {setShowAddHabitPopupForm} = props
-    const {setIsAddHabitModalOpen} = useContext(AddHabitModalContext)
+    const {setIsAddHabitModalOpen, formDetails} = useContext(AddHabitModalContext)
+    const {formName} = formDetails
 
     const handleClose = () => {
         setIsAddHabitModalOpen(false)
@@ -38,8 +39,8 @@ const AddHabitPupupFromSuccessView = props => {
                     <FaCheckCircle className="add-habit-popup-modal-form-success-view-icon" />
                 </div>
 
-                <h1 className='add-habit-popup-modal-form-success-view-content-container-title'>Habit Created Successfully!</h1>
-                <p className="add-habit-popup-modal-form-success-view-content-container-para">Your new habit has been added and anchored into your Consistency Grid.</p>
+                <h1 className='add-habit-popup-modal-form-success-view-content-container-title'>Habit {formName === 'Add' ? 'Added' : 'Updated'} Successfully!</h1>
+                <p className="add-habit-popup-modal-form-success-view-content-container-para">Your habit has been {formName === 'Add' ? 'added' : 'updated'} and anchored into your Consistency Grid.</p>
                 <button type="button" onClick={handleAddAnotherHabit} className="add-habit-popup-modal-form-success-view-content-container-add-habit-btn"><FaPlus className="add-habit-popup-modal-form-success-view-content-container-add-habit-icon" /> Add Another Habit</button>
             </div>
 

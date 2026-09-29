@@ -29,3 +29,16 @@ export const habitFormValidation = (formData) => {
     return error
 
 }
+
+export const updateHabitFormValidation = (previousFormData, currentFormData) => {
+
+    let error = ""
+    
+
+    if(currentFormData.name === previousFormData.name && currentFormData.category === previousFormData.category){
+        error = "No changes detected. Please update at least one field before updating."
+        return error
+    }
+
+    return error
+}

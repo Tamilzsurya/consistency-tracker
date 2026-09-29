@@ -9,10 +9,10 @@ import { FaExclamation } from "react-icons/fa";
 import './index.css';
 
 const PopupFailureModal = props => {
-    const {setTodayHabitEntryApiResponse} = props
+    const {id = "Entry", setApiResponse} = props
 
     const handleClose = () => {
-        setTodayHabitEntryApiResponse({
+        setApiResponse({
             todayHabitEntryApiResponseView: responseConstants.initial,
             submitErrorMsg: "",
             submitSuccessMsg: ""
@@ -31,7 +31,7 @@ const PopupFailureModal = props => {
                     <FaExclamation className="popup-failure-content-icon" />
                 </div>
 
-                <h1 className="popup-failure-content-title">Unable to Complete Your Request</h1>
+                <h1 className="popup-failure-content-title">Unable to Complete Your Habit {id === 'Entry' ? 'Entry' : 'Deletion'}</h1>
                 <p className="popup-failure-content-description">Something went wrong on our end. Please try again later.</p>
             </div>
         </div>

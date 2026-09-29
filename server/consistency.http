@@ -120,13 +120,13 @@ Authorization: Bearer YOUR_TOKEN
 
 ### Update habit
 
-PUT http://localhost:3001/api/habits/1
+PUT http://localhost:3001/api/habits/19
 Content-Type: application/json
-Authorization: Bearer YOUR_TOKEN
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsImlhdCI6MTc5MDYwMTk3NiwiZXhwIjoxNzkxMjA2Nzc2fQ.N5XMEDYcw0VeH5HcyHJR3PiEsczyjsl1tlsRpegcFT4
 
 {
-  "name": "Learn React Advanced",
-  "description": "Study advanced React concepts"
+  "name": "Project Development",
+  "category": "Productivity"
 }
 
 

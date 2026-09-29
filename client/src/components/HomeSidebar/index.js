@@ -1,8 +1,10 @@
 
 import {Link, withRouter} from 'react-router-dom';
 
-
+// contexts
 import AddHabitModalContext from '../../contexts/AddHabitModalContext'
+
+import {habitCategoryList} from '../../constants/habitConstants'
 
 // icons
 import { MdCalendarToday } from "react-icons/md";
@@ -32,8 +34,21 @@ const HomeSidebar = props => {
                 <AddHabitModalContext.Consumer>
                     { 
                         value => {
-                            const { isAddHabitModalOpen, setIsAddHabitModalOpen } = value;
-                            const handelSetIsAddHabitModalOpen = () => setIsAddHabitModalOpen(true);
+                            const { isAddHabitModalOpen, setIsAddHabitModalOpen, setFormDetails } = value;
+
+                            const formDetails = {
+                                    formName: "Add",
+                                    formData: {
+                                        id: null,
+                                        habitName: "",
+                                        habitCategory: habitCategoryList[6],
+                                    }
+                                };
+
+                            const handelSetIsAddHabitModalOpen = () => {
+                                setFormDetails(formDetails)
+                                setIsAddHabitModalOpen(true)
+                            };
 
                             return (
                                     <div className="side-bar">

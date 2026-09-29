@@ -21,10 +21,10 @@ import {habitCategoryList} from '../../constants/habitConstants'
 import {buttonStatus} from '../../constants/uiConstants'
 
 // utils/validation
-import {habitFormValidation} from '../../utils/validation/habitValidation'
+import {habitFormValidation, updateHabitFormValidation} from '../../utils/validation/habitValidation'
 
 // services
-import {createHabit} from '../../services/habitService'
+import {createHabit,  updateHabit} from '../../services/habitService'
 
 
 import './index.css'
@@ -37,9 +37,17 @@ const AddHabitPopupForm = props => {
     const { setShowAddHabitPopupForm } = props
 
 
-    const [selectedHabitCategory, setSelectedHabitCategory] = useState(habitCategoryList[6]);
+    // context
+    const {isAddHabitModalOpen, setIsAddHabitModalOpen, refreshHabitsData, formDetails} = useContext(AddHabitModalContext);
+    // destructure formDetails from context
+    const {formName, formData} = formDetails
+    
+    const {id: habitId, habitName: formHabitName, habitCategory: formHabitCategory} = formData
+    
+
+    const [selectedHabitCategory, setSelectedHabitCategory] = useState(formHabitCategory);
     const [showDropDownMenu, setShowDropDownMenu] = useState(false);
-    const [habitName, setHabitName] = useState('');
+    const [habitName, setHabitName] = useState(formHabitName);
     const [addHabitResponseData, setAddHabitResponseData] = useState({
         error: {},
         currentStageBtn: buttonStatus.ready,
@@ -47,11 +55,21 @@ const AddHabitPopupForm = props => {
         submitErrorMsg: "",
         submitSuccessMsg: ""
     });
+    const [updateHabitResponseData, setUpdateHabitResponseData] = useState({
+        error: {},
+        currentStageBtn: buttonStatus.ready,
+        isCloseBtnDisabled: false,
+        submitErrorMsg: "",
+        submitSuccessMsg: ""
+    })
 
-    console.log(selectedHabitCategory)
+    // jwt token
+    const jwtToken = Cookies.get("jwt_token");
 
-    // context
-    const {isAddHabitModalOpen, setIsAddHabitModalOpen, refreshHabitsData} = useContext(AddHabitModalContext);
+    
+
+
+
 
     // handel the close modal button click context
     const handleCloseModal = () => {
@@ -60,17 +78,17 @@ const AddHabitPopupForm = props => {
 
 
 
-    // handle form submit
+    // handle form submit and api call
     const onSubmitAddHabit = async event =>{
         event.preventDefault();
 
 
-        const jwt_token = Cookies.get("jwt_token");
+        
 
         const formData = {
             name: habitName,
             category: selectedHabitCategory.label,   
-            jwt_token
+            jwtToken
         }
         console.log(selectedHabitCategory.label)
 
@@ -87,10 +105,11 @@ const AddHabitPopupForm = props => {
         setAddHabitResponseData({ 
             error: {}, 
             currentStageBtn: buttonStatus.loading,
-            submitErrorMsg: "",
+              isCloseBtnDisabled: true,
+              submitErrorMsg: "",
             submitSuccessMsg: "",
-            isCloseBtnDisabled: true
          })
+          
 
 
         // call add habit api
@@ -113,7 +132,7 @@ const AddHabitPopupForm = props => {
             setShowAddHabitPopupForm(false);
         
             
-            // context update
+            // context update for refresh the page
             refreshHabitsData();
             
 
@@ -135,9 +154,91 @@ const AddHabitPopupForm = props => {
 
 
 
+
+    // update  habit api call
+    const onSubmitUpdateHabit = async event => {
+        event.preventDefault();
+        console.log("update habit")
+
+        const currentFormData = {
+            name: habitName,
+            category: selectedHabitCategory.label,   
+        }
+        const previousFormData = {
+            name: formHabitName,
+            category: formHabitCategory.label,
+        }
+        
+
+        // validate current data form and set error
+        const error = habitFormValidation(currentFormData);
+        if(Object.keys(error).length !== 0) {
+            setUpdateHabitResponseData(prevState => ( {...prevState, error, currentStageBtn: buttonStatus.ready})  );
+            return;
+        }
+
+
+        // validate current data form and set submit error message
+        const updateHabitError = updateHabitFormValidation(previousFormData, currentFormData);
+        
+        if(updateHabitError) {
+            setUpdateHabitResponseData(prevState => ( {...prevState, submitErrorMsg: updateHabitError, currentStageBtn: buttonStatus.ready})  );
+            return;
+        }
+
+
+
+        // clear all error messages and set loading state if there is no error
+        setUpdateHabitResponseData({ 
+            error: {}, 
+            currentStageBtn: buttonStatus.loading,
+              isCloseBtnDisabled: true,
+              submitErrorMsg: "",
+            submitSuccessMsg: "",
+         })
+
+
+         try{
+
+            const data = await updateHabit(currentFormData, habitId, jwtToken);
+
+            // state update
+            setUpdateHabitResponseData(prevState => ({
+                ...prevState,
+                currentStageBtn: buttonStatus.ready,
+                isCloseBtnDisabled: false,
+                submitErrorMsg: "",
+                submitSuccessMsg: data.message
+            }))
+
+            // close popup form
+            setShowAddHabitPopupForm(false);
+
+            // context update for refresh the page
+            refreshHabitsData();
+           
+
+
+         }catch(error){
+            setUpdateHabitResponseData(prevState => ({
+                ...prevState,
+                currentStageBtn: buttonStatus.ready,
+                isCloseBtnDisabled: false,
+                submitErrorMsg: error.message,
+                submitSuccessMsg: ""
+            }))
+         }
+
+
+    }
+
+
+
+
     // change habit name
     const onChangeHabitName = event => {
         setHabitName(event.target.value);
+
     }
 
     // change selected habit category
@@ -206,25 +307,37 @@ const AddHabitPopupForm = props => {
                 </ul>
                 }
 
-
-                
-
-
             </div>
         )
     }
 
 
     const renderCurrentStageAddHabitBtnView = () => {
-        
-        switch(addHabitResponseData.currentStageBtn){
-            case buttonStatus.loading:
-                return <RegLoaderBtn className = "add-habit-pop-modal-form-add-habit-btn" />;
-            case buttonStatus.ready:
-                return <button type="submit" onClick={onSubmitAddHabit} className="add-habit-pop-modal-form-add-habit-btn">Create Habit</button>
-            default:
-                null
+
+
+        if(formName === "Add"){
+            switch(addHabitResponseData.currentStageBtn){
+                case buttonStatus.loading:
+                    return <RegLoaderBtn className = "add-habit-pop-modal-form-add-habit-btn" />;
+                case buttonStatus.ready:
+                    return <button type="submit" onClick={formName === "Add" ? onSubmitAddHabit: onSubmitUpdateHabit} className="add-habit-pop-modal-form-add-habit-btn">{formName} Habit</button>
+                default:
+                    return null
+            }
         }
+
+        if(formName === "Update"){
+            switch(updateHabitResponseData.currentStageBtn){
+                case buttonStatus.loading:
+                    return <RegLoaderBtn className = "add-habit-pop-modal-form-add-habit-btn" />;
+                case buttonStatus.ready:
+                    return <button type="submit" onClick={formName === "Add" ? onSubmitAddHabit: onSubmitUpdateHabit} className="add-habit-pop-modal-form-add-habit-btn">{formName} Habit</button>
+                default:
+                    return null
+            }
+        }
+        
+        
     }
 
 
@@ -234,7 +347,7 @@ const AddHabitPopupForm = props => {
 
                 {/* form header */}
                 <div className="add-habit-pop-modal-form-header-container">
-                    <h1 className="add-habit-pop-modal-form-header-title">Add Habit</h1>
+                    <h1 className="add-habit-pop-modal-form-header-title">{formName} Habit</h1>
 
                     <button disabled = {addHabitResponseData.isCloseBtnDisabled} type="button" onClick={handleCloseModal} className="add-habit-pop-modal-form-header-close-btn">
                         <IoIosClose className="add-habit-pop-modal-form-header-close-icon" />
@@ -259,12 +372,24 @@ const AddHabitPopupForm = props => {
                     }
                 </div>
 
+
+
+                {/* {add Habit Response messages} */}
                 {
                     addHabitResponseData.submitErrorMsg && <p className="add-habit-form-err-msg">{addHabitResponseData.submitErrorMsg}</p>
                 }
 
                 {
                     addHabitResponseData.submitSuccessMsg && <p className="add-habit-form-success-msg">{addHabitResponseData.submitSuccessMsg}</p>
+                }
+
+
+                {/* updated habit messages */}
+                {
+                    updateHabitResponseData.submitSuccessMsg && <p className="add-habit-form-success-msg">{updateHabitResponseData.submitErrorMsg}</p>
+                }
+                {
+                    updateHabitResponseData.submitErrorMsg && <p className="add-habit-form-err-msg">{updateHabitResponseData.submitErrorMsg}</p>
                 }
 
 

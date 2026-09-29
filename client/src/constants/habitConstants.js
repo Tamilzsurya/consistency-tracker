@@ -1,3 +1,4 @@
+// category constant icons
 import { MdAutoAwesome } from "react-icons/md";
 import { FaDumbbell } from "react-icons/fa6";
 import { FaBookOpenReader } from "react-icons/fa6";
@@ -16,3 +17,12 @@ export const habitCategoryList = [
     {id: 6, label: 'Creative', icon: FaPalette},
     {id: 7, label: 'Others', icon: BsStars},
 ]
+
+export const warningModalConstants = {
+    deleteHabit: {
+        title: 'Delete Habit?',
+        description: 'Are you sure you want to delete this habit? Deleting will permanently remove all progress and records linked to this habit. This action cannot be undone.',
+        confirmBtnText: 'Delete Habit',
+        cancelBtnText: 'Cancel',
+    },
+}

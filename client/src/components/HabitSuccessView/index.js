@@ -18,6 +18,7 @@ import HabitRowNameCardHeader from '../HabitRowNameCardHeader';
 import PopupLoadingModal from '../../modals/PopupLoadingMoadal';
 import PopupSuccessModal from '../../modals/PopupSuccessModal';
 import PopupFailureModal from '../../modals/PopupFailureModal';
+import AddHabitPopFormModal from '../../modals/AddHabitPopFormModal'
 
 // utils/dateAndTime/dateOperations.js
 import {getNextMonthAndTotalDays, getPreviousMonthAndTotalDays, getCurrentMonthAndTotalDays } from '../../utils/dateAndTime/dateOperations'
@@ -29,7 +30,7 @@ import {responseConstants} from '../../constants/uiConstants'
 import {createOrUpdateHabitEntry} from '../../services/habitEntryService'
 import {deleteHabit} from '../../services/habitService'
 
-
+import AddHabitModalContext from '../../contexts/AddHabitModalContext'
 
 import './index.css'
 
@@ -42,7 +43,7 @@ const HabitSucessView = props => {
     
     const currentMonthDetails = getCurrentMonthAndTotalDays(new Date())
     
-    
+    // state
     const [monthDetails, setMonthDetails] = useState(currentMonthDetails);
     const [todayHabitEntryApiResponse, setTodayHabitEntryApiResponse] = useState({
         todayHabitEntryApiResponseView: responseConstants.initial,
@@ -54,6 +55,9 @@ const HabitSucessView = props => {
         submitErrorMsg: "",
         submitSuccessMsg: ""
     });
+
+    const {setIsAddHabitModalOpen, setFormDetails} = useContext(AddHabitModalContext)
+    
     
     
     
@@ -123,6 +127,37 @@ const HabitSucessView = props => {
         }
     }
 
+    const onCallUpdateHabitApi = async formData => {
+      const formDetails = {
+          formName: "Update",
+          formData
+      }
+
+
+      setFormDetails(formDetails)
+      setIsAddHabitModalOpen(true)
+       
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     // functions to change current month to next month
@@ -170,9 +205,10 @@ const HabitSucessView = props => {
     const renderTipsSection = () =>(
         <section className="tips-section">
           
-          <button className="add-habit-button">
+          <button type="button" onClick={() => setIsAddHabitModalOpen(true)} className="add-habit-button">
             <AiOutlinePlusCircle className="tips-section-btn-icon" />
-            <span className="tips-section-btn-text">Add Habit</span></button>
+            <span className="tips-section-btn-text">Add Habit</span>
+          </button>
           <button className='export-data-button'>
             <MdOutlineShare className="tips-section-btn-icon" />
             <span className="tips-section-btn-text">Export Data</span>
@@ -198,14 +234,15 @@ const HabitSucessView = props => {
         case responseConstants.loading:
           return <PopupLoadingModal />;
         case responseConstants.success:
-          return <PopupSuccessModal setTodayHabitEntryApiResponse={setTodayHabitEntryApiResponse} />;
+          return <PopupSuccessModal setApiResponse={setTodayHabitEntryApiResponse} />;
         case responseConstants.failure:
-          return <PopupFailureModal setTodayHabitEntryApiResponse={setTodayHabitEntryApiResponse} />;
+          return <PopupFailureModal setApiResponse={setTodayHabitEntryApiResponse} />;
         default:
           return null;
       }
     }
 
+    // deleteHabitApiResponse view
     const renderDeleteHabitApiResponseView = (currentView) => {
       switch(currentView){
         case responseConstants.initial:
@@ -213,9 +250,9 @@ const HabitSucessView = props => {
         case responseConstants.loading:
           return <PopupLoadingModal />;
         case responseConstants.success:
-          return <PopupSuccessModal setTodayHabitEntryApiResponse={setTodayHabitEntryApiResponse} />;
+          return <PopupSuccessModal id="Delete" setApiResponse={setDeleteHabitApiResponse} />;
         case responseConstants.failure:
-          return <PopupFailureModal setTodayHabitEntryApiResponse={setTodayHabitEntryApiResponse} />;
+          return <PopupFailureModal id="Delete" setApiResponse={setDeleteHabitApiResponse} />;
         default:
           return null;
       }
@@ -237,7 +274,7 @@ const HabitSucessView = props => {
                   <HabitRowNameCardHeader key={formatedMonth} formatedMonth={formatedMonth} handleNextMonth={handleNextMonth} handlePreviousMonth={handlePreviousMonth} />
                   {
                     habitsData.map(eachHabit => (
-                      <HabitRowNameCard key={eachHabit.id} habitDetails={eachHabit} onCallDeleteHabitApi={onCallDeleteHabitApi} />
+                      <HabitRowNameCard key={eachHabit.id} habitDetails={eachHabit} onCallUpdateHabitApi={onCallUpdateHabitApi} onCallDeleteHabitApi={onCallDeleteHabitApi} />
                     ))
                   }
                   
@@ -271,6 +308,10 @@ const HabitSucessView = props => {
             {
               renderDeleteHabitApiResponseView(deleteHabitApiResponse.deleteHabitApiResponseView)
             }
+
+
+           
+
         </section>
     )
 }

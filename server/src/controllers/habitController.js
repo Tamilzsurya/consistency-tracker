@@ -2,6 +2,7 @@
 const { request, response } = require('express')
 const habitService = require('../services/habitService')
 
+// Create:  Create a new habit
 const createHabit = async (request, response, next) => {
     try {
 
@@ -9,6 +10,8 @@ const createHabit = async (request, response, next) => {
 
         const {userId} = payload
         const {name, category} = request.body
+
+        
 
         const result = await habitService.createHabit(userId, name, category)
 
@@ -23,6 +26,27 @@ const createHabit = async (request, response, next) => {
     }
 }
 
+// Update: Update a habit
+const updateHabit = async (request, response, next) => {
+    try{
+
+        const {habitId} = request.params;
+        const {name, category} = request.body;
+
+
+        const result = await habitService.updateHabit(habitId, name, category)
+
+        return response.status(200).json({
+            message: "Habit updated successfully!",
+            result
+        })
+
+    }catch(error){
+        next(error)
+    }
+}
+
+// Read: Get all habits
 const getAllHabits = async (request, response, next) => {
 
     try {
@@ -47,6 +71,7 @@ const getAllHabits = async (request, response, next) => {
 
 }
 
+// Delete: Delete a habit
 const deleteHabit = async (request, response, next) => {
     try{
 
@@ -64,4 +89,4 @@ const deleteHabit = async (request, response, next) => {
     }
 }
 
-module.exports = {createHabit, getAllHabits, deleteHabit}
+module.exports = {createHabit, getAllHabits, deleteHabit, updateHabit}

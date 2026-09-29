@@ -7,20 +7,26 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import { MdOutlineEdit } from "react-icons/md";
 import { RiDeleteBin6Line } from "react-icons/ri";
 
+// components
+import PopupWarningModal from "../../modals/PopupWarningModal";
 
 // constants
-import {habitCategoryList} from '../../constants/habitConstants'
+import {habitCategoryList, warningModalConstants} from '../../constants/habitConstants'
 
 import './index.css'
 
 const HabitRowNameCard = props => {
-    const {habitDetails, onCallDeleteHabitApi} = props
+    const {habitDetails, onCallDeleteHabitApi, onCallUpdateHabitApi} = props
     const {id, name, category} = habitDetails
     
-
+    // get category icon and details
     const currentCategoryDetails = habitCategoryList.find(eachCategory => eachCategory.label === category)
     
+    //state
   const [isShowDropDownMenu, setShowDropDownMenu] = useState(false)
+  const [isShowPopupWarningModal, setShowPopupWarningModal] = useState(false)
+
+  // refs
   const dropdownRef = useRef(null);
 
 
@@ -50,9 +56,19 @@ const HabitRowNameCard = props => {
 
   // delete habit
   const handleDeleteHabit = () => {
+    setShowPopupWarningModal(false)
     onCallDeleteHabitApi(id)
   }
 
+  // 
+  const handleUpdateHabit = () => {
+    const formData = {
+      id, 
+      habitName: name, 
+      habitCategory: currentCategoryDetails}
+    onCallUpdateHabitApi(formData)
+  }
+ 
 
   // show/hide dropdown menu
   const handleShowDropDownMenu = () => {
@@ -62,6 +78,7 @@ const HabitRowNameCard = props => {
   // hide dropdown menu
   const handleHideDropDownMenu = () => {
     setShowDropDownMenu(false)
+
   }
 
 
@@ -70,8 +87,8 @@ const HabitRowNameCard = props => {
 
     return (
       <div ref={dropdownRef} onBlur={handleHideDropDownMenu}  className="each-habit-name-card-dropdown-menu-container">
-        <button className="each-habit-name-card-dropdown-menu-btn edit-btn"><MdOutlineEdit className="each-habit-name-card-dropdown-menu-icon-edit-icon" />Edit</button>
-        <button type="button" onClick={handleDeleteHabit} className="each-habit-name-card-dropdown-menu-btn delete-btn"><RiDeleteBin6Line className="each-habit-name-card-dropdown-menu-icon-delete-icon" />Delete</button>
+        <button type="button" onClick={handleUpdateHabit} className="each-habit-name-card-dropdown-menu-btn edit-btn"><MdOutlineEdit className="each-habit-name-card-dropdown-menu-icon-edit-icon" />Edit</button>
+        <button type="button" onClick={() => setShowPopupWarningModal(true)} className="each-habit-name-card-dropdown-menu-btn delete-btn"><RiDeleteBin6Line className="each-habit-name-card-dropdown-menu-icon-delete-icon" />Delete</button>
       </div>
     )
   }
@@ -101,6 +118,18 @@ const HabitRowNameCard = props => {
         {
           isShowDropDownMenu && renderDropDownMenu()
         }
+
+
+        {
+          isShowPopupWarningModal && (
+            <PopupWarningModal
+              warningModalDetails={warningModalConstants.deleteHabit}
+              onCancel={() => setShowPopupWarningModal(false)}
+              onConfirm={handleDeleteHabit}
+            />
+          )
+        }
+        
         
       </div>
     )

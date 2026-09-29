@@ -19,6 +19,13 @@ const createHabit = async (userId, name, category) => {
     return habitId
 }
 
+const updateHabit = async (habitId, name, category) => {
+
+    const result = await habitModel.updateHabit(habitId, name, category)
+
+    return result
+}
+
 const getAllHabits = async (userId) => {
 
     const habits = await habitModel.getAllHabits(userId)
@@ -48,4 +55,4 @@ const deleteHabit = async (habitId) => {
     return result;
 }
 
-module.exports = {createHabit, getAllHabits, deleteHabit}
+module.exports = {createHabit, getAllHabits, deleteHabit, updateHabit}

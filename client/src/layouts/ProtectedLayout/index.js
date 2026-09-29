@@ -16,6 +16,9 @@ import AddHabitPopButton from '../../components/AddHabitPopButton';
 // modals
 import AddHabitPopFormModal from '../../modals/AddHabitPopFormModal';
 
+// constants
+import {habitCategoryList} from '../../constants/habitConstants'
+
 import './index.css'
 
 
@@ -23,7 +26,17 @@ import './index.css'
 const ProtectedLayout = () => {
     const [isAddHabitPopFormModalOpen, setIsAddHabitPopFormModalOpen] = useState(false)
     const [allHabitsDataVersion, setAllHabitsDataVersion] = useState(0)
-
+    const [formDetails, setFormDetails] = useState({
+        formName: "Add",
+        formData: {
+            id: null,
+            habitName: "",
+            habitCategory: habitCategoryList[6],
+        }
+    }) 
+      
+    //context
+    
     const refreshHabitsData = () => {
         setAllHabitsDataVersion(prevState => prevState + 1);
     }
@@ -31,6 +44,10 @@ const ProtectedLayout = () => {
     // handel set isAddHabitPopFormModalOpen context
     const handelSetIsAddHabitPopFormModalOpen = (value) => {
         setIsAddHabitPopFormModalOpen(value)
+    }
+
+    const handleSetFormDetails = (value) => {
+        setFormDetails(value)
     }
     
     return (
@@ -42,7 +59,10 @@ const ProtectedLayout = () => {
                 setIsAddHabitModalOpen: handelSetIsAddHabitPopFormModalOpen,
 
                 allHabitsDataVersion,
-                refreshHabitsData
+                refreshHabitsData,
+
+                formDetails,
+                setFormDetails: handleSetFormDetails
             }
          } >
 
@@ -58,7 +78,6 @@ const ProtectedLayout = () => {
 
 
                 <AddHabitPopButton />
-                
                 {
                     isAddHabitPopFormModalOpen && <AddHabitPopFormModal />
                 }

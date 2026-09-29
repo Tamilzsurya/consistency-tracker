@@ -1,5 +1,7 @@
-
+// contexts
 import AddHabitModalContext from '../../contexts/AddHabitModalContext'
+
+import {habitCategoryList} from '../../constants/habitConstants'
 
 import { FaPlus } from "react-icons/fa";
 
@@ -10,9 +12,19 @@ const AddHabitPopButton = () => {
         <AddHabitModalContext.Consumer>
             {
                 value => {
-                    const {isAddHabitModalOpen, setIsAddHabitModalOpen} = value;
+                    const {isAddHabitModalOpen, setIsAddHabitModalOpen, setFormDetails} = value;
                     
+                    const formDetails = {
+                        formName: "Add",
+                        formData: {
+                            id: null,
+                            habitName: "",
+                            habitCategory: habitCategoryList[6],
+                        }
+                    };
+
                     const handelSetIsAddHabitModalOpen = () => {
+                        setFormDetails(formDetails)
                         setIsAddHabitModalOpen(true)
                     }
 
