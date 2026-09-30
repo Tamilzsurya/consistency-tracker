@@ -1,19 +1,20 @@
 import { Component } from 'react';
 
+
+// components
 import HomeSidebar from '../../components/HomeSidebar';
 import HomeTopNavbar from '../../components/HomeTopNavbar';
+import ProfileMainContent from '../../components/ProfileMainContent'
 
 import './index.css';
 
 class ProfilePage extends Component {
   render() {
     return (
-      <div className="grid-page">
+      <div className="profile-page">
         <HomeSidebar />
         <HomeTopNavbar />
-        <main className="grid-main-content">
-          Profile Main content
-        </main>
+        <ProfileMainContent />
       </div>
     );
   }

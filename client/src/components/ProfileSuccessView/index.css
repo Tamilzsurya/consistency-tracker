@@ -1,0 +1,182 @@
+.profile-success-view-bg-container{
+    background-color: #F8F9FB;
+    min-height: 100vh;
+    padding: 32px;
+
+    display: flex;
+    flex-direction: column;
+    
+    gap: 32px;
+}
+
+.profile-success-view-content-container{
+    width: 100%;
+}
+.profile-success-view-content-sub-title{
+    color: #464555;
+    font-family: var(--ff-primary);
+    font-size: 12px;
+    font-weight: var(--fw-semi-bold);
+    line-height: 16px;
+    letter-spacing: 1.2px;
+}
+.profile-success-view-content-title{
+    color: #191C1E;
+    font-family: var(--ff-primary);
+    font-size: 32px;
+    font-weight: var(--fw-bold);
+    line-height: 40px;
+    letter-spacing: -0.8px;
+}
+.profile-success-view-content-description{
+    color: #777587;
+    font-family: var(--ff-primary);
+    font-size: 14px;
+    font-weight: var(--fw-regular);
+    line-height: 20px;
+}
+
+
+/* personal information section */
+.profile-success-view-personal-information-section{
+    padding: 24px;
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.03);
+
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+.profile-success-view-personal-information-section-header-container{
+    background-color: #F3F4F6;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    border-radius: 12px;
+}
+.profile-success-view-personal-information-section-header-content-container{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.profile-success-view-personal-information-section-header-content-icon{
+    color: #3525CD;
+    font-size: 24px;
+}
+.profile-success-view-personal-information-section-header-content-title{
+    color: #191C1E;
+    font-family: var(--ff-primary);
+    font-size: 16px;
+    font-weight: var(--fw-bold);
+    line-height: 24px;
+    /* letter-spacing: -0.4px; */
+    letter-spacing: 0px;
+}
+
+.profile-success-view-personal-information-section-content-container{
+
+}
+.profile-success-view-personal-information-section-content-ul-container{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+.profile-success-view-personal-information-section-content-ul-item-container{
+    padding: 16px;
+    background-color: #F8F9FB;
+    /* background-color: #F3F4F6; */
+    border-radius: 12px;
+    grid-column: span 2;
+}
+@media screen and (min-width: 992px){
+    .profile-success-view-personal-information-section-content-ul-item-container{
+        grid-column: span 1;
+    }   
+}
+.profile-success-view-personal-information-section-content-ul-item-title{
+    color: #777587;
+    font-family: var(--ff-primary);
+    font-size: 12px;
+    font-weight: var(--fw-semi-bold);
+    line-height: 16px;
+    letter-spacing: 0.6px;
+}
+.profile-success-view-personal-information-section-content-ul-item-value{
+    color: #191C1E;
+    font-family: var(--ff-primary);
+    font-size: 16px;
+    font-weight: var(--fw-medium);
+    line-height: 24px;
+    letter-spacing: 0px;
+}
+
+
+/* account and security section */
+.profile-success-view-account-and-security-section-content-container{
+    padding: 16px;
+    background-color: #F8F9FB;
+    border-radius: 12px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.profile-success-view-account-and-security-section-content-title-container{}
+.profile-success-view-account-and-security-section-content-title{
+    color: #191C1E;
+    font-family: var(--ff-primary);
+    font-size: 14px;
+    font-weight: var(--fw-semi-bold);
+    line-height: 20px;
+    letter-spacing: 0px;
+}
+.profile-success-view-account-and-security-section-content-description{
+    color: #777587;
+    font-family: var(--ff-primary);
+    font-size: 12px;
+    font-weight: var(--fw-semi-bold);
+    line-height: 16px;
+    letter-spacing: 0.6px;
+
+    display: none;
+}
+@media screen and (min-width: 992px){
+    .profile-success-view-account-and-security-section-content-description{
+        display: block;
+    }
+}
+
+.profile-success-view-account-and-security-section-content-sign-out-button{
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+
+    border: 1px solid #D9D9D9;
+
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
+}
+.profile-success-view-account-and-security-section-content-sign-out-button-icon{
+    /* color: #777587; */
+    color: #191C1E;
+    font-size: 16px;
+}
+.profile-success-view-account-and-security-section-content-sign-out-button-text{
+    color: #191C1E;
+    font-family: var(--ff-primary);
+    font-size: 14px;
+    font-weight: var(--fw-medium);
+    line-height: 20px;
+    letter-spacing: 0px;
+}

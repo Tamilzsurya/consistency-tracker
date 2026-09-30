@@ -1,109 +1,130 @@
 const userService = require('../services/userService')
 
 
-// GET /api/users
-const getAllUsers = async (req, res, next) => {
-  try {
-
-    const users = await userService.getAllUsers()
-
-    res.status(200).json({
-      users,
-    })
-
-  } catch (error) {
-    next(error)
-  }
-}
 
 
-// GET /api/users/:id
-const getUserById = async (req, res, next) => {
-  try {
+const getUserByToken = async (request, response, next) => {
+  const {userId} = request.payload;
 
-    const {id} = req.params
+  try{
 
-    const user = await userService.getUserById(id)
+    const user = await userService.getUserById(userId);
 
-    res.status(200).json({
+    response.status(200).json({
+      message: 'User fetched successfully',
       user,
     })
 
-  } catch (error) {
+  }catch(error){
     next(error)
   }
 }
 
 
-// POST /api/users
-const createUser = async (req, res, next) => {
-  try {
+// // GET /api/users
+// const getAllUsers = async (req, res, next) => {
+//   try {
 
-    const {userName, email, password,} = req.body
+//     const users = await userService.getAllUsers()
 
-    const userId = await userService.createUser( userName, email, password )
+//     res.status(200).json({
+//       users,
+//     })
 
-    res.status(201).json({
-      message: 'User created successfully',
-      userId,
-    })
-
-  } catch (error) {
-    next(error)
-  }
-}
+//   } catch (error) {
+//     next(error)
+//   }
+// }
 
 
-// PUT /api/users/:id
-const updateUser = async (req, res, next) => {
-  try {
+// // GET /api/users/:id
+// const getUserById = async (req, res, next) => {
+//   try {
 
-    const {id} = req.params
+//     const {id} = req.params
 
-    const {
-      userName,
-      email,
-    } = req.body
+//     const user = await userService.getUserById(id)
 
-    const user = await userService.updateUser(
-      id,
-      userName,
-      email
-    )
+//     res.status(200).json({
+//       user,
+//     })
 
-    res.status(200).json({
-      message: 'User updated successfully',
-      user,
-    })
-
-  } catch (error) {
-    next(error)
-  }
-}
+//   } catch (error) {
+//     next(error)
+//   }
+// }
 
 
-// DELETE /api/users/:id
-const deleteUser = async (req, res, next) => {
-  try {
+// // POST /api/users
+// const createUser = async (req, res, next) => {
+//   try {
 
-    const {id} = req.params
+//     const {userName, email, password,} = req.body
 
-    await userService.deleteUser(id)
+//     const userId = await userService.createUser( userName, email, password )
 
-    res.status(200).json({
-      message: 'User deleted successfully',
-    })
+//     res.status(201).json({
+//       message: 'User created successfully',
+//       userId,
+//     })
 
-  } catch (error) {
-    next(error)
-  }
-}
+//   } catch (error) {
+//     next(error)
+//   }
+// }
+
+
+// // PUT /api/users/:id
+// const updateUser = async (req, res, next) => {
+//   try {
+
+//     const {id} = req.params
+
+//     const {
+//       userName,
+//       email,
+//     } = req.body
+
+//     const user = await userService.updateUser(
+//       id,
+//       userName,
+//       email
+//     )
+
+//     res.status(200).json({
+//       message: 'User updated successfully',
+//       user,
+//     })
+
+//   } catch (error) {
+//     next(error)
+//   }
+// }
+
+
+// // DELETE /api/users/:id
+// const deleteUser = async (req, res, next) => {
+//   try {
+
+//     const {id} = req.params
+
+//     await userService.deleteUser(id)
+
+//     res.status(200).json({
+//       message: 'User deleted successfully',
+//     })
+
+//   } catch (error) {
+//     next(error)
+//   }
+// }
 
 
 module.exports = {
-  getAllUsers,
-  getUserById,
-  createUser,
-  updateUser,
-  deleteUser,
+  // getAllUsers,
+  // getUserById,
+  // createUser,
+  // updateUser,
+  // deleteUser,
+  getUserByToken
 }

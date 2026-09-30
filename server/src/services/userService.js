@@ -1,26 +1,26 @@
 const userModel = require('../models/userModel')
 
-const createUser = async ( userName, email, password ) => {
+// row new Error('Email already registered')
+//   }
 
-  const existingUser = await userModel.getUserByEmail?.( email )
+//   const createUser = async ( userName, email, password ) => {
 
-  if (existingUser) {
-    throw new Error('Email already registered')
-  }
+//   const existingUser = await userModel.getUserByEmail?.( email )
 
-  const userId = await userModel.createUser(
-    userName,
-    email,
-    password
-  )
+//   if (existingUser) {
+//     const userId = await userModel.createUser(
+//     userName,
+//     email,
+//     password
+//   )
 
-  return userId
-}
+//   return userId
+// }
 
 
-const getAllUsers = async () => {
-  return await userModel.getAllUsers()
-}
+// const getAllUsers = async () => {
+//   return await userModel.getAllUsers()
+// }
 
 
 const getUserById = async id => {
@@ -34,44 +34,44 @@ const getUserById = async id => {
 }
 
 
-const updateUser = async (
-  id,
-  userName,
-  email
-) => {
+// const updateUser = async (
+//   id,
+//   userName,
+//   email
+// ) => {
 
-  const user = await userModel.getUserById(id)
+//   const user = await userModel.getUserById(id)
 
-  if (!user) {
-    throw new Error('User not found')
-  }
+//   if (!user) {
+//     throw new Error('User not found')
+//   }
 
-  await userModel.updateUser(
-    id,
-    userName,
-    email
-  )
+//   await userModel.updateUser(
+//     id,
+//     userName,
+//     email
+//   )
 
-  return await userModel.getUserById(id)
-}
+//   return await userModel.getUserById(id)
+// }
 
 
-const deleteUser = async id => {
+// const deleteUser = async id => {
 
-  const user = await userModel.getUserById(id)
+//   const user = await userModel.getUserById(id)
 
-  if (!user) {
-    throw new Error('User not found')
-  }
+//   if (!user) {
+//     throw new Error('User not found')
+//   }
 
-  await userModel.deleteUser(id)
-}
+//   await userModel.deleteUser(id)
+// }
 
 
 module.exports = {
-  createUser,
-  getAllUsers,
+  // createUser,
+  // getAllUsers,
   getUserById,
-  updateUser,
-  deleteUser,
+  // updateUser,
+  // deleteUser,
 }

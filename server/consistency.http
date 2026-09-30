@@ -59,9 +59,18 @@ Content-Type: application/json
 GET http://localhost:3001/api/users
 
 
-### Get one user
+### Get one user path parameter
 
 GET http://localhost:3001/api/users/1
+
+
+
+
+### Get one user via jwt token
+
+GET http://localhost:3001/api/users/me
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsImlhdCI6MTc5MDc0MzgyNywiZXhwIjoxNzkxMzQ4NjI3fQ.BuW9uTeERwPjRJ312kjjWZFXfj_tvQasBEmOMFU618o
 
 
 ### Update user

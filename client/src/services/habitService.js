@@ -212,7 +212,8 @@ export const updateHabit = async (currentFormData, habitId, jwtToken) => {
     if(response.status >= 400 && response.status < 500){
         throw new Error(
             data.message || "Unable to get the user details. Please try again later."
-        )
+
+     )
     }
 
 

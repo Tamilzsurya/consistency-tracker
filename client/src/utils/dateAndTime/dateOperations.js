@@ -10,6 +10,15 @@ export const getFormatedDate = (date) => {
 }
 
 
+export const getFormatedMonthAndYear = (date) => {
+    const newDate = new Date(date);
+
+    const formatedMonth = newDate.toLocaleString('en-US', {month: 'long'})
+    const formatedYear = newDate.getFullYear()
+
+    return `${formatedMonth} ${formatedYear}`
+}
+
 
 
 

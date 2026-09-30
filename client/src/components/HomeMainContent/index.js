@@ -118,7 +118,7 @@ const HomeMainContent = () => {
             case responseConstants.success:
                 return <HabitSuccessView habitsData={apiResponse.habitData} />;
             case responseConstants.failure:
-                return <HabitFailureView error={apiResponse.error} getAllHabitsApiCall = {getAllHabitsApiCall} />;
+                return <HabitFailureView error={apiResponse.error} tryAgainApiCall = {getAllHabitsApiCall} />;
             case responseConstants.empty:
                 return <HabitEmptyView />;
             default:

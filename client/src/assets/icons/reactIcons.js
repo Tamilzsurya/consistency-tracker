@@ -20,6 +20,10 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 
 import { MdOutlineDeleteForever } from "react-icons/md";
 
+import { MdOutlineBadge } from "react-icons/md";
+import { PiShieldCheckeredFill } from "react-icons/pi";
+import { MdLogout } from "react-icons/md";
+
 
 
 
