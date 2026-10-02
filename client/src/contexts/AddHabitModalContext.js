@@ -12,6 +12,9 @@ const AddHabitModalContext = React.createContext(
 
         formDetails: {},
         setFormDetails: () => {},
+
+        todayCompletedTasksPercentage: 0,
+        setTodayCompletedTasksPercentage: () => {}
     }
 );
 

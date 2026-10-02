@@ -21,8 +21,8 @@ import './index.css';
 const HomeSidebar = props => {
     const menuItems = [
     {id: 1, to: '/', label: 'Today', icon: MdCalendarToday},
-    {id: 2, to: '/grid', label: 'Grid', icon: BiGridAlt},
-    {id: 3, to: '/trends', label: 'Trends', icon: BiLineChart},
+    // {id: 2, to: '/grid', label: 'Grid', icon: BiGridAlt},
+    // {id: 3, to: '/trends', label: 'Trends', icon: BiLineChart},
     {id: 4, to: '/profile', label: 'Profile', icon: MdPersonOutline},
 ];
 

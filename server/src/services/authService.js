@@ -46,7 +46,7 @@ const loginUser = async (email, password) => {
         
         // check if user is registered with google
         if(existingUser.provider === 'google'){
-            throw new AppError("This email is registered with Google. Please login with Google.", 401)
+            throw new AppError("This email is registered with Google. Please sign in with Google.", 401)
         }
 
         // compare password

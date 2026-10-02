@@ -1,6 +1,7 @@
 let currentDate =  new Date("2026-09-27");
 console.log(currentDate)
 console.log(currentDate.toDateString())
+console.log(currentDate.getFullYear())
 
 
 // currentDate.setDate(currentDate.getDate() + 5);
@@ -14,7 +15,7 @@ console.log(currentDate.toDateString())
 // console.log( Date.now())
 // console.log(currentDate.getMonth())
 // console.log(currentDate.getFullYear())
-// console.log(currentDate.getDate())
+console.log(currentDate.getDate())
 // console.log(currentDate.getDay())
 
 // console.log(currentDate.toString('default', { month: 'long'} ))

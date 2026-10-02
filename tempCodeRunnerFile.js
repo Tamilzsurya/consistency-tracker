@@ -1,1 +1,1 @@
-let date = new Date(2026, 9, 25)
+console.log(currentDate.getDate())

@@ -34,6 +34,7 @@ const ProtectedLayout = () => {
             habitCategory: habitCategoryList[6],
         }
     }) 
+    const [todayCompletedTasksPercentage, setTodayCompletedTasksPercentage] = useState(0)
       
     //context
     
@@ -49,6 +50,10 @@ const ProtectedLayout = () => {
     const handleSetFormDetails = (value) => {
         setFormDetails(value)
     }
+
+    // const handelSetTodayCompletedTasksPercentage = (value) => {
+    //     setHabitAndStatisticsDetails(value);
+    // }
     
     return (
 
@@ -62,7 +67,10 @@ const ProtectedLayout = () => {
                 refreshHabitsData,
 
                 formDetails,
-                setFormDetails: handleSetFormDetails
+                setFormDetails: handleSetFormDetails,
+
+                todayCompletedTasksPercentage,
+                setTodayCompletedTasksPercentage
             }
          } >
 

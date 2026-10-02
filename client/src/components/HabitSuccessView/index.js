@@ -7,6 +7,9 @@ import { FaCheckCircle } from "react-icons/fa";
 import { BsStars } from "react-icons/bs";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { MdOutlineShare } from "react-icons/md";
+// icons
+import { FaSquare } from "react-icons/fa";
+import { LuSquareDashed } from "react-icons/lu";
 
 // components
 import HabitRowGridCard from '../HabitRowGridCard';
@@ -21,7 +24,7 @@ import PopupFailureModal from '../../modals/PopupFailureModal';
 import AddHabitPopFormModal from '../../modals/AddHabitPopFormModal'
 
 // utils/dateAndTime/dateOperations.js
-import {getNextMonthAndTotalDays, getPreviousMonthAndTotalDays, getCurrentMonthAndTotalDays } from '../../utils/dateAndTime/dateOperations'
+import {getNextMonthAndTotalDays, getPreviousMonthAndTotalDays, getCurrentMonthAndTotalDays, getFormatedDate } from '../../utils/dateAndTime/dateOperations'
 
 // constants
 import {responseConstants} from '../../constants/uiConstants'
@@ -38,8 +41,9 @@ import './index.css'
 
 
 const HabitSucessView = props => {
-    const {habitsData} = props
-    
+    const {habitsData, dashboardStats} = props
+    const {todayCompletedTasksPercentage, todayCompletedTasks, todayIncompletedTasks ,   totalTasks, bestStreak, monthCompletedTasks} = dashboardStats
+    console.log(dashboardStats)
     
     const currentMonthDetails = getCurrentMonthAndTotalDays(new Date())
     
@@ -57,10 +61,25 @@ const HabitSucessView = props => {
     });
 
     const {setIsAddHabitModalOpen, setFormDetails} = useContext(AddHabitModalContext)
-    
-    
-    
-    
+
+
+    // currentYear
+    const currentYear = monthDetails.formatedYear
+    console.log(monthDetails)
+    console.log(currentYear)
+
+
+    // useEffect to trigger the animation
+    useEffect(() => {
+
+        const progressBar = document.querySelector('.info-percentage-inner-container');
+        setTimeout(() => {
+            progressBar.style.width = `${todayCompletedTasksPercentage}%`;
+            progressBar.style.transition = 'width 1.2s ease-in-out';
+        }, 100); // Delay the animation by 100ms to ensure the initial render is complete
+
+    }, [todayCompletedTasksPercentage]);
+
     const {totalDays, formatedMonth, newDate, totalDaysList} = monthDetails;
     const jwtToken =  Cookies.get("jwt_token");
 
@@ -178,7 +197,7 @@ const HabitSucessView = props => {
           <section className="info-section">
                 <div className="today-info-container">
                   <h2 className="info-title">CURRENT STANDING</h2>
-                  <p className="info-description">85% Task Completed Today.</p>
+                  <p className="info-description">{todayCompletedTasksPercentage}% Task Completed Today. {todayCompletedTasks} task completed out of {totalTasks}</p>
                   <div className='info-percentage-outer-container'>
                     <div className='info-percentage-inner-container'></div>
                   </div>
@@ -186,16 +205,16 @@ const HabitSucessView = props => {
                 </div>
     
                 <div className="streak-info-container">
-                  <h1 className="streak-number">24d</h1>
-                  <h2 className="streak-title">Streak</h2>
-                  <p className="streak-description">Uinterrupted momentum</p>
+                  <h1 className="streak-number">{bestStreak}d</h1>
+                  <h2 className="streak-title">All Time Best Streak</h2>
+                  <p className="streak-description">Uninterrupted momentum</p>
                 </div>
     
                 <div className="tasks-info-container">
                   <div className="check-icon-container">
                     <FaCheckCircle className="check-icon" />
                   </div>
-                  <h2 className="tasks-number">142 Done</h2>
+                  <h2 className="tasks-number">{monthCompletedTasks} Done</h2>
                   <p className="tasks-description">Tasks completed this month</p>
                 </div>
           </section>
@@ -210,8 +229,10 @@ const HabitSucessView = props => {
             <span className="tips-section-btn-text">Add Habit</span>
           </button>
           <button className='export-data-button'>
-            <MdOutlineShare className="tips-section-btn-icon" />
-            <span className="tips-section-btn-text">Export Data</span>
+            {/* <MdOutlineShare className="tips-section-btn-icon" />
+            <span className="tips-section-btn-text">Export Data</span> */}
+            <p className="tips-section-btn-icon">{todayIncompletedTasks}</p>
+            <p className="tips-section-btn-text">Pending Task Today</p>
           </button>
     
           <div className="tips-container">
@@ -270,25 +291,69 @@ const HabitSucessView = props => {
             
             {/* today-page: habits section */}
             <section className="habits-section">
-                <div className='habit-names-container'>
-                  <HabitRowNameCardHeader key={formatedMonth} formatedMonth={formatedMonth} handleNextMonth={handleNextMonth} handlePreviousMonth={handlePreviousMonth} />
-                  {
-                    habitsData.map(eachHabit => (
-                      <HabitRowNameCard key={eachHabit.id} habitDetails={eachHabit} onCallUpdateHabitApi={onCallUpdateHabitApi} onCallDeleteHabitApi={onCallDeleteHabitApi} />
-                    ))
-                  }
-                  
-                  
+              
+              <header className="habits-section-header">
+                <div className="habits-section-header-content">
+                  <h1 className="habits-section-header-content-title">Your Habits : {currentYear}</h1>
+                  <p className="habits-section-header-content-description">Track your habits and stay consistent with your goals.</p>
                 </div>
 
-                <div className='habit-cards-container'>
-                  <HabitRowGridCardHeader totalDays={totalDays} key={formatedMonth} />
-                  {
-                    habitsData.map(eachHabit => (
-                      <HabitRowGridCard key={eachHabit.id} habitDetails={eachHabit} totalDays={totalDays} totalDaysList={totalDaysList} onCallUpdateTodayHabitEntryApi={onCallUpdateTodayHabitEntryApi} />
-                    ))
-                  }
+                <div className="habits-section-header-status-legend habits-section-header-status-legend-laptop-device">
+                    <div className="habits-section-header-legend-status-indicator-container">
+                        <LuSquareDashed  className="habits-section-header-legend-status-indicator-icon habits-section-header-legend-status-indicator-today-icon" />
+                        <p className="habits-section-header-legend-status-indicator-text">Today</p>
+                    </div>
+                    <div className="habits-section-header-legend-status-indicator-container">
+                        <FaSquare  className="habits-section-header-legend-status-indicator-icon habits-section-header-legend-status-indicator-incomplete-icon" />
+                        <p className="habits-section-header-legend-status-indicator-text">Missed</p>
+                    </div>
+                    <div className="habits-section-header-legend-status-indicator-container">
+                        <FaSquare  className="habits-section-header-legend-status-indicator-icon habits-section-header-legend-status-indicator-complete-icon" />
+                        <p className="habits-section-header-legend-status-indicator-text">Complete</p>
+                    </div>
                 </div>
+              </header>
+
+                <div className="habits-cards-bg-container">
+                  <div className='habit-names-container'>
+                    <HabitRowNameCardHeader key={formatedMonth} formatedMonth={formatedMonth} handleNextMonth={handleNextMonth} handlePreviousMonth={handlePreviousMonth} />
+                    {
+                      habitsData.map(eachHabit => (
+                        <HabitRowNameCard key={eachHabit.id} habitDetails={eachHabit} onCallUpdateHabitApi={onCallUpdateHabitApi} onCallDeleteHabitApi={onCallDeleteHabitApi} />
+                      ))
+                    }
+                    
+                    
+                  </div>
+
+                  <div className='habit-cards-container'>
+                    <HabitRowGridCardHeader totalDays={totalDays} key={formatedMonth} />
+                    {
+                      habitsData.map(eachHabit => (
+                        <HabitRowGridCard key={eachHabit.id} habitDetails={eachHabit} totalDays={totalDays} totalDaysList={totalDaysList} onCallUpdateTodayHabitEntryApi={onCallUpdateTodayHabitEntryApi} />
+                      ))
+                    }
+                  </div>
+                </div>
+                
+              <footer className="habits-section-footer">
+                    <div className="habits-section-header-status-legend habits-section-header-status-legend-mobile-device">
+                    <div className="habits-section-header-legend-status-indicator-container">
+                        <LuSquareDashed  className="habits-section-header-legend-status-indicator-icon habits-section-header-legend-status-indicator-today-icon" />
+                        <p className="habits-section-header-legend-status-indicator-text">Today</p>
+                    </div>
+                    <div className="habits-section-header-legend-status-indicator-container">
+                        <FaSquare  className="habits-section-header-legend-status-indicator-icon habits-section-header-legend-status-indicator-incomplete-icon" />
+                        <p className="habits-section-header-legend-status-indicator-text">Missed</p>
+                    </div>
+                    <div className="habits-section-header-legend-status-indicator-container">
+                        <FaSquare  className="habits-section-header-legend-status-indicator-icon habits-section-header-legend-status-indicator-complete-icon" />
+                        <p className="habits-section-header-legend-status-indicator-text">Complete</p>
+                    </div>
+                </div>
+              </footer>
+
+              
             </section>
 
             

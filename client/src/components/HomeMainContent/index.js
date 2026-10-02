@@ -30,13 +30,14 @@ const HomeMainContent = () => {
     const [apiResponse, setApiResponse] = useState({
         error: "",
         habitData: [],
+        dashboardStats: {},
         currentApiStateView: responseConstants.initial
     });
 
    
 
     // context
-    const {allHabitsDataVersion} = useContext(AddHabitModalContext);
+    const {allHabitsDataVersion, setTodayCompletedTasksPercentage} = useContext(AddHabitModalContext);
 
     // console.log(`Habit Data: ${apiResponse.habitData[0].habitName}`)
 
@@ -68,7 +69,10 @@ const HomeMainContent = () => {
         try {
 
             const data = await getAllHabits(formData);
-            const {habits} = data;
+            const habits = data.habits.habitDetails;
+            const dashboardStats = data.habits.dashboardStats;
+            const {todayCompletedTasksPercentage} = dashboardStats;
+            
 
             if(habits.length === 0){
                 setApiResponse(prevState => ({
@@ -92,8 +96,11 @@ const HomeMainContent = () => {
             setApiResponse(prevState => ({
                 ...prevState,
                 habitData: formatedHabits,
+                dashboardStats: dashboardStats,
                 currentApiStateView: responseConstants.success
             }))
+
+            setTodayCompletedTasksPercentage(todayCompletedTasksPercentage)
 
 
         }catch(error){
@@ -116,7 +123,7 @@ const HomeMainContent = () => {
             case responseConstants.loading:
                 return <HabitLoadingView />;
             case responseConstants.success:
-                return <HabitSuccessView habitsData={apiResponse.habitData} />;
+                return <HabitSuccessView habitsData={apiResponse.habitData} dashboardStats={apiResponse.dashboardStats} />;
             case responseConstants.failure:
                 return <HabitFailureView error={apiResponse.error} tryAgainApiCall = {getAllHabitsApiCall} />;
             case responseConstants.empty:

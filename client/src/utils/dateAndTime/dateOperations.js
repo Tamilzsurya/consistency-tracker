@@ -67,8 +67,9 @@ export const getNextMonthAndTotalDays = (date) => {
     const totalDays = getCurrentMonthTotalDays(newDate);
     const formatedMonth = getCurrentFormattedMonth(newDate);
     const totalDaysList = getCurrentMonthDaysList(newDate);
+    const formatedYear = newDate.getFullYear()
 
-    return {totalDays, formatedMonth, newDate, totalDaysList}
+    return {totalDays, formatedMonth, newDate, totalDaysList, formatedYear}
 }
 
 export const getPreviousMonthAndTotalDays = (date) => {
@@ -80,8 +81,9 @@ export const getPreviousMonthAndTotalDays = (date) => {
     const totalDays = getCurrentMonthTotalDays(newDate);
     const formatedMonth = getCurrentFormattedMonth(newDate);
     const totalDaysList = getCurrentMonthDaysList(newDate);
+    const formatedYear = newDate.getFullYear()
 
-    return {totalDays, formatedMonth, newDate, totalDaysList}
+    return {totalDays, formatedMonth, newDate, totalDaysList, formatedYear}
 }
 
 
@@ -93,6 +95,7 @@ export const getCurrentMonthAndTotalDays = (date) => {
     const totalDays = getCurrentMonthTotalDays(newDate);
     const formatedMonth = getCurrentFormattedMonth(newDate);
     const totalDaysList = getCurrentMonthDaysList(newDate);
+    const formatedYear = newDate.getFullYear()
 
-    return {totalDays, formatedMonth, newDate, totalDaysList}
+    return {totalDays, formatedMonth, newDate, totalDaysList, formatedYear}
 }

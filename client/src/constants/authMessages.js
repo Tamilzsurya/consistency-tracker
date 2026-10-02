@@ -11,9 +11,12 @@ const AUTH_ERROR_MESSAGES = {
     GOOGLE_LOGIN_FAILED:
         "Unable to login with Google. Please try again.",
     GOOGLE_EMAIL_NOT_VERIFIED:
-        "Your Google email address is not verified.",
+        "Your Google email address is not verified. Please verify your email with Google and try again.",
     GOOGLE_ACCOUNT_CONFLICT_WITH_APPLE:
         "This email is already registered with Apple. Please login with Apple.",
-};
+    GOOGLE_LOGIN_FAILED:
+        "Unable to get required information from Google. Please try again later.",
+    
+}; 
 
 export default AUTH_ERROR_MESSAGES;

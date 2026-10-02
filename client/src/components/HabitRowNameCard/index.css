@@ -28,7 +28,21 @@
     font-size: 22px;
     margin-right: 8px;
 }
-.habit-name{
+.each-habit-name-card-name{
+    color: #191C1E;
+    font-family: var(--ff-primary);
+    font-size: 14px;
+    font-weight: var(--fw-regular);
+    line-height: 24px;
+
+    
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+}
+@media screen and (min-width: 992px){
+    .each-habit-name-card-name{
     color: #191C1E;
     font-family: var(--ff-primary);
     font-size: 16px;
@@ -40,6 +54,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
 
+}
 }
 
 .each-habit-name-card-three-dot-btn{

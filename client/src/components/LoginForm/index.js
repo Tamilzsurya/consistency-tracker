@@ -47,7 +47,7 @@ class LoginForm extends Component {
             return;
         }
 
-        const message = AUTH_ERROR_MESSAGES[errorCode] || "Something went wrong while signing in with Google.";
+        const message = AUTH_ERROR_MESSAGES[errorCode] || "Something went wrong while signing in with Google. Please try again later.";
 
         this.setState({ submitErrMessage: message });
 
@@ -188,7 +188,7 @@ class LoginForm extends Component {
             <>
                 <div className="password-label-container">
                     <label htmlFor="password" className="form-label">PASSWORD</label>
-                    <a href="#" className="forgot-password-link">FORGOT?</a>
+                    {/* <a href="#" className="forgot-password-link">FORGOT?</a> */}
                 </div>
                 <input id="password" className="form-input" type="password" placeholder="••••••••" onChange={this.handleInputChange} onBlur={this.handleInputBlur} />
                 {passwordError && <p className="form-err-msg">{passwordError}</p>}

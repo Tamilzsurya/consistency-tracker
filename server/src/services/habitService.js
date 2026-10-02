@@ -4,6 +4,9 @@ const habitModel = require('../models/habitModel')
 const habitEntriesModel =  require('../models/habitEntryModel')
 const AppError = require('../utils/appError')
 
+// services
+const dashboardService = require('../services/dashboardService')
+
 const createHabit = async (userId, name, category) => {
     
     // check if the user is already exists in db
@@ -28,10 +31,13 @@ const updateHabit = async (habitId, name, category) => {
 
 const getAllHabits = async (userId) => {
 
-    const habits = await habitModel.getAllHabits(userId)
-    const habitEntries = await habitEntriesModel.getHabitEntries(1)
+    const dashboardStats = await dashboardService.getDashboardStats(userId)
 
-    const formatedHabitsList = Promise.all(habits.map( async habit => {
+
+    const habits = await habitModel.getAllHabits(userId)
+
+
+    const formatedHabitsList = await Promise.all(habits.map( async habit => {
         const habitEntries = await habitEntriesModel.getHabitEntries(habit.id)
         const formatedHabitEntries = habitEntries.map(eachHabitEntry => (
             {
@@ -46,9 +52,12 @@ const getAllHabits = async (userId) => {
 
     } )
     )
-    return formatedHabitsList
+
+    // return formatedHabitsList
+    return { habitDetails: formatedHabitsList, dashboardStats }
 }
 
+// delete
 const deleteHabit = async (habitId) => {
     const result = await habitModel.deleteHabit(habitId)
 

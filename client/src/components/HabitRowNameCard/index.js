@@ -103,7 +103,7 @@ const HabitRowNameCard = props => {
             <currentCategoryDetails.icon className="habit-name-card-icon" />
           </div>
           
-          <h3 className='habit-name'>{name}</h3>
+          <h3 className='each-habit-name-card-name'>{name}</h3>
         </div>
 
        

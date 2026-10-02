@@ -118,7 +118,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsImlhd
 ### Get All habits
 
 GET http://localhost:3001/api/habits
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsImlhdCI6MTc4OTk4NTY1MCwiZXhwIjoxNzkwNTkwNDUwfQ.vlB0WqCfIW12562F0RtehNGlcbOdGcokuypLCm7doCU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsImlhdCI6MTc5MDgyMTcyOSwiZXhwIjoxNzkxNDI2NTI5fQ.Irox9ycP1SlBJgmASSjIEVpB6-KOwDOfMDzxmEwiqgU
 
 
 ### Get one habit
