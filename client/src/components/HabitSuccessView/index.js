@@ -161,24 +161,6 @@ const HabitSucessView = props => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     // functions to change current month to next month
     const handleNextMonth = () => {
         const nextMonthDetails = getNextMonthAndTotalDays(newDate);
