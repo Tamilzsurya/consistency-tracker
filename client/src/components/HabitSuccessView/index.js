@@ -28,11 +28,13 @@ import {getNextMonthAndTotalDays, getPreviousMonthAndTotalDays, getCurrentMonthA
 
 // constants
 import {responseConstants} from '../../constants/uiConstants'
+import {habitCategoryList} from '../../constants/habitConstants'
 
 // services
 import {createOrUpdateHabitEntry} from '../../services/habitEntryService'
 import {deleteHabit} from '../../services/habitService'
 
+// contexts
 import AddHabitModalContext from '../../contexts/AddHabitModalContext'
 
 import './index.css'
@@ -158,6 +160,20 @@ const HabitSucessView = props => {
        
     }
 
+    // handel setIsAddHabitModalOpen context for add habit pop form modal
+    const handelSetIsAddHabitModalOpen =() => {
+         const formDetails = {
+                        formName: "Add",
+                        formData: {
+                            id: null,
+                            habitName: "",
+                            habitCategory: habitCategoryList[6],
+                        }
+                    };
+        setFormDetails(formDetails)
+        setIsAddHabitModalOpen(true)
+
+    }
 
 
 
@@ -206,7 +222,7 @@ const HabitSucessView = props => {
     const renderTipsSection = () =>(
         <section className="tips-section">
           
-          <button type="button" onClick={() => setIsAddHabitModalOpen(true)} className="add-habit-button">
+          <button type="button" onClick={handelSetIsAddHabitModalOpen} className="add-habit-button">
             <AiOutlinePlusCircle className="tips-section-btn-icon" />
             <span className="tips-section-btn-text">Add Habit</span>
           </button>

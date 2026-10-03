@@ -80,6 +80,9 @@ const HomeMainContent = () => {
                     habitData: habits,
                     currentApiStateView: responseConstants.empty
                 }))
+
+                setTodayCompletedTasksPercentage(todayCompletedTasksPercentage)
+
                 return;
             }
 

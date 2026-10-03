@@ -1,5 +1,5 @@
 
-
+// contexts
 import AddHabitModalContext from '../../contexts/AddHabitModalContext.js'
 
 // icons
@@ -10,6 +10,7 @@ import consistencyGridEmptyStateImg from '../../assets/images/consistency-grid-e
 
 // constents
 import habitSuggestionList from '../../constants/habitSuggestion.js'
+import {habitCategoryList} from '../../constants/habitConstants.js'
 
 // components
 import HabitSuggestionItem from '../HabitSuggestionItem'
@@ -22,9 +23,19 @@ const HabitEmptyView = () => {
         <AddHabitModalContext.Consumer>
             {
                 value => {
-                    const { isAddHabitModalOpen, setIsAddHabitModalOpen } = value;
+                    const { isAddHabitModalOpen, setIsAddHabitModalOpen, setFormDetails } = value;
+
+                     const formDetails = {
+                                            formName: "Add",
+                                            formData: {
+                                                id: null,
+                                                habitName: "",
+                                                habitCategory: habitCategoryList[6],
+                                            }
+                                        };
 
                     const handelSetIsAddHabitModalOpen = () =>{
+                        setFormDetails(formDetails)
                         setIsAddHabitModalOpen(true)
                     }
 

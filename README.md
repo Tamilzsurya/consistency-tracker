@@ -725,27 +725,45 @@ PUT    /api/habit-entries/:id
 
 # 🖼️ Screenshots
 
-## Landing Page
+## Register Page
 
-![Landing Page](./screenshots/landing-page.png)
+![Register Page](./screenshots/register.png)
 
 ---
 
-## Login
+## Login Page
 
 ![Login Page](./screenshots/login.png)
 
 ---
 
-## Dashboard
+## Verify Otp Page
 
-![Dashboard](./screenshots/dashboard.png)
+![Verify Otp Page](./screenshots/verify-otp.png)
 
 ---
 
-## Consistency Grid
+## Home Landing Page
 
-![Consistency Grid](./screenshots/consistency-grid.png)
+![Home Landing Page](./screenshots/home-landing-page.png)
+
+---
+
+## Home Page Empty Habit View
+
+![Home Page Empty Habit View](./screenshots/empty-habit-view.png)
+
+---
+
+## Consistency Grid View
+
+![Consistency Grid View](./screenshots/consistency-grid-view.png)
+
+---
+
+## Not Found Page
+
+![Not Nound Page](./screenshots/not-found.png)
 
 ---
 
@@ -1027,7 +1045,7 @@ Data-driven Features
 
 ---
 
-# 👨‍💻 Author
+# 👨‍💻 Developer
 
 ## Tamilarasu N
 
