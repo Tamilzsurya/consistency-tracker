@@ -1,7 +1,7 @@
 
 export const registerUser = async (formData) => {
 
-        const url = 'http://localhost:3001/api/auth/register'
+        const url = `${process.env.REACT_APP_SERVER_URL}/api/auth/register`
         const options = {
             method: 'POST',
 
@@ -61,7 +61,7 @@ export const registerUser = async (formData) => {
 export const loginUser = async (formData) => {
 
     // create request data
-    const url = 'http://localhost:3001/api/auth/login'
+    const url = `${process.env.REACT_APP_SERVER_URL}/api/auth/login`
     const options = {
         method: 'POST',
 
@@ -122,7 +122,7 @@ export const verifyOtp = async (formData) => {
     const {otp, verificationToken} = formData
 
     // create request data
-    const url = 'http://localhost:3001/api/auth/verify-otp'
+    const url = `${process.env.REACT_APP_SERVER_URL}/api/auth/verify-otp`
     const options = {
         method: 'POST',
 
@@ -185,7 +185,7 @@ export const resendOtp = async (formData) =>{
 
     const {verificationToken} = formData
 
-    const url = "http://localhost:3001/api/auth/resend-otp"
+    const url = `${process.env.REACT_APP_SERVER_URL}/api/auth/resend-otp`
     const options = {
         method: 'POST',
         headers: {

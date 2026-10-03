@@ -10,7 +10,7 @@ const startServer = async () => {
     await testDatabaseConnection()
 
     app.listen(PORT, () => {
-      console.log(`Server running at http://localhost:${PORT}`)
+      console.log(`Server running at ${process.env.SERVER_URL}`)
     })
   } catch (error) {
     console.error(`Database error: ${error.message}`)
