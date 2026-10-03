@@ -68,7 +68,7 @@ class LoginForm extends Component {
     // handle google login
     handelGoogleLogin = async () => {
 
-         window.location.href = 'http://localhost:3001/api/auth/google'
+         window.location.href = `${process.env.REACT_APP_SERVER_URL}/api/auth/google`
     }
     // handle apple login
     handelAppleLogin = async () => {

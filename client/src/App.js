@@ -33,8 +33,6 @@ const App = () => (
         <LoginProtectedRoute  exact path="/verify-otp" component={VerifyOtpPage} />
 
         <HomeProtectedRoute exact path="/" component={ProtectedLayout} />
-        <HomeProtectedRoute exact path="/grid" component={ProtectedLayout} />
-        <HomeProtectedRoute exact path="/trends" component={ProtectedLayout} />
         <HomeProtectedRoute exact path="/profile" component={ProtectedLayout} />
 
 

@@ -79,8 +79,7 @@ const ProtectedLayout = () => {
 
                 <Switch>
                     <Route exact path="/" component={HomePage} />
-                    <Route exact path="/grid" component={GridPage} />
-                    <Route exact path="/trends" component={TrendPage} />
+                   
                     <Route exact path="/profile" component={ProfilePage} />
                 </Switch>
 
