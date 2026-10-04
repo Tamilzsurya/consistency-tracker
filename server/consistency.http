@@ -13,10 +13,10 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjYsIm90c
 ### Verify otp
 POST http://localhost:3001/api/auth/verify-otp
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjYsIm90cElkIjoyOSwiaWF0IjoxNzg5OTg1Mzk1LCJleHAiOjE3ODk5ODU5OTV9.kvthvVTCmb18kCsjvOPdb5cUk4SkOGtLddTcj6Bex40
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsIm90cElkIjoxLCJpYXQiOjE3OTEwNzQ1MjIsImV4cCI6MTc5MTA3NTEyMn0.cYw6Wx_JUHf0_2rAFwK542pDUkH24Cr1V-8u1MgQjUo
 
 {
-  "otp": "612186"
+  "otp": "181322"
 }
 
 
@@ -37,10 +37,10 @@ POST http://localhost:3001/api/auth/register
 Content-Type: application/json
 
 {
-  "userName": "tamilarasu",
+  "userName": "tamilarasu N",
   "email": "tamilzsurya09@gmail.com",
-  "password": "password123",
-  "confirmPassword": "password123"
+  "password": "Tmt@2004",
+  "confirmPassword": "Tmt@2004"
 }
 
 

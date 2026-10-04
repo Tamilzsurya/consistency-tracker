@@ -70,7 +70,7 @@ CREATE TABLE habits
     )
     NOT NULL DEFAULT 'Others',
 
-    is_active TINYINT(1) NOT NULL DEFAULT 1,
+    is_active BOOLEAN NOT NULL DEFAULT TRUE,
 
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
 
@@ -104,7 +104,7 @@ CREATE TABLE habit_entries
 
     entry_date DATE NOT NULL,
 
-    is_completed TINYINT(1) NOT NULL,
+    is_completed BOOLEAN NOT NULL DEFAULT FALSE,
 
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
 

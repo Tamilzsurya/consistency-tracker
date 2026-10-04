@@ -11,6 +11,7 @@ const startServer = async () => {
 
     app.listen(PORT, () => {
       console.log(`Server running at ${process.env.SERVER_URL}`)
+      console.log(`Server running on port ${PORT}`);
     })
   } catch (error) {
     console.error(`Database error: ${error.message}`)
