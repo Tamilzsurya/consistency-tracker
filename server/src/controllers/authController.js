@@ -92,7 +92,7 @@ const googleCallback = async (request, response, next) => {
         response.cookie('jwt_token', jwtToken, { 
             secure: true,
             sameSite: 'none',
-            path: '/',
+            path: 'https://consistency-tracker-theta.vercel.app/',
             maxAge: 1000 * 60 * 60 * 24 * 7 
         })
 
