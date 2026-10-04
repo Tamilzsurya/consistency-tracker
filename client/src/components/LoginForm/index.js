@@ -51,7 +51,6 @@ class LoginForm extends Component {
 
         this.setState({ submitErrMessage: message });
 
-        window.history.replaceState({}, document.title, '/login');
 
         
     }
