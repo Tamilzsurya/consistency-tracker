@@ -37,10 +37,10 @@ POST http://localhost:3001/api/auth/register
 Content-Type: application/json
 
 {
-  "userName": "tamilarasu N",
-  "email": "tamilzsurya09@gmail.com",
-  "password": "Tmt@2004",
-  "confirmPassword": "Tmt@2004"
+  "userName": "perarasu N",
+  "email": "perarasu09@gmail.com",
+  "password": "perarasu@2004",
+  "confirmPassword": "perarasu@2004"
 }
 
 

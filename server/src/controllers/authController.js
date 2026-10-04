@@ -89,7 +89,13 @@ const googleCallback = async (request, response, next) => {
         const jwtToken = await signAndVerifyJwt.signJwt(payload, tokenExpiresIn);
 
         // send the cookie to client
-        response.cookie('jwt_token', jwtToken, { maxAge: 1000 * 60 * 60 * 24 * 7 })
+        response.cookie('jwt_token', jwtToken, { 
+            httpOnly: true,
+            secure: true,
+            sameSite: 'none',
+            path: '/',
+            maxAge: 1000 * 60 * 60 * 24 * 7 
+        })
 
         return response.redirect(`${process.env.CLIENT_URL}/`);
 
