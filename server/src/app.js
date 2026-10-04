@@ -27,6 +27,15 @@ app.use('/api/habits', habitRoutes)
 app.use('/api/entries', entryRoutes)
 
 
+// Health check route
+app.get("/api/health", (req, res) => {
+    res.status(200).json({
+        success: true,
+        message: "Consistency backend is running"
+    });
+});
+
+
 
 
 // Error middleware
