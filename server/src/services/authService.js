@@ -73,10 +73,10 @@ const loginUser = async (email, password) => {
         const payload = {userId, otpId}
         const verificationToken = await signAndVerifyJwt.signJwt(payload, tokenExpiresIn)
 
-        await sendVerificationEmail(email, otp);
+       await sendVerificationEmail(email, otp);
         // send  to user email
         try{
-            
+             
         }catch(error){
             throw new AppError("We are truble to send the otp. Please try again later.", 500)
         }
