@@ -1,5 +1,6 @@
 import { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
+import Cookies from "js-cookie";
 
 // components
 import RegLoaderBtn from '../RegLoaderBtn';
@@ -41,6 +42,24 @@ class LoginForm extends Component {
 
         const searchParams =  new URLSearchParams(search);
 
+
+
+        const token = searchParams.get("token");
+
+        if (token) {
+            window.history.replaceState({}, document.title, '/login');
+
+            // Store the token in a cookie
+            Cookies.set("jwt_token", token, { expires: 7, secure: true });
+            history.replace('/'); // Redirect to the home page or any other page you want
+
+            return;
+        }
+
+
+
+
+        // check if there is an error in the query params
         const errorCode = searchParams.get("error");
 
         if (!errorCode) {
@@ -51,7 +70,7 @@ class LoginForm extends Component {
 
         this.setState({ submitErrMessage: message });
 
-
+        window.history.replaceState({}, document.title, '/login');
         
     }
 
