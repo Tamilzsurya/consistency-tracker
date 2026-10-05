@@ -45,7 +45,7 @@ const getMonthCompletedTasks = async (userId) => {
         JOIN habits AS h
           ON he.habit_id = h.id
         WHERE h.user_id = ?
-          AND he.entry_date >= DATE_FORMAT(CURDATE(), "%Y-%m-01")
+          AND he.entry_date >= DATE_FORMAT(CURDATE(), '%Y-%m-01')
           AND he.entry_date <= CURDATE()
           AND he.is_completed = TRUE
     `;
