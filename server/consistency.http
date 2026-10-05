@@ -6,17 +6,18 @@ GET http://localhost:3001/api/auth/google
 ### Resend otp
 POST http://localhost:3001/api/auth/resend-otp
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjYsIm90cElkIjoyOSwiaWF0IjoxNzg5OTg1Mzk1LCJleHAiOjE3ODk5ODU5OTV9.kvthvVTCmb18kCsjvOPdb5cUk4SkOGtLddTcj6Bex40
+Authorization: Bearer Your_JWT_Token
+
 
 
 
 ### Verify otp
 POST http://localhost:3001/api/auth/verify-otp
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsIm90cElkIjoxLCJpYXQiOjE3OTEwNzQ1MjIsImV4cCI6MTc5MTA3NTEyMn0.cYw6Wx_JUHf0_2rAFwK542pDUkH24Cr1V-8u1MgQjUo
+Authorization: Bearer Your_JWT_Token
 
 {
-  "otp": "181322"
+  "otp": ""
 }
 
 
@@ -25,8 +26,8 @@ POST http://localhost:3001/api/auth/login
 Content-Type: application/json
 
 {
-  "email": "tamilzsurya09@yahoo.com",
-  "password": "Tmt@2004"
+  "email": "",
+  "password": ""
 }
 
 
@@ -37,10 +38,10 @@ POST http://localhost:3001/api/auth/register
 Content-Type: application/json
 
 {
-  "userName": "Tamil Arasu",
-  "email": "tamilzsurya09@yahoo.com",
-  "password": "Tmt@2004",
-  "confirmPassword": "Tmt@2004"
+  "userName": "",
+  "email": "",
+  "password": "",
+  "confirmPassword": ""
 }
 
 
@@ -70,7 +71,7 @@ GET http://localhost:3001/api/users/1
 
 GET http://localhost:3001/api/users/me
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsImlhdCI6MTc5MDc0MzgyNywiZXhwIjoxNzkxMzQ4NjI3fQ.BuW9uTeERwPjRJ312kjjWZFXfj_tvQasBEmOMFU618o
+Authorization: Bearer Your_JWT_Token
 
 
 ### Update user
@@ -79,8 +80,8 @@ PUT http://localhost:3001/api/users/1
 Content-Type: application/json
 
 {
-  "fullName": "Tamil Arasu Updated",
-  "email": "tamil.updated@example.com"
+  "fullName": "",
+  "email": ""
 }
 
 
@@ -107,18 +108,18 @@ DELETE http://localhost:3001/api/users/1
 ### Create habit
 POST http://localhost:3001/api/habits
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsImlhdCI6MTc4OTk4NTY1MCwiZXhwIjoxNzkwNTkwNDUwfQ.vlB0WqCfIW12562F0RtehNGlcbOdGcokuypLCm7doCU
+Authorization: Bearer Your_JWT_Token
 
 {
-  "name": "Learn React",
-  "category": "Health"
+  "name": "",
+  "category": ""
 }
 
 
 ### Get All habits
 
 GET http://localhost:3001/api/habits
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsImlhdCI6MTc5MDgyMTcyOSwiZXhwIjoxNzkxNDI2NTI5fQ.Irox9ycP1SlBJgmASSjIEVpB6-KOwDOfMDzxmEwiqgU
+Authorization: Bearer Your_JWT_Token
 
 
 ### Get one habit
@@ -131,18 +132,18 @@ Authorization: Bearer YOUR_TOKEN
 
 PUT http://localhost:3001/api/habits/19
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsImlhdCI6MTc5MDYwMTk3NiwiZXhwIjoxNzkxMjA2Nzc2fQ.N5XMEDYcw0VeH5HcyHJR3PiEsczyjsl1tlsRpegcFT4
+Authorization: Bearer Your_JWT_Token
 
 {
-  "name": "Project Development",
-  "category": "Productivity"
+  "name": "",
+  "category": ""
 }
 
 
 ### Delete habit
 
 DELETE http://localhost:3001/api/habits/1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsImlhdCI6MTc4OTk4NTY1MCwiZXhwIjoxNzkwNTkwNDUwfQ.vlB0WqCfIW12562F0RtehNGlcbOdGcokuypLCm7doCU
+Authorization: Bearer Your_JWT_Token
 
 
 
@@ -158,11 +159,11 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsImlhd
 
 POST http://localhost:3001/api/entries
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsImlhdCI6MTc4OTk4NTY1MCwiZXhwIjoxNzkwNTkwNDUwfQ.vlB0WqCfIW12562F0RtehNGlcbOdGcokuypLCm7doCU
+Authorization: Bearer Your_JWT_Token
 
 {
-  "id": "1-2026-09-26",
-  "habitId": 1,
+  "id": "",
+  "habitId": 0,
   "isCompleted": false,
   "entryDate": "2026-09-26"
 }
