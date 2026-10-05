@@ -90,9 +90,10 @@ const googleCallback = async (request, response, next) => {
 
         // send the cookie to client
         response.cookie('jwt_token', jwtToken, { 
+            httpOnly: false,
             secure: true,
             sameSite: 'none',
-            path: 'https://consistency-tracker-theta.vercel.app/',
+            path: '/',
             maxAge: 1000 * 60 * 60 * 24 * 7 
         })
 
