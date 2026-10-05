@@ -97,7 +97,7 @@ const googleCallback = async (request, response, next) => {
         //     maxAge: 1000 * 60 * 60 * 24 * 7 
         // })
 
-        return response.redirect(`${process.env.CLIENT_URL}/?token=${jwtToken}`);
+        return response.redirect(`${process.env.CLIENT_URL}/login?token=${jwtToken}`);
 
     }
     catch(error){
