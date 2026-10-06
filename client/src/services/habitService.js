@@ -11,7 +11,8 @@ export const getAllHabits = async (formData) => {
             Authorization: `Bearer ${jwt_token}`,
             'Content-type': 'application/json'
        }, 
-        body: JSON.stringify({date})
+       
+       body: JSON.stringify({date})
 
     }
 

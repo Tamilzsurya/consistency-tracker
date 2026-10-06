@@ -113,6 +113,7 @@ const HomeMainContent = () => {
 
         }catch(error){
 
+            console.log(`Error in getAllHabitsApiCall: ${error.message, error}`)
             setApiResponse(prevState => ({
                 ...prevState,
                 error,
