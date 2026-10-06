@@ -1,6 +1,6 @@
 export const getAllHabits = async (formData) => {
 
-    const {jwt_token} = formData;
+    const {jwt_token, date} = formData;
 
     const url = `${process.env.REACT_APP_SERVER_URL}/api/habits`
 
@@ -11,6 +11,7 @@ export const getAllHabits = async (formData) => {
             Authorization: `Bearer ${jwt_token}`,
             'Content-type': 'application/json'
        }, 
+        body: JSON.stringify({date})
 
     }
 

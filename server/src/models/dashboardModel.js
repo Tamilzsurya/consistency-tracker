@@ -10,16 +10,16 @@ const getTotalTasks = async (userId) => {
     return Number(result[0].totalTasks)
 }
 
-const getTodayCompletedTasks = async (userId) => {
+const getTodayCompletedTasks = async (userId, date) => {
     const query = `
         SELECT COUNT(*) AS todayCompletedTasks
         FROM habit_entries AS he INNER JOIN habits AS h
         ON he.habit_id = h.id
         WHERE h.user_id = ? 
-          AND he.entry_date = CURDATE()
+          AND he.entry_date = ?
           AND he.is_completed = TRUE   
     `;
-    const [result] = await db.execute(query, [userId])
+    const [result] = await db.execute(query, [userId, date])
     
     return Number(result[0].todayCompletedTasks)
 }
@@ -38,19 +38,19 @@ const getTodayCompletedTasks = async (userId) => {
 //     return Number(result[0].todayIncompletedTasks)
 // }
 
-const getMonthCompletedTasks = async (userId) => {
+const getMonthCompletedTasks = async (userId, date) => {
     const query = `
         SELECT COUNT(*) AS monthCompletedTasks
         FROM habit_entries AS he
         JOIN habits AS h
           ON he.habit_id = h.id
         WHERE h.user_id = ?
-          AND he.entry_date >= DATE_FORMAT(CURDATE(), '%Y-%m-01')
-          AND he.entry_date <= CURDATE()
+          AND he.entry_date >= DATE_FORMAT(?, '%Y-%m-01')
+          AND he.entry_date <= ?
           AND he.is_completed = TRUE
     `;
 
-    const [result] = await db.execute(query, [userId])
+    const [result] = await db.execute(query, [userId, date, date])
 
     return Number(result[0].monthCompletedTasks)
 }

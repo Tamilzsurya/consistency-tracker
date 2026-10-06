@@ -14,6 +14,9 @@ import HabitFailureView from '../HabitFailureView';
 // services
 import {getAllHabits} from '../../services/habitService';
 
+// utils
+import {getFormatedDate} from '../../utils/dateAndTime/dateOperations'
+
 
 
 import './index.css'
@@ -51,9 +54,11 @@ const HomeMainContent = () => {
 
     const getAllHabitsApiCall = async () => {
         const jwt_token =  Cookies.get("jwt_token");
+        const date = getFormatedDate(new Date())
 
         const formData = {
-            jwt_token
+            jwt_token,
+            date
         }
 
 

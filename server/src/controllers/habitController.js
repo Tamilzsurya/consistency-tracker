@@ -52,10 +52,11 @@ const getAllHabits = async (request, response, next) => {
     try {
 
         const {payload} = request
+        const {date} = request.body
 
         const {userId} = payload
 
-        const habits = await habitService.getAllHabits(userId)
+        const habits = await habitService.getAllHabits(userId, date)
 
         response.status(200).json(
             {

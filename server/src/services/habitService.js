@@ -29,9 +29,9 @@ const updateHabit = async (habitId, name, category) => {
     return result
 }
 
-const getAllHabits = async (userId) => {
+const getAllHabits = async (userId, date) => {
 
-    const dashboardStats = await dashboardService.getDashboardStats(userId)
+    const dashboardStats = await dashboardService.getDashboardStats(userId, date)
 
 
     const habits = await habitModel.getAllHabits(userId)

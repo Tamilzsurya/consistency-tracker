@@ -119,13 +119,17 @@ Authorization: Bearer Your_JWT_Token
 ### Get All habits
 
 GET http://localhost:3001/api/habits
-Authorization: Bearer Your_JWT_Token
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsImlhdCI6MTc5MTIwNDU1MCwiZXhwIjoxNzkxODA5MzUwfQ.gMWQiXjquw-q_-so112puxG5h1nZtX4q6H-OpCZRqeg
 
+{
+  "date": "2026-10-06"
+}
 
 ### Get one habit
 
 GET http://localhost:3001/api/habits/1
 Authorization: Bearer YOUR_TOKEN
+
 
 
 ### Update habit

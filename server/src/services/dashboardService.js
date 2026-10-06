@@ -1,12 +1,12 @@
 const dashboardModel = require('../models/dashboardModel')
 
 
-const getDashboardStats = async (userId) => {
+const getDashboardStats = async (userId, date) => {
 
-    const totalTasks = await dashboardModel.getTotalTasks(userId)
-    const todayCompletedTasks = await dashboardModel.getTodayCompletedTasks(userId)
-    const monthCompletedTasks = await dashboardModel.getMonthCompletedTasks(userId)
-    const taskCompletedDates = await dashboardModel.taskCompletedDates(userId)
+    const totalTasks = await dashboardModel.getTotalTasks(userId, date)
+    const todayCompletedTasks = await dashboardModel.getTodayCompletedTasks(userId, date)
+    const monthCompletedTasks = await dashboardModel.getMonthCompletedTasks(userId, date)
+    const taskCompletedDates = await dashboardModel.taskCompletedDates(userId, date)
 
 
     // calculate incompleted tasks
