@@ -11,7 +11,7 @@ export const getAllHabits = async (formData) => {
             Authorization: `Bearer ${jwt_token}`,
             'Content-type': 'application/json'
        }, 
-       
+
        body: JSON.stringify({date})
 
     }
@@ -23,7 +23,7 @@ export const getAllHabits = async (formData) => {
     try{
         response = await fetch(url, options)
     }catch(error){
-        throw new Error( 'Unable to connect to the server. Please try again later.' )
+        throw new Error( error.message || "Unable to connect to the server. Please try again later." )
     }
 
 
@@ -32,7 +32,7 @@ export const getAllHabits = async (formData) => {
     try {
         data = await response.json()
     }catch (error) {
-        throw new Error( "Something went wrong on our end. Please try again later." )
+        throw new Error( error.message || "Something went wrong on our end. Please try again later." )
     }
 
     
