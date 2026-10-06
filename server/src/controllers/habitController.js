@@ -52,7 +52,7 @@ const getAllHabits = async (request, response, next) => {
     try {
 
         const {payload} = request
-        const {date} = request.body
+        const {date} = request.query
 
         const {userId} = payload
 
